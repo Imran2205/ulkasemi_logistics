@@ -1,0 +1,811 @@
+{% load static %}
+{% load widget_tweaks %}
+
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+  <meta charset="UTF-8">
+  <title>Lunch Booking</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="{% static 'lunch_booking/css/lunch_style.css' %}">
+  <link rel="stylesheet" href="{% static 'lunch_booking/css/waiting_loader.css' %}">
+  <link rel="stylesheet" href="{% static 'lunch_booking/css/loader_bg.css' %}">
+  <link href="https://fonts.googleapis.com/css?family=Coda|Open+Sans" rel="stylesheet">
+</head>
+<body>
+  <div class="parent-container vertical-center" id="main_ele" style="display: none">
+    <div class="register_container" style="display: none" id="reg_div">
+      <div style="margin-bottom: 10px">
+        <a style="margin-top: auto; margin-bottom: auto; font-size: 24px; font-weight: 600">No ID Found</a>
+        <br>
+        <a style="margin-top: auto; margin-bottom: auto; font-size: 24px; font-weight: 600">Register your ID</a>
+      </div>
+      <div class="register_container_child_div">
+        <div class="form">
+          <input type="text" id="id_input" class="form__input" placeholder="Type your ID...">
+        </div>
+        <div class="btn_reg btn_reg__secondary" id="reg_btn"><p>Register</p></div>
+      </div>
+    </div>
+    <div class="container" style="display: none" id="book_container">
+      <div class="office-location-container"  style="display: none">
+        <div style="margin-bottom: 10px">
+          <a style="margin-top: auto; margin-bottom: auto; font-size: 24px; font-weight: 600">Choose Office Location</a>
+        </div>
+        <div class="office-location">
+          <div class="radio" style="">
+            <div class="radio-btn-1">
+              <input id="radio-1" type="radio" name="radio" value="1" checked>
+              <label for="radio-1"></label>
+            </div>
+            <div class="office-option">
+              <a style="margin-top: auto; margin-bottom: auto; font-size: 20px">Regnum Centre</a>
+            </div>
+          </div>
+          <div class="radio">
+            <div class="radio-btn-2">
+              <input id="radio-2" type="radio" name="radio" value="2">
+              <label for="radio-2"></label>
+            </div>
+            <div class="office-option">
+              <a style="margin-top: auto; margin-bottom: auto; font-size: 20px">Baridhara DOHS</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="switch-holder">
+        <div class="switch-label">
+          <span>
+            <img style="height: 40px; width: 40px; margin-right: 10px; margin-top: 7px" src="https://raw.githubusercontent.com/asmsaad/launch-booking-webpage/main/icons/vegan-food.png">
+          </span>
+          <span style="font-size: 20px; margin: auto" class="book_lunch_text">Book Lunch for Tomorrow (25<sup>th</sup> Feb)</span>
+        </div>
+        <div class="switch-toggle">
+          <input type="checkbox" id="lunch-book">
+          <label for="lunch-book"></label>
+        </div>
+      </div>
+    </div>
+
+    <div id="date-picker-section">
+      <div id="date-picker-container" style="display: none">
+        <div class="office-location-container" style="display: none">
+          <div style="margin-bottom: 10px">
+            <a style="margin-top: auto; margin-bottom: auto; font-size: 24px; font-weight: 600">Choose Office Location</a>
+          </div>
+          <div class="office-location">
+            <div class="radio" style="">
+              <div class="radio-btn-1">
+                <input id="radio-3" type="radio" name="radio-2" value="1" checked>
+                <label for="radio-3"></label>
+              </div>
+              <div class="office-option">
+                <a style="margin-top: auto; margin-bottom: auto; font-size: 20px">Regnum Centre</a>
+              </div>
+            </div>
+            <div class="radio">
+              <div class="radio-btn-2">
+                <input id="radio-4" type="radio" name="radio-2" value="2">
+                <label for="radio-4"></label>
+              </div>
+              <div class="office-option">
+                <a style="margin-top: auto; margin-bottom: auto; font-size: 20px">Baridhara DOHS</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="date-picker-title">
+          <h4> Select your date </h4>
+        </div>
+
+        <p> Click on the date to open the date picker. </p>
+
+        <div style="margin-bottom: 20px;">
+          <span><a style="font-weight: bold">Total Bookings for tomorrow:</a> <a id="total_booking" style="font-weight: bold"></a></span>
+        </div>
+
+        <div id="date-picker-dates">
+          <div id="date-picker-date-first" class="date-picker-date">
+            <div id="booking-date"></div>
+          </div>
+
+          <div>
+            <button class="btn">
+<!--              <i class="fa fa-download"></i>-->
+              <img style="height: 40px; width: 40px" src="https://raw.githubusercontent.com/asmsaad/launch-booking-webpage/main/icons/downloading.png">
+              <span style="margin-top: 11px">Download</span>
+            </button>
+          </div>
+        </div>
+
+        <div id="date-picker-modal" class="hidden-2">
+          <div id="date-picker-top-bar">
+            <div id="date-picker-previous-month" class="date-picker-change-month">&lsaquo;</div>
+            <div id="date-picker-month">December 17</div>
+            <div id="date-picker-next-month" class="date-picker-change-month">&rsaquo;</div>
+          </div>
+          <div id="date-picker-exit">&times;</div>
+          <table id="date-picker">
+            <tr id="date-picker-weekdays">
+              <th>S</th>
+              <th>M</th>
+              <th>T</th>
+              <th>W</th>
+              <th>T</th>
+              <th>F</th>
+              <th>S</th>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="no_time" class="div_with_bg" style="display: none">
+    <a style="font-size: 6vh; font-weight: bold; color: #333333; position: relative" class="vertical-center-2">
+      The webpage is no <br> longer taking response.<br>
+      Please book after tomorrow 8 am.
+    </a>
+  </div>
+
+  <div id="loader" class="div_with_bg" style="display: none">
+<!--    <a style="font-size: 6vh; font-weight: bold; color: #333333; position: relative" class="vertical-center-2">Updating.. Please Wait!</a>-->
+    <svg class="waiting icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 143.7 143.7">
+      <circle class="circle" fill="none" cx="71.8" cy="71.8" r="67.8"/>
+    </svg>
+  </div>
+
+  <div id="tick_mark_div" class="div_with_bg" style="display: none">
+    <svg class="check-circle icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 143.7 143.7">
+      <circle class="circle" fill="none" cx="71.8" cy="71.8" r="67.8"/>
+      <path class="path" fill="none" d="M36.8,73.3l21.5,21.5c0.6,0.6,1.5,0.6,2.1,0l46.4-46.4"/>
+    </svg>
+    <h1 style="color: #2ECC71; font-size: 6vh">Successfully received your response!</h1>
+  </div>
+
+  <div id="cross_mark_div" class="div_with_bg" style="display: none">
+    <svg class="times-circle icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 143.7 143.7">
+      <circle class="circle" fill="none" cx="71.8" cy="71.8" r="67.8"/>
+      <line class="path" fill="none" x1="44.9" y1="98.7" x2="98.7" y2="44.9"/>
+      <line class="path" fill="none" x1="44.9" y1="44.9" x2="98.7" y2="98.7"/>
+    </svg>
+  </div>
+
+  <div style="position: absolute; right:40px; bottom: 10px; height: 80px; width: auto;">
+    <img height="80px" width="auto" src="https://raw.githubusercontent.com/asmsaad/launch-booking-webpage/main/icons/automation_team.png">
+  </div>
+
+  <div class="loader_div" id="loader_div" style="display: none;">
+    <div class="landing_loading vertical-center-2">
+      <h1>Please wait</h1>
+      <div class="dots">
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+      </div>
+    </div>
+  </div>
+
+
+  <!--1058830329036-52avoapkqap1gn34h7ikt4r8326mdlqd.apps.googleusercontent.com-->
+  <!--  old: 381380085175-eb444k641i1l069l62f9e1mk9m3rgcu8.apps.googleusercontent.com-->
+  <div id="g_id_onload"
+    data-client_id="381380085175-eb444k641i1l069l62f9e1mk9m3rgcu8.apps.googleusercontent.com"
+    data-context="signin"
+    data-ux_mode="popup"
+    data-callback="handleCredentialResponse"
+    data-auto_prompt="false">
+  </div>
+
+  <div class="g_id_signin" id="login_btn"
+    data-type="standard"
+    data-shape="pill"
+    data-theme="filled_black"
+    data-text="signin_with"
+    data-size="large"
+    data-logo_alignment="left">
+  </div>
+
+  <script type="text/javascript">
+    document.getElementById("loader_div").style.display = "block"
+  </script>
+
+  <script src="{% static 'lunch_booking/js/jwt-decode.js' %}"></script>
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.0.272/jspdf.debug.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.6/jspdf.plugin.autotable.min.js"></script>
+
+  <script>
+    // console.log(window.location.origin);
+    var login_btn = document.getElementById("login_btn");
+    var dashboard_div = document.getElementById("main_ele")
+    var cookie_email = getCookie('email_lunch_booking_ulkasemi');
+    var cookie_name = getCookie('name_lunch_booking_ulkasemi');
+    var cookie_email_domain = cookie_email.substring(cookie_email.indexOf('@') + 1);
+    console.log(cookie_email_domain);
+    console.log(cookie_name);
+    var time_today = (new Date()).getHours();
+    console.log(time_today);
+
+    if (cookie_email_domain == 'ulkasemi.com' && cookie_name!='') {
+      if (time_today >= 8 && time_today < 20){
+        document.getElementById("no_time").style.display = 'none';
+        loadDashboard();
+      }
+      else{
+        document.getElementById("g_id_onload").style.display = 'none';
+        document.getElementById("login_btn").style.display = 'none';
+        document.getElementById("no_time").style.display = 'block';
+      }
+    }
+    else{
+      document.getElementById("loader_div").style.display = "none";
+    }
+
+    function handleCredentialResponse(response) {
+      const responsePayload = jwt_decode(response.credential);
+
+      var domain = responsePayload.email.substring(responsePayload.email.indexOf('@') + 1);
+      console.log(domain)
+
+      if (domain == 'ulkasemi.com') {
+        document.getElementById("loader_div").style.display = 'block';
+        setCookie('email_lunch_booking_ulkasemi', responsePayload.email, 365);
+        setCookie('name_lunch_booking_ulkasemi', responsePayload.name, 365);
+        cookie_email = responsePayload.email;
+        cookie_name = responsePayload.name;
+        loadDashboard();
+        check_email();
+      } else {
+        alert("Please login in with ulkasemi email");
+        login_btn.style.display = 'block';
+        dashboard_div.style.display = 'none';
+        dashboard_div.innerHTML = "";
+      }
+
+      // console.log("ID: " + responsePayload.sub);
+      // console.log('Full Name: ' + responsePayload.name);
+      // console.log('Given Name: ' + responsePayload.given_name);
+      // console.log('Family Name: ' + responsePayload.family_name);
+      // console.log("Image URL: " + responsePayload.picture);
+      // console.log("Email: " + responsePayload.email);
+    }
+
+    function loadDashboard() {
+      login_btn.style.display = 'none';
+      dashboard_div.style.display = 'block';
+    }
+
+    function setCookie(cname, cvalue, exdays) {
+      const d = new Date();
+      d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+      let expires = "expires=" + d.toUTCString();
+      document.cookie = cname + "=" + cvalue + ";" + expires;
+    }
+
+    function getCookie(cname) {
+      let name = cname + "=";
+      let ca = document.cookie.split(';');
+      for (let i = 0; i < ca.length; i++) {
+        let c = ca[i];
+        while (c.charAt(0) == ' ') {
+          c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+          return c.substring(name.length, c.length);
+        }
+      }
+      return "";
+    }
+
+    function checkCookie(cname) {
+      let user = getCookie(cname);
+      if (user != "") {
+        console.log("Welcome again " + user);
+      } else {
+        user = prompt("Please enter your name:", "");
+        if (user != "" && user != null) {
+          setCookie("username", user, 365);
+        }
+      }
+    }
+  </script>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+
+  <script type="text/javascript">
+    var monthFormatter = new Intl.DateTimeFormat("en-us", {month: "long"});
+    var weekdayFormatter = new Intl.DateTimeFormat("en-us", {weekday: "long"});
+
+    var dates = [];
+    dates[0] = new Date(); // defaults to today
+    dates[1] = addDays(dates[0], 31);
+    dates[2] = addDays(dates[0], 1);
+
+    // console.log(dates[0].getDate() + " " + monthFormatter.format(dates[0]).slice(0, 3));
+    $(".book_lunch_text").html(
+      "Book Lunch for Tomorrow (" + dates[2].getDate() + '<sup>th</sup> ' + monthFormatter.format(dates[2]).slice(0, 3) + ")"
+    );
+
+    var currentDate = 0; // index into dates[]
+    var previousDate = 1;
+
+    var datesBoxes = $("#booking-date");
+    var displayBoxes = $(".date-picker-display");
+
+    // sensible default just in case jQuery doesn't kick in
+    // makes sure that the experience is still usable, and when $(window).width() returns then this variable is updated to the correct value
+    var windowWidth = 300;
+    var colourPickerWidth = 300;
+
+    // set up dates
+    $(document).ready(function () {
+      // will work the same the first time as every other
+      updateDatePicker();
+
+      // update dates shown to correct dates
+      $(datesBoxes[0]).text(getDateString(dates[0]));
+      $(datesBoxes[1]).text(getDateString(dates[1]));
+
+      $(displayBoxes[0]).text(dates[0].getDate() + " " + monthFormatter.format(dates[0]).slice(0, 3));
+      $(displayBoxes[1]).text(dates[1].getDate() + " " + monthFormatter.format(dates[1]).slice(0, 3));
+    });
+
+    // add event listeners
+    $(document).ready(function () {
+
+      // has to be applied each time, as it's removed when calendar is reset
+      applyDateEventListener();
+
+      $(".date-picker-date").click(function (e) {
+
+        // if active, toggle picker off and return
+        var currentlyActive = $(this).hasClass("active");
+        if (currentlyActive) {
+          $(this).removeClass("active");
+          hideDatePicker();
+          return;
+        }
+
+        $(".date-picker-date").removeClass("active");
+        $(this).addClass("active");
+
+        // update currentDate
+        previousDate = currentDate;
+        if ($(this)[0].id == "date-picker-date-first") {
+          currentDate = 0;
+        } else {
+          currentDate = 1;
+        }
+
+        // update calendar
+        showDatePicker(e);
+        updateDatePicker();
+      });
+
+      $("#date-picker-next-month").click(function () {
+        changeMonth("Next");
+      });
+
+      $("#date-picker-previous-month").click(function () {
+        changeMonth("Previous");
+      });
+
+      $("#date-picker-exit").click(function () {
+        hideDatePicker();
+      });
+
+      $(document).click(function (e) {
+        var target = $(e.target);
+        var clickedOnPicker = (target.closest("#date-picker-modal").length);
+        var clickedOnDate = (target.closest(".date-picker-date").length);
+        var isPreviousOrNext = target.hasClass("previous-month") || target.hasClass("next-month");
+
+        if (!(clickedOnPicker || clickedOnDate || isPreviousOrNext)) {
+          hideDatePicker();
+        }
+      });
+
+    });
+
+    // called on initialising (set to today) and then every time the month changes or on moving between dates
+    function updateDatePicker(changeMonth = false) {
+
+      var datePicker = $("#date-picker");
+      var curDate = dates[currentDate]; // shorthand
+
+      // check if it needs to update
+      // updates if changed month directly (changeMonth) or if switched to other .date-picker-date and month is different (differentMonth)
+      var differentMonth = checkChangedMonth();
+      if (changeMonth === false && differentMonth === false) {
+        return;
+      }
+
+      updatePickerMonth();
+
+      // clear out all tr instances other than the header row
+      // really just removing all rows and appending header row straight back in
+      var headerRow = `
+    <tr id="date-picker-weekdays">
+      <th>S</th>
+      <th>M</th>
+      <th>T</th>
+      <th>W</th>
+      <th>T</th>
+      <th>F</th>
+      <th>S</th>
+    </tr>`;
+      // clear all rows
+      datePicker.contents().remove();
+      datePicker.append(headerRow);
+
+      var todayDate = curDate.getDate();
+      var firstOfMonth = new Date(curDate.getFullYear(), curDate.getMonth(), 1);
+      var firstWeekday = firstOfMonth.getDay(); // 0-indexed; 0 is Sunday, 6 is Saturday
+      var lastMonthToInclude = firstWeekday; // happily, this just works as-is.
+      var firstOfNextMonth = addMonths(firstOfMonth, 1);
+      var lastOfMonth = addDays(firstOfNextMonth, -1).getDate();
+
+      var openRow = "<tr class='date-picker-calendar-row'>";
+      var closeRow = "</tr>";
+      var currentRow = openRow;
+
+      // Add in as many of last month as required
+      if (lastMonthToInclude > 0) {
+        var lastMonthLastDay = addDays(firstOfMonth, -1);
+        var lastMonthDays = lastMonthLastDay.getDate();
+        var lastMonthStartAdding = lastMonthDays - lastMonthToInclude + 1;
+
+        // add days from previous month
+        // takes arguments (start loop, end loop <=, counter, 'true' if current month OR class if another month (optional, default "") )
+        //addToCalendar(lastMonthStartAdding, lastMonthDays, 0, "previous-month");
+        //addToCalendar(lastMonthStartAdding, lastMonthDays, 0, "month-previous");
+        addToCalendar(lastMonthStartAdding, lastMonthDays, 0, "previous-month");
+      }
+
+      // fill out rest of row with current month
+      // doesn't matter how many of last month were included, all accounted for
+      addToCalendar(1, 7 - lastMonthToInclude, lastMonthToInclude, true);
+
+      // reset for current month generation
+      currentRow = openRow;
+
+      var counter = 7;
+      var addedFromCurrentMonth = 7 - firstWeekday + 1;
+
+      addToCalendar(addedFromCurrentMonth, lastOfMonth, counter, true);
+
+      // at this point, counter = all of this month + whatever was included from last month
+      counter = lastMonthToInclude + lastOfMonth;
+      var nextMonthToInclude = counter % 7 === 0 ? 0 : 7 - (counter % 7);
+
+      addToCalendar(1, nextMonthToInclude, counter, "next-month");
+
+      // add event listener again
+      applyDateEventListener();
+
+      // update current date box
+      updateDateShown();
+
+
+      // functions scoped to this outer function
+      //############################################################
+      function checkChangedMonth() {
+        // updates if changed month directly (changeMonth) or if switched to other .date-picker-date and month is different (differentMonth)
+        var differentMonth = false;
+        // checks if it's the same date again
+        if (currentDate !== previousDate) {
+          // if either month or year are different then month has changed
+          if (dates[0].getMonth() !== dates[1].getMonth() || dates[0].getYear() !== dates[1].getYear()) {
+            differentMonth = true;
+          }
+        }
+
+        return differentMonth;
+
+      }
+
+      function addToCalendar(start, end, counter, cellClass) {
+
+        var currentMonth = cellClass === true ? true : false;
+
+        for (var i = start; i <= end; i++) {
+          counter += 1;
+          if (i === todayDate && currentMonth) {
+            currentRow += `<td class="active">${i}</td>`;
+          } else if (cellClass && !currentMonth) {
+            currentRow += `<td class="${cellClass}">${i}</td>`;
+          } else {
+            currentRow += `<td>${i}</td>`;
+          }
+          if (counter % 7 === 0) {
+            datePicker.append(currentRow + closeRow);
+            currentRow = openRow;
+          }
+        }
+      }
+    }
+
+    function updatePickerMonth() {
+      var monthName = monthFormatter.format(dates[currentDate]);
+      var year = dates[currentDate].getFullYear();
+      var dateText = monthName + " " + year;
+      $("#date-picker-month").text(dateText);
+    }
+
+    function dateSelected(currentDay) {
+
+      // update the active .date-picker-date with the current date
+      var activeDate = $($(".date-picker-date.active")[0]);
+
+      // get current date and update
+      dates[currentDate].setDate(currentDay);
+      updateDateShown();
+    }
+
+    // 'direction' can be either "Next" or "Previous"
+    function changeMonth(direction) {
+
+      var increment = direction === "Next" ? 1 : -1;
+
+      // change month
+      dates[currentDate] = addMonths(dates[currentDate], increment);
+
+      // change month name in picker
+      updatePickerMonth();
+
+      // update calendar
+      // passes 'true' that month has changed
+      updateDatePicker(true);
+    }
+
+    function showDatePicker(e) {
+      // console.log($(window).height())
+      var pxFromTop = $(".date-picker-date").offset().top;
+      // console.log(pxFromTop);
+      var datePicker = $("#date-picker-modal");
+      datePicker.css("top", pxFromTop + 40);
+      // check if right edge of colourPicker will go off the edge of the screen, and if so then reduce left by that amount
+      var rightEdge = e.pageX + colourPickerWidth;
+      // console.log(rightEdge)
+      var overflowWidth = rightEdge - windowWidth;
+      // console.log(windowWidth)
+      if (overflowWidth > 0) {
+        datePicker.css("left", e.pageX - overflowWidth);
+      } else {
+        datePicker.css("left", e.pageX);
+      }
+
+      $("#date-picker-modal").removeClass("hidden-2");
+    }
+
+    function hideDatePicker() {
+      $(".date-picker-date").removeClass("active");
+      $("#date-picker-modal").addClass("hidden-2");
+    }
+
+    function applyDateEventListener() {
+
+      $("#date-picker td").click(function () {
+
+        // Calendar UI
+        $("#date-picker td").removeClass("active");
+        $(this).addClass("active");
+
+        // update variables
+        currentDay = $(this).text();
+
+        // update the current date
+        dateSelected(currentDay);
+
+        // change month based on calendar day class
+        if ($(this).hasClass("previous-month")) {
+          changeMonth("Previous");
+        } else if ($(this).hasClass("next-month")) {
+          changeMonth("Next");
+        } else {
+          // clicked in current month; made selection so hide picker again
+          hideDatePicker();
+        }
+      });
+
+    }
+
+
+    // Utilities
+    //################################################################
+    // set location for date picker
+    $(document).ready(function () {
+      updateWidths();
+    });
+
+    $(window).resize(function () {
+      updateWidths();
+    });
+
+    function updateWidths() {
+      windowWidth = $(window).width();
+    }
+
+    // courtesy of https://stackoverflow.com/questions/563406/add-days-to-javascript-date
+    function addDays(date, days) {
+      var result = new Date(date);
+      result.setDate(result.getDate() + days);
+      return result;
+    }
+
+    function addMonths(date, months) {
+      var result = new Date(date);
+      result.setMonth(result.getMonth() + months);
+      return result;
+    }
+
+    // courtesy of https://stackoverflow.com/a/15764763/7170445
+    function getDateString(date) {
+      var year = date.getFullYear();
+
+      var month = (1 + date.getMonth()).toString();
+      month = month.length > 1 ? month : '0' + month;
+
+      var day = date.getDate().toString();
+      day = day.length > 1 ? day : '0' + day;
+
+      return day + '/' + month + '/' + year;
+    }
+
+    function updateDateShown() {
+      var formattedDate = getDateString(dates[currentDate]);
+      var updateDateBox = $(datesBoxes[currentDate]);
+
+      var updateDisplayBox = $(displayBoxes[currentDate]);
+      var dayAndMonth = dates[currentDate].getDate() + " " + monthFormatter.format(dates[currentDate]).slice(0, 3);
+
+      updateDateBox.text(formattedDate);
+      updateDisplayBox.text(dayAndMonth);
+    }
+  </script>
+
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-analytics.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-messaging.js"></script>
+<!--  <script src="js/fcm_script.js"></script>-->
+
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyBrbp6qgMQTdulFTl3oupuQa1_4G6zvBsk",
+      authDomain: "lunch-booking-380210.firebaseapp.com",
+      projectId: "lunch-booking-380210",
+      storageBucket: "lunch-booking-380210.appspot.com",
+      messagingSenderId: "1058830329036",
+      appId: "1:1058830329036:web:f562cbee96fb5a4a01ce69",
+      measurementId: "G-X3RHXPY5BM"
+    };
+    firebase.initializeApp(firebaseConfig);
+    // firebase.analytics();
+  </script>
+
+  <script>
+    const messaging = firebase.messaging();
+    messaging.getToken({vapidKey: 'BKX3fwJm59i47kkwQYbSTxi0qE9T8N029iXap5hKAoX8lReN1BV_Qoi9XLQI7osXeufd_AxSquBji4HPeLDYo-s'}).then((currentToken) => {
+      if (currentToken) {
+        console.log("token is ", currentToken);
+        subscribeTokenToTopic(currentToken, 'all');
+        //Send this token to your server and store it.
+      } else {
+        console.log('No registration token available. Request permission to generate one.');
+      }
+    }).catch((err) => {
+      console.log('An error occurred while retrieving token. ', err);
+    });
+
+    // messaging.onTokenRefresh(function () {
+    //   messaging.getToken({vapidKey: 'BKX3fwJm59i47kkwQYbSTxi0qE9T8N029iXap5hKAoX8lReN1BV_Qoi9XLQI7osXeufd_AxSquBji4HPeLDYo-s'})
+    //     .then(function (refreshedToken) {
+    //       console.log('Token refreshed.');
+    //       subscribeTokenToTopic(refreshedToken, 'all')
+    //     })
+    //     .catch(function (err) {
+    //       console.log('Unable to retrieve refreshed token ', err);
+    //     });
+    //   });
+
+    messaging.onMessage((payload) => {
+      console.log('Message received. ', payload['data']);
+
+      var title = payload['data']['title'];
+
+      const notificationOptions = {
+        body: payload['data']['text'],
+        icon: 'https://github.com/Imran2205/lunch_booking/raw/master/images/food.png'
+      };
+      var notification = new Notification(title, notificationOptions);
+      notification.onclick = function() {
+          window.location.href = payload['data']['url'];
+      };
+    });
+
+    function subscribeTokenToTopic(token, topic) {
+      fetch('https://iid.googleapis.com/iid/v1/'+token+'/rel/topics/'+topic, {
+        method: 'POST',
+        headers: new Headers({
+          'Authorization': 'key='+"AAAA9oc0pMw:APA91bEceXs98Fz5-QzC93dsbSysKidTmYXa2mVUbGVqBZvrs_AUtPomVyTY7LuWaJgPjg0ncqOWWXa2k8EvSNK70_cBf6xj-ge2ys7aeNscvmzRMnT5m-UanVR8dY5k5-B7_5QGcJl5"
+        })
+      }).then(response => {
+        if (response.status < 200 || response.status >= 400) {
+          throw 'Error subscribing to topic: '+response.status + ' - ' + response.text();
+        }
+        console.log('Subscribed to "'+topic+'"');
+      }).catch(error => {
+        console.error(error);
+      })
+    }
+
+    async function registerWorker() {
+      console.log('Registering service worker');
+
+      let hostname = location.hostname;
+      if (hostname.indexOf('imran2205.github.io') !== -1){
+        var url_js = "firebase-messaging-sw.js";
+        var scp = '/';
+      }
+      else{
+        var url_js = "firebase-messaging-sw.js";
+        var scp = '/';
+      }
+      console.log(scp, url_js);
+      // const registration = await navigator.serviceWorker.register(url_js, {scope: scp});
+      const registration = await navigator.serviceWorker.register(url_js, {scope: scp});
+      console.log('Registered service worker');
+      navigator.serviceWorker.ready.then(function(reg) {
+        console.log("subscribing...");
+        const subscription = registration.pushManager.subscribe({
+          userVisibleOnly: true,
+          applicationServerKey: 'BKX3fwJm59i47kkwQYbSTxi0qE9T8N029iXap5hKAoX8lReN1BV_Qoi9XLQI7osXeufd_AxSquBji4HPeLDYo-s'
+        });
+      });
+    }
+
+    if ('serviceWorker' in navigator) {
+      console.log('Registering service worker');
+      registerWorker().catch(error => console.error(error));
+    }
+
+  </script>
+
+  <script src="{% static 'lunch_booking/js/script.js' %}"></script>
+</body>
+</html>
+
+
+
+<!--<script type="module">-->
+<!--  // Import the functions you need from the SDKs you need-->
+<!--  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-app.js";-->
+<!--  import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-analytics.js";-->
+<!--  // TODO: Add SDKs for Firebase products that you want to use-->
+<!--  // https://firebase.google.com/docs/web/setup#available-libraries-->
+
+<!--  // Your web app's Firebase configuration-->
+<!--  // For Firebase JS SDK v7.20.0 and later, measurementId is optional-->
+<!--  const firebaseConfig = {-->
+<!--    apiKey: "AIzaSyBrbp6qgMQTdulFTl3oupuQa1_4G6zvBsk",-->
+<!--    authDomain: "lunch-booking-380210.firebaseapp.com",-->
+<!--    projectId: "lunch-booking-380210",-->
+<!--    storageBucket: "lunch-booking-380210.appspot.com",-->
+<!--    messagingSenderId: "1058830329036",-->
+<!--    appId: "1:1058830329036:web:f562cbee96fb5a4a01ce69",-->
+<!--    measurementId: "G-X3RHXPY5BM"-->
+<!--  };-->
+
+<!--  // Initialize Firebase-->
+<!--  const app = initializeApp(firebaseConfig);-->
+<!--  const analytics = getAnalytics(app);-->
+<!--</script>-->
+

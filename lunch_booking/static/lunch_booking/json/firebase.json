@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "lunch-booking-380210",
+  "private_key_id": "e97dfd16eec88507a53898a784cc2a186b2133d8",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCkS+I6AOH4nlfE\nvOv6pJUsh/uxb2U6nvKEJ+q+4EeR10AnTD4r2hkOGg7MDMT1yQz/GmchwTuy2GMA\n4jmz8O3Li9lmmNM7QQiQmV/nqfeMFsssKrvqkYPwGhlUV4R4t0evmZHCg0SQox3T\nt6n23u+/JLGHOm+kO65G/IKI5C724Bi8uE4MrrKHL61t4UdWFFJPrx+lWucjUGzm\nbVotwavPgHZTQy1v5MMKPS9vYj9gvAGROtiRv7LQIYsDqi5CHJVIiasv3TnD/tBO\nluLVrpBka4E0FnU+uFNq88H1EgvYr+5UEaCP6v+/eC6fk2myYRDcwM+1FswD7RE4\naBhCM1zLAgMBAAECggEAPBQXpLg/6acVVzbyX9QhTIhpTGf8r2QCMLtcBvKCmV0J\n85TYwzZcpSB4OruMpogffYWNIvXDO9IO2frfuOIoQp9gHzlRPMC6Pg4n2NH5WLvZ\nDcyOrOcLRRh2HLZoFbCHwTm56FQSFYXgWVQ3DbRWHSJw3I9M1dSRFRovLZmrZtDT\nX+d0lLtJDYf6snDPfnK5jvaLFnsM/6olX8ypGYGnlyiSpt1H88/P/6YppmTw3V4M\ngKfRmEojA+cJ8GeadvmUn/S+iq5IInSIOBPn04JPwmAXRdndmQE4Jp3gF/qdMQb5\nVoHjVmQhys8wRRU0T5ec4/7QPqlHsdQS1eVZwg2xYQKBgQDZCdJjOrBSXkCPkDzy\nbqHnuhApjs2O74qRw5ETi+pupZqdELCYSxh2PVJvJZd8cXBklweoFOrnC7Ytriu7\n+GSaJ8AfhEx1/iT3YShnKlK4STS9QAsISEOr2m67dnFXm3QU5MgE27MVL3p5tCJU\nZIIMR9EbKWXCecSy1Icu58BUuwKBgQDBykMSatjqULmeF0ngBuHoKFcqVa7GXE95\nliSTDRqUKW/P2CVmvTRC+oHQ9RCZZh1p85AXGELBeBrX8KXSlQykXHRRO9d+bTEf\n8nuiSryD/2YiX9D6cJO6P+ELmjDpnIy4gcPxZNrh9AUQ4VeJqwVqWFQVcHI7iAuK\neeHKipmfMQKBgQCpB10yqqJng8AEDvFoXYD6V43+z5iHmUbx/r0d2/nX8mFXsYfX\nE6UZcOiiZ0RzRmWh8X2lCaVoC1b2fI7S9cBjzlFyOjbSLfvcLW6p6exCWcEZIqd0\n69LIJHXYyYW8FPVy0Dp2jiQKe8+GuSODVkNyDPxtivAVZYArRhmCDjtbwQKBgENM\nIUS5FEEy7XLoNYB2A2ei8rpB7SL3laXsrSDgERXY2fp83mgyVn7YDdLp9+y9mINd\n0PEkPLKBKhlJedyKZEyDyuUW+fvuoXutsp+mgpb4T5iqW6FNDRBF9LoZvtixw/Cj\nJ8+hrZ2AJ244QzUMziGjMPgNB66CzTc2omG7BiRRAoGAbajcapxMFF1lO5k8JcvY\nFJjbGzzioXlNB5X+1K3RagKyth+bRV6j9skgue0qQE2ERxMG6f/TvibPbA4bv1PJ\n3s1DinqjybwPh4XTrzoHgvi1W5CXt7dK2GX5MIhrpMXvlCeMecpKXF78B1JFJ+rr\nJ6NupJa0BdVCq9T0VFWqm4k=\n-----END PRIVATE KEY-----\n",
+  "client_email": "firebase-adminsdk-2oub4@lunch-booking-380210.iam.gserviceaccount.com",
+  "client_id": "116926711880795117273",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-2oub4%40lunch-booking-380210.iam.gserviceaccount.com"
+}
