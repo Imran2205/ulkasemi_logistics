@@ -39,6 +39,7 @@ dohs.addEventListener("change", verify_call);
 
 reg_btn.addEventListener("click", ()=>{
     reg_btn.disabled = true;
+    reg_btn.css('pointer-events', 'none');
     var id = id_input.value;
     register(id, cookie_email, cookie_name);
 });
@@ -71,6 +72,7 @@ function register(id,email,name){
         console.error(err);
         alert("registration failed");
         reg_btn.disabled = false;
+        reg_btn.css('pointer-events', '');
     });
 
 }
