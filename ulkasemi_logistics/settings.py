@@ -26,7 +26,8 @@ SECRET_KEY = "django-insecure-p6q7ow4#xj(r=y4+e&kd8-9zkua7-e)r%8wu2$zc8(b2349$(t
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['103.3.61.49', '127.0.0.1', 'localhost', '103-3-61-49.ip.linodeusercontent.com']
+ALLOWED_HOSTS = ['103.3.61.49', '127.0.0.1', 'localhost', '103-3-61-49.ip.linodeusercontent.com',
+                 'www.ulka.autos', 'https://www.ulka.autos', 'ulka.autos']
 
 
 # Application definition
@@ -39,12 +40,14 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "lunch_booking.apps.LunchBookingConfig",
-    "widget_tweaks"
+    "widget_tweaks",
+    "corsheaders"
 ]
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
@@ -133,3 +136,5 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 SECURE_REFERRER_POLICY = "strict-origin-when-cross-origin"
 SECURE_CROSS_ORIGIN_OPENER_POLICY = "same-origin-allow-popups"
+
+CORS_ALLOW_ALL_ORIGINS = True
