@@ -38,7 +38,7 @@ regnum.addEventListener("change", verify_call);
 dohs.addEventListener("change", verify_call);
 
 reg_btn.addEventListener("click", ()=>{
-    document.getElementById('reg_btn').disabled = true;
+    reg_btn.disabled = true;
     var id = id_input.value;
     register(id, cookie_email, cookie_name);
 });
@@ -70,7 +70,7 @@ function register(id,email,name){
     }).catch(err => {
         console.error(err);
         alert("registration failed");
-        document.getElementById('reg_btn').disabled = false;
+        reg_btn.disabled = false;
     });
 
 }
