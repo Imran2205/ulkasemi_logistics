@@ -12,7 +12,7 @@ let tomorrow=today.setDate(today.getDate() + 1);
 //variable Declaration
 const checkbox=document.getElementById('lunch-book');
 // const submitBtn=document.querySelector('#submit');
-const url="https://script.google.com/macros/s/AKfycbzGv6cdr7IpXNsPJxo-UFzPuYcrC3XqooXQrh2__3l_87NW_GDzibBPJJGmF52xApR7EA/exec";
+const url="https://script.google.com/macros/s/AKfycbzXGlJqONdUdlVKmT2Q9KnxEqfRLRYCkrqOb_85ik1a0ivgszX_WOXxZrsdpPhZU8zm8g/exec";
 const downloadSection=document.querySelector('#date-picker-container');
 const downloadBtn=document.querySelector('.btn');
 const statement=document.querySelector('#booking-statement');
@@ -38,6 +38,7 @@ regnum.addEventListener("change", verify_call);
 dohs.addEventListener("change", verify_call);
 
 reg_btn.addEventListener("click", ()=>{
+    document.getElementById('reg_btn').disabled = true;
     var id = id_input.value;
     register(id, cookie_email, cookie_name);
 });
@@ -69,6 +70,7 @@ function register(id,email,name){
     }).catch(err => {
         console.error(err);
         alert("registration failed");
+        document.getElementById('reg_btn').disabled = false;
     });
 
 }
