@@ -1,7 +1,10 @@
 import firebase_admin
 from firebase_admin import credentials, messaging
+from django.conf import settings
 
-firebase_cred = credentials.Certificate(r"C:\Users\admin\Desktop\desktop\web\lunch_booking\json\firebase.json")
+cred_path = settings.BASE_DIR / "lunch_booking/static/lunch_booking/json" / "firebase.json"
+firebase_cred = credentials.Certificate(cred_path)
+
 firebase_app = firebase_admin.initialize_app(firebase_cred)
 
 message = messaging.Message(
