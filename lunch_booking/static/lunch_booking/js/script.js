@@ -37,6 +37,8 @@ checkbox.addEventListener("change",postData);
 regnum.addEventListener("change", verify_call);
 dohs.addEventListener("change", verify_call);
 
+var registering = false;
+
 reg_btn.addEventListener("click", (e) =>{
     // e.preventDefault();
     // reg_btn.disabled = true;
@@ -45,7 +47,10 @@ reg_btn.addEventListener("click", (e) =>{
 
     let id = id_input.value;
     if (id.length === 6) {
-        register(id, cookie_email, cookie_name);
+        if (!registering) {
+            registering = true;
+            register(id, cookie_email, cookie_name);
+        }
     }
     else {
         alert("Please enter a valid ID");
@@ -80,10 +85,11 @@ function register(id,email,name){
     }).catch(err => {
         console.error(err);
         alert("registration failed");
-        reg_btn.classList.remove("disable-click")
-        reg_btn.classList.add("enable-click")
+        // reg_btn.classList.remove("disable-click")
+        // reg_btn.classList.add("enable-click")
         // reg_btn.disabled = false;
         // reg_btn.css('pointer-events', '');
+        registering = false;
     });
 
 }
