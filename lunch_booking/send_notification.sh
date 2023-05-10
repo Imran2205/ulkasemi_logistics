@@ -1,2 +1,2 @@
-source /home/automation/django_web_projects/ulkasemi_logistics/venv/bin/activate
-python /home/automation/django_web_projects/ulkasemi_logistics/lunch_booking/notification_sender.py
+# source /home/automation/django_web_projects/ulkasemi_logistics/venv/bin/activate
+/home/automation/django_web_projects/ulkasemi_logistics/venv/bin/python /home/automation/django_web_projects/ulkasemi_logistics/lunch_booking/notification_sender.py >> /home/automation/django_web_projects/ulkasemi_logistics/lunch_booking/cron_out.txt
