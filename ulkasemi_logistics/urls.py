@@ -23,10 +23,9 @@ from lunch_booking import views as lb_views
 urlpatterns = [
     path("admin/", admin.site.urls),
     path('', include('home.urls')),
-    path('lunch-booking', include('lunch_booking.urls')),
+    path('lunch-booking/', include('lunch_booking.urls')),
     path('firebase-messaging-sw.js', lb_views.service_worker),
     path('accounts/', include('allauth.urls')),
-
 ]
 
 if settings.DEBUG:

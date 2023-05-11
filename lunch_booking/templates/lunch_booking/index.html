@@ -66,6 +66,9 @@
           <label for="lunch-book"></label>
         </div>
       </div>
+      <div>
+        <button id="notifyBtn">Notify Me</button>
+      </div>
     </div>
 
     <div id="date-picker-section">
@@ -716,12 +719,6 @@
     //     });
     //   });
 
-    Notification.requestPermission(function(result) {
-      if (result === 'granted') {
-        console.log("permission granted");
-      }
-    });
-
     messaging.onMessage((payload) => {
       console.log('Message received. ', payload['data']);
 
@@ -783,6 +780,58 @@
       registerWorker().catch(error => console.error(error));
     }
 
+    // function notifyMe() {
+    //   if (!("Notification" in window)) {
+    //     // Check if the browser supports notifications
+    //     alert("This browser does not support desktop notification");
+    //   } else if (Notification.permission === "granted") {
+    //     const notification = new Notification("Hi there!");
+    //     // …
+    //   } else if (Notification.permission !== "denied") {
+    //     Notification.requestPermission().then((permission) => {
+    //       if (permission === "granted") {
+    //         console.log("granted");
+    //       }
+    //     });
+    //   }
+    // }
+
+    function triggerNotifications() {
+      console.log("requesting permission");
+      Notification.requestPermission().then(function (permission) {
+        console.log(">>>>>", permission);
+      });
+      console.log("sent permission");
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+       console.log(Notification.permission);
+      if (Notification.permission !== 'granted'){
+        triggerNotifications();
+        // notifyMe();
+      }
+    }, false);
+  </script>
+
+  <script type="text/javascript">
+    // Request permission for notifications
+    function requestPermission() {
+      if (Notification.permission === "granted") {
+        // If permission is already granted, show the notification
+        new Notification("Hello World!");
+      } else if (Notification.permission !== "denied") {
+        // If permission is not granted or denied, request permission
+        Notification.requestPermission().then(function(permission) {
+          if (permission === "granted") {
+            // If permission is granted, show the notification
+            new Notification("Notification enabled!");
+          }
+        });
+      }
+    }
+
+    // Add event listener to button
+    document.getElementById("notifyBtn").addEventListener("click", requestPermission);
   </script>
 
   <script src="{% static 'lunch_booking/js/script.js' %}"></script>

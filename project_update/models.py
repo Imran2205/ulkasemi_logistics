@@ -1,3 +1,6 @@
 from django.db import models
 
-# Create your models here.
+
+class ProjectInfoModel(models.Model):
+    project_name = models.CharField(max_length=1000, default='', unique=True)
+
