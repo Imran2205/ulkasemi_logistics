@@ -71,6 +71,13 @@
       </div>
     </div>
 
+    <div id="no_time"  style="display: none; text-align: justify; max-width: 600px;">
+      <a style="font-size: 4vh; font-weight: bold; color: #333333">
+        The webpage is no longer taking response.
+        Please book tomorrow after 8 am.
+      </a>
+    </div>
+
     <div id="date-picker-section">
       <div id="date-picker-container" style="display: none">
         <div class="office-location-container" style="display: none">
@@ -144,13 +151,6 @@
         </div>
       </div>
     </div>
-  </div>
-
-  <div id="no_time" class="div_with_bg" style="display: none">
-    <a style="font-size: 6vh; font-weight: bold; color: #333333; position: relative" class="vertical-center-2">
-      The webpage is no <br> longer taking response.<br>
-      Please book after tomorrow 8 am.
-    </a>
   </div>
 
   <div id="loader" class="div_with_bg" style="display: none">
@@ -232,11 +232,12 @@
     var cookie_email_domain = cookie_email.substring(cookie_email.indexOf('@') + 1);
     console.log(cookie_email_domain);
     console.log(cookie_name);
-    var time_today = (new Date()).getHours();
-    console.log(time_today);
+
 
     if (cookie_email_domain == 'ulkasemi.com' && cookie_name!='') {
-      if (time_today >= 8 && time_today < 20){
+      var time_today = (new Date()).getHours();
+      console.log(time_today);
+      if (time_today >= 11 && time_today < 20){
         document.getElementById("no_time").style.display = 'none';
         loadDashboard();
       }
@@ -244,6 +245,7 @@
         document.getElementById("g_id_onload").style.display = 'none';
         document.getElementById("login_btn").style.display = 'none';
         document.getElementById("no_time").style.display = 'block';
+        document.getElementById("book_container").style.display = 'none'
       }
     }
     else{
@@ -282,6 +284,13 @@
     function loadDashboard() {
       login_btn.style.display = 'none';
       dashboard_div.style.display = 'block';
+      var time_today = (new Date()).getHours();
+
+      if (time_today >= 11 && time_today < 20) {
+        console.log(time_today);
+      } else {
+        document.getElementById('book_container').style.display = 'none';
+      }
     }
 
     function setCookie(cname, cvalue, exdays) {
