@@ -195,7 +195,7 @@ function check_email() {
         container_section.classList.remove("vertical-center");
         var time_today = (new Date()).getHours();
 
-        if (time_today >= 11 && time_today < 20) {
+        if (time_today >= 8 && time_today < 20) {
           console.log(time_today);
         } else {
           document.getElementById("no_time").style.display = 'block';
@@ -203,6 +203,7 @@ function check_email() {
           loadDashboard();
         }
       } else {
+        loadDashboard();
         downloadSection.style['display'] = 'none';
         container_section.classList.add("vertical-center");
       }

@@ -13,7 +13,7 @@ var firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 // firebase.analytics();
 const messaging = firebase.messaging();
-var url = "https://www.ulka.autos/lunch_booking/"
+var url = "https://www.ulka.autos/lunch-booking/"
 messaging.onBackgroundMessage(function(payload) {
   console.log('[firebase-messaging-sw.js] Received background message ', payload);
   // Customize notification here

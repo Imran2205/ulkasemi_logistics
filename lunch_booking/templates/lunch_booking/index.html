@@ -66,15 +66,15 @@
           <label for="lunch-book"></label>
         </div>
       </div>
-      <div>
-        <button id="notifyBtn">Notify Me</button>
-      </div>
+<!--      <div>-->
+<!--        <button id="notifyBtn">Notify Me</button>-->
+<!--      </div>-->
     </div>
 
     <div id="no_time"  style="display: none; text-align: justify; max-width: 600px;">
-      <a style="font-size: 4vh; font-weight: bold; color: #333333">
+      <a style="font-size: 4vh; font-weight: bold; color: #ff6b35">
         The webpage is no longer taking response.
-        Please book tomorrow after 8 am.
+        Please book tomorrow after 8 AM.
       </a>
     </div>
 
@@ -176,8 +176,8 @@
     </svg>
   </div>
 
-  <div style="position: absolute; right:40px; bottom: 10px; height: 80px; width: auto;">
-    <img height="80px" width="auto" src="https://raw.githubusercontent.com/asmsaad/launch-booking-webpage/main/icons/automation_team.png">
+  <div style="position: fixed; right:40px; bottom: 10px; height: auto; width: auto;">
+    <img height="50vh" width="auto" src="{% static 'lunch_booking/images/automation_team_logo.svg' %}">
   </div>
 
   <div class="loader_div" id="loader_div" style="display: none;">
@@ -237,7 +237,7 @@
     if (cookie_email_domain == 'ulkasemi.com' && cookie_name!='') {
       var time_today = (new Date()).getHours();
       console.log(time_today);
-      if (time_today >= 11 && time_today < 20){
+      if (time_today >= 8 && time_today < 20){
         document.getElementById("no_time").style.display = 'none';
         loadDashboard();
       }
@@ -286,7 +286,7 @@
       dashboard_div.style.display = 'block';
       var time_today = (new Date()).getHours();
 
-      if (time_today >= 11 && time_today < 20) {
+      if (time_today >= 8 && time_today < 20) {
         console.log(time_today);
       } else {
         document.getElementById('book_container').style.display = 'none';
