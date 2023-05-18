@@ -119,7 +119,7 @@ function downloadData(e) {
       // table creation in html <can be ignored>//
       let ind = 1;
       lunchData.forEach(element => {
-        bookingData.push([ind, element['name'], element['email'], element['id'], ""])
+        bookingData.push([ind, element['email'], element['name'], element['id'], ""])
         ind += 1;
       });
 
@@ -251,7 +251,7 @@ function generatePdf(elements, q_date) {
   doc.text(10, y = y + 30, title);
 
   doc.autoTable({
-    columns: ["Sl", "Name", "Email", "ID", ""],
+    columns: ["Sl", "Email", "Name", "ID", "Tick"],
     body: elements,
     startY: 70,
     theme: 'grid',
