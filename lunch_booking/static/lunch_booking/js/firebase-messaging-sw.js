@@ -23,7 +23,7 @@ messaging.onBackgroundMessage(function(payload) {
   url = payload['data']['url'];
   const notificationOptions = {
     body: payload['data']['text'],
-    icon: 'https://github.com/Imran2205/lunch_booking/raw/master/images/food.png'
+    icon: 'https://www.ulka.autos/static/lunch_booking/images/vegan-food.png'
   };
   self.registration.showNotification(notificationTitle,
         notificationOptions);

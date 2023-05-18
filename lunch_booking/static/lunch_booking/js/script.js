@@ -66,7 +66,7 @@ function verify_call(e) {
 
 function register(id, email, name) {
   let regObj = {id: id, email: email, name: name};
-  console.log(regObj)
+  // console.log(regObj)
   let options = {
     method: "POST",
   }
@@ -74,7 +74,7 @@ function register(id, email, name) {
   fetch(`${url}?${qs}`, options)
     .then(res => res.json())
     .then(resp => {
-      console.log(resp);
+      // console.log(resp);
       reg_div.style.display = 'none';
       // window.location.reload();
       // book_container.style.display = 'block';
@@ -99,7 +99,7 @@ function downloadData(e) {
   let newDate = dates[1] + "/" + dates[0] + "/" + dates[2];
   let date = new Date(newDate);
   date = date.getDate();
-  console.log(date)
+  // console.log(date)
   e.preventDefault();
   let lRegnum = regnum2.checked;
   const selectedLocation = lRegnum ? "Regnum" : "Regnum";
@@ -123,7 +123,7 @@ function downloadData(e) {
         ind += 1;
       });
 
-      console.log(lunchData);
+      // console.log(lunchData);
       generatePdf(bookingData, newDate);
       return resp
     })
@@ -149,7 +149,7 @@ function postData(e) {
   fetch(`${url}?${qs}`, options)
     .then(res => res.json())
     .then(resp => {
-      console.log(resp);
+      // console.log(resp);
       // alert("booking status updated successfully");
       loader.style.display = 'none';
       tick_div.style.display = 'block';
@@ -172,8 +172,8 @@ function check_email() {
     .then(r => r.json())
     .then(r => {
       r = JSON.parse(r)
-      console.log(r);
-      console.log(r['userType']);
+      // console.log(r);
+      // console.log(r['userType']);
       let userType = (r['userType']);
 
       if (r['email'] == "N/A") {
@@ -196,7 +196,7 @@ function check_email() {
         var time_today = (new Date()).getHours();
 
         if (time_today >= 8 && time_today < 20) {
-          console.log(time_today);
+          // console.log(time_today);
         } else {
           document.getElementById("no_time").style.display = 'block';
           // downloadSection.style['display'] = 'block';
@@ -241,7 +241,7 @@ function generatePdf(elements, q_date) {
   // var res = doc.autoTableHtmlToJson(document.getElementById("table"));
   // console.log(res);
   // generate auto table with body
-  console.log(elements)
+  // console.log(elements)
   var y = 10;
   doc.setLineWidth(2);
   doc.setFont("helvetica");

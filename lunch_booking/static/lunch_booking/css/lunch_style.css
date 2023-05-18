@@ -392,11 +392,11 @@ body {
   top: 7px;
   right: 10px;
   content: "";
-  background: url("https://raw.githubusercontent.com/asmsaad/launch-booking-webpage/main/icons/calendar.png");
+  background: url("../images/calendar.png");
   background-repeat: no-repeat;
   background-size: 32px;
 }
-
+/*background: url("https://raw.githubusercontent.com/asmsaad/launch-booking-webpage/main/icons/calendar.png");*/
 #date-picker-display-container {
   display: flex;
   flex-wrap: wrap;

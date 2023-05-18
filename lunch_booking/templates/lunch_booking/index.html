@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="{% static 'lunch_booking/css/lunch_style.css' %}">
   <link rel="stylesheet" href="{% static 'lunch_booking/css/waiting_loader.css' %}">
   <link rel="stylesheet" href="{% static 'lunch_booking/css/loader_bg.css' %}">
-  <link rel="icon" type="image/x-icon" href="{% static 'lunch_booking/images/food.png' %}">
+  <link rel="icon" type="image/x-icon" href="{% static 'lunch_booking/images/vegan-food.png' %}">
   <link href="https://fonts.googleapis.com/css?family=Coda|Open+Sans" rel="stylesheet">
 </head>
 <body>
@@ -58,7 +58,7 @@
       <div class="switch-holder">
         <div class="switch-label">
           <span>
-            <img style="height: 40px; width: 40px; margin-right: 10px; margin-top: 7px" src="https://raw.githubusercontent.com/asmsaad/launch-booking-webpage/main/icons/vegan-food.png">
+            <img style="height: 40px; width: 40px; margin-right: 10px; margin-top: 7px" src="{% static 'lunch_booking/images/vegan-food.png' %}">
           </span>
           <span style="font-size: 20px; margin: auto" class="book_lunch_text">Book Lunch for Tomorrow (25<sup>th</sup> Feb)</span>
         </div>
@@ -125,7 +125,7 @@
           <div>
             <button class="btn">
 <!--              <i class="fa fa-download"></i>-->
-              <img style="height: 40px; width: 40px" src="https://raw.githubusercontent.com/asmsaad/launch-booking-webpage/main/icons/downloading.png">
+              <img style="height: 40px; width: 40px" src="{% static 'lunch_booking/images/downloading.png' %}">
               <span style="margin-top: 11px">Download</span>
             </button>
           </div>
@@ -231,13 +231,13 @@
     var cookie_email = getCookie('email_lunch_booking_ulkasemi');
     var cookie_name = getCookie('name_lunch_booking_ulkasemi');
     var cookie_email_domain = cookie_email.substring(cookie_email.indexOf('@') + 1);
-    console.log(cookie_email_domain);
-    console.log(cookie_name);
+    {#console.log(cookie_email_domain);#}
+    {#console.log(cookie_name);#}
 
 
     if (cookie_email_domain == 'ulkasemi.com' && cookie_name!='') {
       var time_today = (new Date()).getHours();
-      console.log(time_today);
+      {#console.log(time_today);#}
       if (time_today >= 8 && time_today < 20){
         document.getElementById("no_time").style.display = 'none';
         loadDashboard();
@@ -257,7 +257,7 @@
       const responsePayload = jwt_decode(response.credential);
 
       var domain = responsePayload.email.substring(responsePayload.email.indexOf('@') + 1);
-      console.log(domain)
+      {#console.log(domain)#}
 
       if (domain == 'ulkasemi.com') {
         document.getElementById("loader_div").style.display = 'block';
@@ -288,7 +288,7 @@
       var time_today = (new Date()).getHours();
 
       if (time_today >= 8 && time_today < 20) {
-        console.log(time_today);
+        {#console.log(time_today);#}
       } else {
         document.getElementById('book_container').style.display = 'none';
       }
@@ -319,7 +319,7 @@
     function checkCookie(cname) {
       let user = getCookie(cname);
       if (user != "") {
-        console.log("Welcome again " + user);
+        {#console.log("Welcome again " + user);#}
       } else {
         user = prompt("Please enter your name:", "");
         if (user != "" && user != null) {
@@ -708,7 +708,7 @@
     const messaging = firebase.messaging();
     messaging.getToken({vapidKey: 'BKX3fwJm59i47kkwQYbSTxi0qE9T8N029iXap5hKAoX8lReN1BV_Qoi9XLQI7osXeufd_AxSquBji4HPeLDYo-s'}).then((currentToken) => {
       if (currentToken) {
-        console.log("token is ", currentToken);
+        {#console.log("token is ", currentToken);#}
         subscribeTokenToTopic(currentToken, 'all');
         //Send this token to your server and store it.
       } else {
@@ -730,13 +730,13 @@
     //   });
 
     messaging.onMessage((payload) => {
-      console.log('Message received. ', payload['data']);
+      {#console.log('Message received. ', payload['data']);#}
 
       var title = payload['data']['title'];
 
       const notificationOptions = {
         body: payload['data']['text'],
-        icon: 'https://github.com/Imran2205/lunch_booking/raw/master/images/food.png'
+        icon: 'https://www.ulka.autos/static/lunch_booking/images/vegan-food.png'
       };
       var notification = new Notification(title, notificationOptions);
       notification.onclick = function() {
@@ -754,14 +754,14 @@
         if (response.status < 200 || response.status >= 400) {
           throw 'Error subscribing to topic: '+response.status + ' - ' + response.text();
         }
-        console.log('Subscribed to "'+topic+'"');
+        {#console.log('Subscribed to "'+topic+'"');#}
       }).catch(error => {
         console.error(error);
       })
     }
 
     async function registerWorker() {
-      console.log('Registering service worker');
+      {#console.log('Registering service worker');#}
 
       let hostname = location.hostname;
       if (hostname.indexOf('imran2205.github.io') !== -1){
@@ -772,12 +772,12 @@
         var url_js = "firebase-messaging-sw.js";
         var scp = '/';
       }
-      console.log(scp, url_js);
+      {#console.log(scp, url_js);#}
       // const registration = await navigator.serviceWorker.register(url_js, {scope: scp});
       const registration = await navigator.serviceWorker.register(url_js, {scope: scp});
-      console.log('Registered service worker');
+      {#console.log('Registered service worker');#}
       navigator.serviceWorker.ready.then(function(reg) {
-        console.log("subscribing...");
+        {#console.log("subscribing...");#}
         const subscription = registration.pushManager.subscribe({
           userVisibleOnly: true,
           applicationServerKey: 'BKX3fwJm59i47kkwQYbSTxi0qE9T8N029iXap5hKAoX8lReN1BV_Qoi9XLQI7osXeufd_AxSquBji4HPeLDYo-s'
@@ -786,7 +786,7 @@
     }
 
     if ('serviceWorker' in navigator) {
-      console.log('Registering service worker');
+      {#console.log('Registering service worker');#}
       registerWorker().catch(error => console.error(error));
     }
 
@@ -807,15 +807,15 @@
     // }
 
     function triggerNotifications() {
-      console.log("requesting permission");
+      {#console.log("requesting permission");#}
       Notification.requestPermission().then(function (permission) {
-        console.log(">>>>>", permission);
+        {#console.log(">>>>>", permission);#}
       });
-      console.log("sent permission");
+      {#console.log("sent permission");#}
     }
 
     document.addEventListener('DOMContentLoaded', function() {
-       console.log(Notification.permission);
+       {#console.log(Notification.permission);#}
       if (Notification.permission !== 'granted'){
         triggerNotifications();
         // notifyMe();
