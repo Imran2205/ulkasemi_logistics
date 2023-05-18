@@ -1,0 +1,197 @@
+.timeline-member {
+  line-height: 1.0em;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+.timeline-member h1, .timeline-member h2, .timeline-member h3, .timeline-member h4, .timeline-member h5, .timeline-member h6 {
+  line-height: inherit;
+}
+
+/*----- TIMELINE ITEM -----*/
+.timeline-item-member {
+  padding-left: 40px;
+  position: relative;
+}
+.timeline-item-member:last-child {
+  padding-bottom: 0;
+}
+
+/*----- TIMELINE INFO -----*/
+.timeline-info-member {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  margin: 0 0 0.5em 0;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.timeline-marker-member {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 35px;
+
+}
+
+.timeline-marker-member:after {
+  content: "";
+  width: 3px;
+  background: #CCD5DB;
+  display: block;
+  position: absolute;
+  top: 35px;
+  bottom: -20px;
+  left: 13px;
+}
+
+.timeline-item-member:last-child .timeline-marker-member:after {
+  content: none;
+}
+
+/*----- TIMELINE CONTENT -----*/
+.timeline-content-member {
+  padding-bottom: 40px;
+}
+.timeline-content-member p:last-child {
+  margin-bottom: 0;
+}
+
+/*----- TIMELINE PERIOD -----*/
+.period {
+  padding: 0;
+}
+.period .timeline-info-member {
+  display: none;
+}
+
+.period .timeline-marker-member:after {
+  content: "";
+  height: 32px;
+  top: auto;
+}
+.period .timeline-content-member {
+  padding: 40px 0 70px;
+}
+.period .timeline-title-member {
+  margin: 0;
+}
+
+/*----------------------------------------------
+    MOD: TIMELINE SPLIT
+----------------------------------------------*/
+@media (min-width: 768px) {
+  .timeline-split .timeline-member, .timeline-centered .timeline-member {
+    display: table;
+  }
+  .timeline-split .timeline-item-member, .timeline-centered .timeline-item-member {
+    display: table-row;
+    padding: 0;
+  }
+  .timeline-split .timeline-info-member, .timeline-centered .timeline-info-member,
+  .timeline-split .timeline-marker-member,
+  .timeline-centered .timeline-marker-member,
+  .timeline-split .timeline-content-member,
+  .timeline-centered .timeline-content-member,
+  .timeline-split .period .timeline-info-member {
+    display: table-cell;
+    vertical-align: top;
+  }
+  .timeline-split .timeline-marker-member, .timeline-centered .timeline-marker-member{
+    position: relative;
+  }
+  .timeline-split .timeline-content-member, .timeline-centered .timeline-content-member {
+    padding-left: 30px;
+  }
+  .timeline-split .timeline-info-member, .timeline-centered .timeline-info-member {
+    padding-right: 30px;
+  }
+  .timeline-split .period .timeline-title-member, .timeline-centered .period .timeline-title-member {
+    position: relative;
+    left: -45px;
+  }
+}
+
+/*----------------------------------------------
+    MOD: TIMELINE CENTERED
+----------------------------------------------*/
+@media (min-width: 992px) {
+  .timeline-centered,
+  .timeline-centered .timeline-item-member,
+  .timeline-centered .timeline-info-member,
+  .timeline-centered .timeline-marker-member,
+  .timeline-centered .timeline-content-member {
+    display: block;
+    margin: 0;
+    padding: 0;
+  }
+  .timeline-centered .timeline-item-member {
+    padding-bottom: 40px;
+    overflow: hidden;
+  }
+  .timeline-centered .timeline-marker-member{
+    position: absolute;
+    left: 50%;
+    margin-left: -7.5px;
+  }
+  .timeline-centered .timeline-info-member,
+  .timeline-centered .timeline-content-member {
+    width: 50%;
+  }
+  .timeline-centered > .timeline-item-member:nth-child(odd) .timeline-info-member {
+    float: left;
+    text-align: right;
+    padding-right: 30px;
+  }
+  .timeline-centered > .timeline-item-member:nth-child(odd) .timeline-content-member {
+    float: right;
+    text-align: left;
+    padding-left: 30px;
+  }
+  .timeline-centered > .timeline-item-member:nth-child(even) .timeline-info-member {
+    float: right;
+    text-align: left;
+    padding-left: 30px;
+  }
+  .timeline-centered > .timeline-item-member:nth-child(even) .timeline-content-member {
+    float: left;
+    text-align: right;
+    padding-right: 30px;
+  }
+  .timeline-centered > .timeline-item-member.period .timeline-content-member {
+    float: none;
+    padding: 0;
+    width: 100%;
+    text-align: center;
+  }
+  .timeline-centered .timeline-item-member.period {
+    padding: 50px 0 90px;
+  }
+  .timeline-centered .period .timeline-marker-member:after {
+    height: 30px;
+    bottom: 0;
+    top: auto;
+  }
+  .timeline-centered .period .timeline-title-member {
+    left: auto;
+  }
+}
+
+.justify-align-text {
+  text-align: justify;
+   padding-top: 7px;
+}
+
+/*----------------------------------------------
+    MOD: MARKER OUTLINE
+----------------------------------------------*/
+/*.marker-outline .timeline-marker-member:before {*/
+/*  background: transparent;*/
+/*  border-color: #FF6B6B;*/
+/*}*/
+/*.marker-outline .timeline-item-member:hover .timeline-marker-member:before {*/
+/*  background: #FF6B6B;*/
+/*}!*# sourceMappingURL=style.css.map *!*/

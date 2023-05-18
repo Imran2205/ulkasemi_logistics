@@ -1,0 +1,45 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600;700&display=swap');
+:root {
+  --tag-color-one: #e0fbf6;
+  --tag-color-text-one: #58c2a9;
+  --tag-color-two: #ece7fe;
+  --tag-color-text-two: #8972f3;
+  --tag-color-three: #fde7ea;
+  --tag-color-text-three: #e77f89;
+  --tag-color-four: #f7f8fc;
+  --tag-color-text-four: #a0a6b5;
+  --tag-color-five: #ffe6a7;
+  --tag-color-text-five: #ff9f1c;
+
+}
+
+.tag {
+  font-size: 10px;
+  padding: 4px 8px;
+  border-radius: 20px;
+}
+.tag.ongoing {
+  background-color: var(--tag-color-one);
+  color: var(--tag-color-text-one);
+}
+.tag.inreview {
+  background-color: var(--tag-color-two);
+  color: var(--tag-color-text-two);
+}
+.tag.cancel {
+  background-color: var(--tag-color-three);
+  color: var(--tag-color-text-three);
+}
+.tag.waiting {
+  background-color: var(--tag-color-four);
+  color: var(--tag-color-text-four);
+}
+.tag.onhold {
+    background-color: var(--tag-color-five);
+    color: var(--tag-color-text-five);
+  }
+
+.chatStatus{
+  font-size: 12px;
+}

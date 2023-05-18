@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "lunch_booking.apps.LunchBookingConfig",
     "home.apps.HomeConfig",
-    "project_update.apps.ProjectUpdateConfig",
+    "project_management.apps.ProjectManagementConfig",
     "widget_tweaks",
     "corsheaders",
     'django.contrib.sites',
