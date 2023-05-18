@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<form method="post">
+    <select name="item[]" multiple>
+         <option value="1">Lotus</option>
+         <option value="2">Sun Flower</option>
+         <option value="3">MNC</option>
+         <option value="4">DELL</option>
+         <option value="5">LENOVO</option>
+    </select>
+
+    <button type="submit" name="ss">SUBMIT</button>
+</form>
+
+<div class="multiple"></div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+
+<script>
+   $('select[name=item]').on('change', function() {
+        var ul = $('<ul>');
+        $('.multiple').empty();
+
+        $(this).find('option').each(function(index, element) {
+            if($(element).is(':selected')) {
+                ul.append('<li>' + $(element).text() + '</li>');
+            }
+        });
+
+        $('.multiple').html(ul);
+    });
+</script>
+</body>
+</html>

@@ -23,6 +23,17 @@ class Team(models.Model):
         super().save(*args, **kwargs)
 
 
+class Leave(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user')
+    date = models.DateTimeField(default=None)
+
+    def __str__(self):
+        return f"{self.user.username}'s Leave"
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+
+
 class UlkaSupervisor(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     team_members = models.ManyToManyField(User, null=True, related_name='team_members')
