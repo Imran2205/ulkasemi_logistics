@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="60947511-0721-42d5-a361-46c8cc93ce5a" name="ulkasemi-logistics">
+        <fileTransfer rootFolder="/home/automation/django_web_projects/ulkasemi_logistics" accessType="SFTP" host="103.3.61.49" port="22" sshConfigId="5e77d074-e1a6-4570-9501-bf2232a06067" sshConfig="automation@103.3.61.49:22 password">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

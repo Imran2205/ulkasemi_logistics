@@ -13,8 +13,8 @@ update_type = [
 
 class Team(models.Model):
     name = models.CharField(max_length=1000, default='')
-    department = models.ForeignKey(Department, on_delete=models.CASCADE, related_name='department', null=True)
-    members = models.ManyToManyField(User, null=True, related_name='members')
+    department = models.ForeignKey(Department, on_delete=models.CASCADE, null=True)
+    members = models.ManyToManyField(User)
 
     def __str__(self):
         return f'{self.name} Team'
@@ -24,8 +24,8 @@ class Team(models.Model):
 
 
 class Leave(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user')
-    date = models.DateTimeField(default=None)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    date = models.DateField(default=None)
 
     def __str__(self):
         return f"{self.user.username}'s Leave"
@@ -36,8 +36,7 @@ class Leave(models.Model):
 
 class UlkaSupervisor(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    team_members = models.ManyToManyField(User, null=True, related_name='team_members')
-    teams = models.ManyToManyField(Team, null=True, related_name='teams')
+    teams = models.ManyToManyField(Team)
 
     def __str__(self):
         return f'{self.user.last_name}'
@@ -78,7 +77,7 @@ class Vendor(models.Model):
 
 class VendorSupervisor(models.Model):
     name = models.CharField(max_length=1000, default='', unique=True)
-    vendor = models.ForeignKey(Vendor, on_delete=models.CASCADE, related_name='vendor', null=True)
+    vendor = models.ForeignKey(Vendor, on_delete=models.CASCADE, null=True)
     email = models.CharField(max_length=200, default='', null=True)
     profile_picture = models.FileField(upload_to='images/')
 
@@ -91,19 +90,19 @@ class VendorSupervisor(models.Model):
 
 class ProjectInfo(models.Model):
     name = models.CharField(max_length=1000, default='', unique=True)
-    id = models.CharField(max_length=100, unique=True, default='', null=True)
+    project_id = models.CharField(max_length=100, unique=True, default='', null=True)
     description = models.TextField(max_length=1000, default='', null=True)
-    members = models.ManyToManyField(User, null=True, related_name='members')
-    vendor = models.ForeignKey(Vendor, on_delete=models.CASCADE, related_name='vendor', null=True)
-    vendor_supervisors = models.ManyToManyField(VendorSupervisor, null=True, related_name='vendor_supervisors')
-    ulka_supervisors = models.ManyToManyField(UlkaSupervisor, null=True, related_name='ulka_supervisors')
-    departments = models.ManyToManyField(Department, null=True, related_name='departments')
-    teams = models.ManyToManyField(Team, null=True, related_name='teams')
-    tags = models.ManyToManyField(Tag, null=True, related_name='tags')
-    status = models.ForeignKey(Status, on_delete=models.CASCADE, related_name='status', null=True)
-    start_date = models.DateTimeField(default=None, null=True)
-    deadline = models.DateTimeField(default=None, null=True)
-    entry_date = models.DateTimeField(default=None, null=True)
+    members = models.ManyToManyField(User)
+    vendor = models.ForeignKey(Vendor, on_delete=models.CASCADE, null=True)
+    vendor_supervisors = models.ManyToManyField(VendorSupervisor)
+    ulka_supervisors = models.ManyToManyField(UlkaSupervisor)
+    departments = models.ManyToManyField(Department)
+    teams = models.ManyToManyField(Team)
+    tags = models.ManyToManyField(Tag)
+    status = models.ForeignKey(Status, on_delete=models.CASCADE, null=True)
+    start_date = models.DateField(default=None, null=True)
+    deadline = models.DateField(default=None, null=True)
+    entry_date = models.DateField(default=None, null=True)
     last_updated = models.DateTimeField(default=None, null=True)
     progress = models.IntegerField()
 
@@ -117,8 +116,8 @@ class ProjectInfo(models.Model):
 class WeeklyUpdate(models.Model):
     week = models.IntegerField()
     created_at = models.DateTimeField(default=None, null=True)
-    project = models.ForeignKey(ProjectInfo, on_delete=models.CASCADE, related_name='project', null=True)
-    creator = models.ForeignKey(User, on_delete=models.CASCADE, related_name='creator', null=True)
+    project = models.ForeignKey(ProjectInfo, on_delete=models.CASCADE, null=True)
+    creator = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     type = models.CharField(max_length=100, choices=update_type, default='this_week')
     description = models.TextField(max_length=1000, default='', null=True)
 

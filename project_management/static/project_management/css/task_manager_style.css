@@ -1162,7 +1162,7 @@ body {
 img {
   max-width: 100%;
 }
-.container {
+.container-db {
   background-color: var(--theme-bg-color);
   display: flex;
   max-width: 1600px;

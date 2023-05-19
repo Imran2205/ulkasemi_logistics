@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PublishConfigData" serverName="ulkasemi-logistics" remoteFilesAllowedToDisappearOnAutoupload="false">
+    <serverData>
+      <paths name="ulkasemi-logistics">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/" local="$PROJECT_DIR$" web="/" />
+          </mappings>
+          <excludedPaths>
+            <excludedPath path="/venv" />
+            <excludedPath path="/db.sqlite3" />
+            <excludedPath path="/lunch_booking/migrations" />
+            <excludedPath path="/project_update/migrations" />
+            <excludedPath path="/static" />
+          </excludedPaths>
+        </serverdata>
+      </paths>
+    </serverData>
+  </component>
+</project>
