@@ -1,6 +1,7 @@
 from django.db import models
 from home.models import Department
 from django.contrib.auth.models import User
+import datetime
 
 
 update_type = [
@@ -102,7 +103,7 @@ class ProjectInfo(models.Model):
     status = models.ForeignKey(Status, on_delete=models.CASCADE, null=True)
     start_date = models.DateField(default=None, null=True)
     deadline = models.DateField(default=None, null=True)
-    entry_date = models.DateField(default=None, null=True)
+    entry_date = models.DateField(default=datetime.date.today, null=True)
     last_updated = models.DateTimeField(default=None, null=True)
     progress = models.IntegerField()
 

@@ -14,12 +14,13 @@
   <link rel="stylesheet" href="{% static 'project_management/css/update_input.css' %}">
   <link rel="stylesheet" href="{% static 'project_management/css/timeline-member.css' %}">
   <link rel="stylesheet" href="{% static 'project_management/css/pop_up_form.css' %}">
+  <link rel="stylesheet" href="{% static 'project_management/css/loader_style.css' %}">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/css/select2.min.css" />
 </head>
 <body>
-<div class="container-db blur-in" id="overlay">
+<div class="container-db" id="overlay">
   <div class="user-profile-area">
     <div class="task-manager">task manager</div>
     <div class="side-wrapper">
@@ -740,10 +741,10 @@
   </div>
 </div>
 
-<div id="form-pop-up-container" style="position: absolute; left: 0; top: 0; width: 100%; height: 100%; z-index: 77; background: transparent; overflow-y: hidden">
+<div id="form-pop-up-container" style="position: absolute; left: 0; top: 0; width: 100%; height: 100%; z-index: 77; background: transparent; overflow-y: hidden;">
   <div class="pop-up-f">
     <div class="box small-6 large-centered">
-      <a href="#" class="close-button" style="z-index: 200">&#10008;</a>
+      <a href="javascript:void(0)" class="close-button" style="z-index: 200; text-decoration:none">&#10008;</a>
 {#      <div style="position:fixed; padding: 30px 150px; background-color: #f1f1f6; height: 88vh; top: 40px; margin-left: auto; margin-right: auto; z-index: 0; width: 1000px;" class="col-md blur-bg">#}
 {#      </div>#}
       <div style="padding: 50px 40px 20px 40px; overflow-y: scroll; height: 88vh; top: 0; left: 0; background-color: #f0f0f7" class="col-md">
@@ -751,21 +752,23 @@
             <div class="row mb-1">
               <div class="form-outline mb-1">
                 <label for="project_name">Project name</label>
-                <input type="text" id="project_name" name="project_name" class="form-control"/>
+                <input type="text" id="project_name" name="project_name" class="form-control" style="font-size: 14px;"/>
               </div>
             </div>
 
             <div class="row mb-1">
                <div class="form-outline mb-1">
                  <label for="project_description">Project Description</label>
-                 <textarea class="form-control" id="project_description" name="project_description" rows="4"></textarea>
+                 <textarea class="form-control" id="project_description" name="project_description" rows="4" style="font-size: 14px;"></textarea>
               </div>
             </div>
 
             <div class="row mb-1">
               <div class="form-outline mb-1">
                 <label for="members">Members</label>
-                <select id="members" class="form-control member_selection" name="members" multiple="multiple"></select>
+                <div style="font-size: 14px;">
+                  <select id="members" class="form-control member_selection" name="members" multiple="multiple"></select>
+                </div>
               </div>
             </div>
 
@@ -773,13 +776,17 @@
               <div class="col">
                 <div class="form-outline mb-1">
                   <label for="departments">Departments</label>
-                  <select id="departments" class="form-control department_selection" name="departments" multiple="multiple"></select>
+                  <div style="font-size: 14px;">
+                    <select id="departments" class="form-control department_selection" name="departments" multiple="multiple"></select>
+                  </div>
                 </div>
               </div>
               <div class="col">
                 <div class="form-outline mb-1">
                   <label for="teams">Teams</label>
-                  <select id="teams" class="form-control team_selection" name="teams" multiple="multiple"></select>
+                  <div style="font-size: 14px;">
+                    <select id="teams" class="form-control team_selection" name="teams" multiple="multiple"></select>
+                  </div>
                 </div>
               </div>
             </div>
@@ -787,14 +794,18 @@
             <div class="row mb-1">
               <div class="col">
                 <div class="form-outline mb-1">
-                  <label for="vendors">Vendors</label>
-                  <select id="vendors" class="form-control vendor_selection" name="vendors" multiple="multiple"></select>
+                  <label for="vendor">Vendor</label>
+                  <div style="font-size: 14px;">
+                    <select id="vendor" class="form-control vendor_selection" name="vendor" multiple="multiple"></select>
+                  </div>
                 </div>
               </div>
               <div class="col">
                 <div class="form-outline mb-1">
                   <label for="vendor_supervisors">Vendor Supervisors</label>
-                  <select id="vendor_supervisors" class="form-control vendor_supervisor_selection" name="vendor_supervisors" multiple="multiple"></select>
+                  <div style="font-size: 14px;">
+                    <select id="vendor_supervisors" class="form-control vendor_supervisor_selection" name="vendor_supervisors" multiple="multiple"></select>
+                  </div>
                 </div>
               </div>
             </div>
@@ -803,20 +814,22 @@
               <div class="col">
                 <div class="form-outline mb-1">
                   <label for="start_date">Start Date</label>
-                  <input id="start_date" class="form-control" name="start_date" type="date" />
+                  <input id="start_date" class="form-control" name="start_date" type="date" style="font-size: 14px;"/>
                 </div>
               </div>
               <div class="col">
                 <div class="form-outline mb-1">
                   <label for="end_date">Estimated End Date</label>
-                  <input id="end_date" class="form-control" name="end_date" type="date" />
+                  <input id="end_date" class="form-control" name="end_date" type="date" style="font-size: 14px;"/>
                 </div>
               </div>
             </div>
 
             <div class="form-outline mb-1">
               <label for="tags">Tags</label>
-              <select id="tags" class="form-control tag_selection" name="tags" multiple="multiple"></select>
+              <div style="font-size: 14px;">
+                <select id="tags" class="form-control tag_selection" name="tags" multiple="multiple"></select>
+              </div>
             </div>
 
             <div class="form-outline mb-1" style="margin-top: 20px; text-align: center">
@@ -828,6 +841,18 @@
   </div>
 </div>
 
+<div class="loader_div" id="loader_div" style="display: block;">
+    <div class="landing_loading vertical-center-2">
+      <h1>Please wait</h1>
+      <div class="dots">
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+      </div>
+    </div>
+  </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
@@ -844,8 +869,22 @@
 
 <script type="text/javascript">
   $(function() {
-    $('.pop-up-f').hide();
-    $('.pop-up-f').fadeIn(1000);
+    {#$('.pop-up-f').fadeOut(0);#}
+    {#$('#overlay').removeClass('blur-in');#}
+    {#$('#overlay').addClass('blur-out');#}
+    {#$('.pop-up-f').hide();#}
+    $('#form-pop-up-container').hide();
+    $('.add-button').click(function (e) {
+        $('#overlay').removeClass('blur-out');
+        $('#overlay').addClass('blur-in');
+
+        $('#form-pop-up-container').show();
+        {#$('.pop-up-f').show();#}
+
+        $('.pop-up-f').fadeIn(1000);
+        e.stopPropagation();
+    });
+
     $('.close-button').click(function (e) {
       $('.pop-up-f').fadeOut(700);
       $('#overlay').removeClass('blur-in');
@@ -859,10 +898,15 @@
 
 <script>
     $('.member_selection').select2({
-        data: ["Piano", "Flute", "Guitar", "Drums", "Photography"],
-        tags: true,
+        data: [
+            {% for member in members  %}
+                "{{ member.user.first_name }} {{ member.user.last_name }} ({{ member.office_id_no }})",
+            {% endfor %}
+
+        ],
+
         maximumSelectionLength: 10,
-        tokenSeparators: [',', ' '],
+
         placeholder: "Select or type keywords",
         //minimumInputLength: 1,
         //ajax: {
@@ -883,10 +927,15 @@
 </script>
 <script>
     $('.vendor_selection').select2({
-        data: ["GF", "TSMC", "Fort Media", "Ti", "X"],
-        tags: true,
-        maximumSelectionLength: 10,
-        tokenSeparators: [',', ' '],
+        data: [
+            {% for vendor in vendors  %}
+                "{{ vendor.name }}",
+            {% endfor %}
+
+        ],
+
+        maximumSelectionLength: 1,
+
         placeholder: "Select or type keywords",
         //minimumInputLength: 1,
         //ajax: {
@@ -907,10 +956,15 @@
 </script>
 <script>
     $('.vendor_supervisor_selection').select2({
-        data: ["GF", "TSMC", "Fort Media", "Ti", "X"],
-        tags: true,
+        data: [
+            {% for v_s in vendor_supervisors  %}
+                "{{ v_s.name }} ({{ v_s.vendor.name }})",
+            {% endfor %}
+
+        ],
+
         maximumSelectionLength: 10,
-        tokenSeparators: [',', ' '],
+
         placeholder: "Select or type keywords",
         //minimumInputLength: 1,
         //ajax: {
@@ -931,10 +985,15 @@
 </script>
 <script>
     $('.department_selection').select2({
-        data: ["GF", "TSMC", "Fort Media", "Ti", "X"],
-        tags: true,
+        data: [
+            {% for dept in departments  %}
+                "{{ dept.name }}",
+            {% endfor %}
+
+        ],
+
         maximumSelectionLength: 10,
-        tokenSeparators: [',', ' '],
+
         placeholder: "Select or type keywords",
         //minimumInputLength: 1,
         //ajax: {
@@ -955,10 +1014,15 @@
 </script>
 <script>
     $('.team_selection').select2({
-        data: ["GF", "TSMC", "Fort Media", "Ti", "X"],
-        tags: true,
+        data: [
+            {% for team in teams  %}
+                "{{ team.name }}",
+            {% endfor %}
+
+        ],
+
         maximumSelectionLength: 10,
-        tokenSeparators: [',', ' '],
+
         placeholder: "Select or type keywords",
         //minimumInputLength: 1,
         //ajax: {
@@ -980,7 +1044,12 @@
 
 <script>
     $('.tag_selection').select2({
-        data: ["GF", "TSMC", "Fort Media", "Ti", "X"],
+        data: [
+            {% for tag in tags  %}
+                "{{ tag.name }}",
+            {% endfor %}
+
+        ],
         tags: true,
         maximumSelectionLength: 10,
         tokenSeparators: [',', ' '],
@@ -1072,8 +1141,20 @@
     frm.submit(function (e) {
 
         e.preventDefault();
-        console.log(frm.serialize());
-        console.log('ff');
+
+        $.ajax({
+            url: "{% url 'create_project' %}",
+            method: 'POST',
+            data: frm.serialize(),
+            success: function (response) {
+                alert("Successfully created your project");
+                location.href = "{% url 'project_management' %}";
+            },
+            error: function (error) {
+                console.log(error);
+                console.log("error");
+            }
+        });
 
         /*$.ajax({
             type: frm.attr('method'),
@@ -1090,5 +1171,13 @@
         });*/
     });
 </script>
+<script type="text/javascript">
+ $(window).on('load', function() {
+    setTimeout(function(){
+        $('.loader_div').hide();
+    },1500);
+ });
+</script>
+
 </body>
 </html>
