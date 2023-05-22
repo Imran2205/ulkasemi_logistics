@@ -747,25 +747,25 @@
 {#      <div style="position:fixed; padding: 30px 150px; background-color: #f1f1f6; height: 88vh; top: 40px; margin-left: auto; margin-right: auto; z-index: 0; width: 1000px;" class="col-md blur-bg">#}
 {#      </div>#}
       <div style="padding: 50px 40px 20px 40px; overflow-y: scroll; height: 88vh; top: 0; left: 0; background-color: #f0f0f7" class="col-md">
-          <form>
+          <form id="project_creation_form" action="/create_project" method="post">
             <div class="row mb-1">
               <div class="form-outline mb-1">
-                <label for="form6Example1">Project name</label>
-                <input type="text" id="form6Example1" class="form-control"/>
+                <label for="project_name">Project name</label>
+                <input type="text" id="project_name" name="project_name" class="form-control"/>
               </div>
             </div>
 
             <div class="row mb-1">
                <div class="form-outline mb-1">
-                 <label for="form6Example7">Project Description</label>
-                 <textarea class="form-control" id="form6Example7" rows="4"></textarea>
+                 <label for="project_description">Project Description</label>
+                 <textarea class="form-control" id="project_description" name="project_description" rows="4"></textarea>
               </div>
             </div>
 
             <div class="row mb-1">
               <div class="form-outline mb-1">
                 <label for="members">Members</label>
-                <select id="members" class="form-control member_selection" multiple="multiple"></select>
+                <select id="members" class="form-control member_selection" name="members" multiple="multiple"></select>
               </div>
             </div>
 
@@ -773,13 +773,13 @@
               <div class="col">
                 <div class="form-outline mb-1">
                   <label for="departments">Departments</label>
-                  <select id="departments" class="form-control department_selection" multiple="multiple"></select>
+                  <select id="departments" class="form-control department_selection" name="departments" multiple="multiple"></select>
                 </div>
               </div>
               <div class="col">
                 <div class="form-outline mb-1">
                   <label for="teams">Teams</label>
-                  <select id="teams" class="form-control team_selection" multiple="multiple"></select>
+                  <select id="teams" class="form-control team_selection" name="teams" multiple="multiple"></select>
                 </div>
               </div>
             </div>
@@ -788,13 +788,13 @@
               <div class="col">
                 <div class="form-outline mb-1">
                   <label for="vendors">Vendors</label>
-                  <select id="vendors" class="form-control vendor_selection" multiple="multiple"></select>
+                  <select id="vendors" class="form-control vendor_selection" name="vendors" multiple="multiple"></select>
                 </div>
               </div>
               <div class="col">
                 <div class="form-outline mb-1">
                   <label for="vendor_supervisors">Vendor Supervisors</label>
-                  <select id="vendor_supervisors" class="form-control vendor_supervisor_selection" multiple="multiple"></select>
+                  <select id="vendor_supervisors" class="form-control vendor_supervisor_selection" name="vendor_supervisors" multiple="multiple"></select>
                 </div>
               </div>
             </div>
@@ -803,20 +803,20 @@
               <div class="col">
                 <div class="form-outline mb-1">
                   <label for="start_date">Start Date</label>
-                  <input id="start_date" class="form-control" type="date" />
+                  <input id="start_date" class="form-control" name="start_date" type="date" />
                 </div>
               </div>
               <div class="col">
                 <div class="form-outline mb-1">
                   <label for="end_date">Estimated End Date</label>
-                  <input id="end_date" class="form-control" type="date" />
+                  <input id="end_date" class="form-control" name="end_date" type="date" />
                 </div>
               </div>
             </div>
 
             <div class="form-outline mb-1">
               <label for="tags">Tags</label>
-              <select id="tags" class="form-control tag_selection" multiple="multiple"></select>
+              <select id="tags" class="form-control tag_selection" name="tags" multiple="multiple"></select>
             </div>
 
             <div class="form-outline mb-1" style="margin-top: 20px; text-align: center">
@@ -1036,7 +1036,7 @@
     const undoButton = document.getElementById('undoButton');
     const redoButton = document.getElementById('redoButton');
     const linkButton = document.getElementById('linkButton');
-    const printButton = document.getElementById('printButton');
+    {#const printButton = document.getElementById('printButton');#}
     const editorContent = document.getElementById('editorContent');
 
     bulletButton.addEventListener('click', () => {
@@ -1060,11 +1060,35 @@
       document.execCommand('createLink', false, url);
     });
 
-    printButton.addEventListener('click', () => {
+    /*printButton.addEventListener('click', () => {
       const editedHTML = editorContent.innerHTML;
       console.log(editedHTML);
-    });
+    });*/
   });
+</script>
+<script type="text/javascript">
+    var frm = $('#project_creation_form');
+
+    frm.submit(function (e) {
+
+        e.preventDefault();
+        console.log(frm.serialize());
+        console.log('ff');
+
+        /*$.ajax({
+            type: frm.attr('method'),
+            url: frm.attr('action'),
+            data: frm.serialize(),
+            success: function (data) {
+                console.log('Submission was successful.');
+                console.log(data);
+            },
+            error: function (data) {
+                console.log('An error occurred.');
+                console.log(data);
+            },
+        });*/
+    });
 </script>
 </body>
 </html>
