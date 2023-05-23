@@ -105,7 +105,7 @@ class ProjectInfo(models.Model):
     start_date = models.DateField(default=None, null=True)
     deadline = models.DateField(default=None, null=True)
     entry_date = models.DateField(default=datetime.date.today, null=True)
-    last_updated = models.DateTimeField(default=datetime.date.today, null=True)
+    last_updated = models.DateTimeField(default=datetime.datetime.now, null=True)
     progress = models.IntegerField()
 
     def __str__(self):
