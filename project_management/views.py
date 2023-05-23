@@ -22,6 +22,7 @@ def project_management(request):
     vendors = Vendor.objects.all()
     vendor_supervisors = VendorSupervisor.objects.all()
     members = ProfileInfo.objects.all()
+    statuses = Status.objects.all()
 
     cond1 = Q(members=request.user)
     # cond2 = Q(ulka_supervisors=request.user)
@@ -47,7 +48,8 @@ def project_management(request):
         "members": members,
         "projects_1": projects_1,
         "project_rest": projects_rest,
-        "today": datetime.date.today
+        "today": datetime.date.today,
+        "statuses": statuses
     }
     return render(request, 'project_management/index.html', context)
 
