@@ -129,7 +129,7 @@ STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
-LOGIN_URL = 'login_register'
+LOGIN_URL = 'account_login'
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 DJANGO_POPUP_VIEW_FIELD_TEMPLATE_PACK = 'bootstrap4'
 

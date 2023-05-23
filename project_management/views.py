@@ -3,12 +3,17 @@ from home.models import ProfileInfo, Department
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 from django.utils.dateparse import parse_date
+from django.contrib.auth.decorators import login_required
+from django.db.models import Q
+import datetime
 from .models import (
     Tag, Team, UlkaSupervisor, VendorSupervisor,
-    Vendor, ProjectInfo
+    Vendor, ProjectInfo, Status
 )
+from allauth.socialaccount.models import SocialAccount
 
 
+@login_required
 def project_management(request):
     departments = Department.objects.all()
     teams = Team.objects.all()
@@ -17,6 +22,21 @@ def project_management(request):
     vendors = Vendor.objects.all()
     vendor_supervisors = VendorSupervisor.objects.all()
     members = ProfileInfo.objects.all()
+
+    cond1 = Q(members=request.user)
+    # cond2 = Q(ulka_supervisors=request.user)
+    cond3 = Q(created_by=request.user)
+    projects = ProjectInfo.objects.filter(cond1 | cond3).order_by('deadline').distinct()
+    if len(projects) > 1:
+        projects_1 = projects[:1]
+        projects_rest = projects[1:]
+    elif len(projects) == 1:
+        projects_1 = projects
+        projects_rest = []
+    else:
+        projects_1 = []
+        projects_rest = []
+
     context = {
         "departments": departments,
         "teams": teams,
@@ -24,7 +44,10 @@ def project_management(request):
         "ulka_supervisors": ulka_supervisors,
         "vendors": vendors,
         "vendor_supervisors": vendor_supervisors,
-        "members": members
+        "members": members,
+        "projects_1": projects_1,
+        "project_rest": projects_rest,
+        "today": datetime.date.today
     }
     return render(request, 'project_management/index.html', context)
 
@@ -33,9 +56,9 @@ def is_ajax(request):
     return request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest'
 
 
+@login_required
 @csrf_exempt
 def ajax_create_project(request):
-    current_user = request.user
     if request.method == "POST" and is_ajax(request=request):
         project_name = request.POST.get('project_name', None)
         project_description = request.POST.get('project_description', None)
@@ -71,14 +94,16 @@ def ajax_create_project(request):
             instance.vendor = Vendor.objects.get(name=vendor)
             instance.start_date = parse_date(start_date)
             instance.deadline = parse_date(end_date)
-
-            for tag in tags:
-                instance.tags.add(Tag.objects.get(name=tag))
+            instance.created_by = request.user
+            instance.status = Status.objects.get(name="Pending")
 
             instance.project_id = str(instance.id).zfill(8)
             instance.save(update_fields=[
-                'project_id', 'vendor', 'start_date', 'deadline', 'entry_date'
+                'project_id', 'vendor', 'start_date', 'deadline', 'entry_date', 'status', 'created_by'
             ])
+
+            for tag in tags:
+                instance.tags.add(Tag.objects.get(name=tag))
 
             for member in members:
                 instance.members.add(ProfileInfo.objects.get(office_id_no=member.split('(')[-1].replace(')', '')).user)

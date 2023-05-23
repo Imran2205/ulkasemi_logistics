@@ -92,6 +92,7 @@ class VendorSupervisor(models.Model):
 class ProjectInfo(models.Model):
     name = models.CharField(max_length=1000, default='', unique=True)
     project_id = models.CharField(max_length=100, unique=True, default='', null=True)
+    created_by = models.ForeignKey(User, on_delete=models.CASCADE, null=True, related_name='created_by')
     description = models.TextField(max_length=1000, default='', null=True)
     members = models.ManyToManyField(User)
     vendor = models.ForeignKey(Vendor, on_delete=models.CASCADE, null=True)
@@ -104,7 +105,7 @@ class ProjectInfo(models.Model):
     start_date = models.DateField(default=None, null=True)
     deadline = models.DateField(default=None, null=True)
     entry_date = models.DateField(default=datetime.date.today, null=True)
-    last_updated = models.DateTimeField(default=None, null=True)
+    last_updated = models.DateTimeField(default=datetime.date.today, null=True)
     progress = models.IntegerField()
 
     def __str__(self):
