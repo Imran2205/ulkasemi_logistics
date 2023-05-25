@@ -1246,7 +1246,7 @@ img {
   position: relative;
 }
 .notify.alert:before {
-  content: "2";
+  content: "0";
   font-size: 9px;
   font-weight: 700;
   position: absolute;
@@ -1264,6 +1264,13 @@ img {
 .notify.alert:last-child:before {
   content: "5";
 }
+
+.notify.alert:first-child:before {
+  content: "0";
+  background-color: transparent;
+  color: transparent;
+}
+
 .progress {
   margin-top: 5px;
   border-radius: 4px;
@@ -1423,6 +1430,7 @@ img {
   align-items: flex-between;
  /* align-items: center;*/
   transition: 0.4s ease;
+  cursor: pointer;
 }
 .msg-title {
   font-weight: 600;
@@ -1778,12 +1786,12 @@ img {
   position: absolute;
   top: 4px;
   width: 100px;
-  height: 10px;
+  height: 28px;
   font-size: 12px;
   font-weight: bold;
   text-align: center;
   line-height: 1;
-  padding: 9px 4px;
+  padding: 7px 4px;
   border-radius: 20px;
   transition: 0.3s ease all;
 }

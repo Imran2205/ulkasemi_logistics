@@ -114,9 +114,9 @@ a:hover {
   background: #CCD5DB;
   display: block;
   position: absolute;
-  top: 40px;
+  top: 34px;
   bottom: -4px;
-  left: 16px;
+  left: 14px;
 }
 .timeline-item:last-child .timeline-marker:after {
   content: none;

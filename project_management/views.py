@@ -59,7 +59,7 @@ def is_ajax(request):
 
 
 @login_required
-@csrf_exempt
+# @csrf_exempt
 def ajax_create_project(request):
     if request.method == "POST" and is_ajax(request=request):
         project_name = request.POST.get('project_name', None)
@@ -123,3 +123,14 @@ def ajax_create_project(request):
         return JsonResponse({}, status=200)
     return JsonResponse({"success": False}, status=400)
 
+
+def ajax_get_proj(request, pk):
+    if request.method == "GET" and is_ajax(request=request):
+        proj = ProjectInfo.objects.get(id=pk)
+        context = {
+            'proj_name': proj.name,
+            'proj_desc': proj.description,
+            'proj_progress': proj.progress,
+            'proj_status': proj.status.name
+        }
+        return JsonResponse(data=context)
