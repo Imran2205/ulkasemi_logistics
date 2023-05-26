@@ -94,7 +94,8 @@ function save_comment(e, req_url, token) {
       },
       headers: {'X-CSRFToken': token},
       success: function (response) {
-        console.log(response)
+        console.log(response);
+        alert("Your response is stored successfully!!!")
       },
       error: function (error) {
         console.log(error);
