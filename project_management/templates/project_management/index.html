@@ -16,6 +16,7 @@
   <link rel="stylesheet" href="{% static 'project_management/css/pop_up_form.css' %}">
   <link rel="stylesheet" href="{% static 'project_management/css/loader_style.css' %}">
   <link rel="stylesheet" href="{% static 'project_management/css/project_status_set.css' %}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/css/select2.min.css"/>
@@ -146,7 +147,7 @@
           <!--            </svg>-->
           <!--          </div>-->
           {% for project in projects_1 %}
-            <div class="msg selected-bg anim-y" onclick="project_selection(this, {{ project.id }}, '{% url "get_proj" pk=0 %}')">
+            <div class="msg anim-y" onclick="project_selection(this, {{ project.id }}, '{% url "get_proj" pk=0 %}', '{{ csrf_token }}')">
               <!-- <input type="checkbox" name="msg" id="mail1" class="mail-choice" checked> -->
               <!--                        <label for="mail1"></label>-->
               <div class="msg-content">
@@ -217,7 +218,7 @@
           {% endfor %}
 
           {% for project in project_rest %}
-            <div class="msg anim-y" onclick="project_selection(this, {{ project.id }}, '{% url "get_proj" pk=0 %}')">
+            <div class="msg anim-y" onclick="project_selection(this, {{ project.id }}, '{% url "get_proj" pk=0 %}', '{{ csrf_token }}')">
               <!-- <input type="checkbox" name="msg" id="mail1" class="mail-choice" checked> -->
               <!--                        <label for="mail1"></label>-->
               <div class="msg-content">
@@ -291,7 +292,7 @@
           <button class="add-button">Add task</button>
         </div>
       </div>
-      <div class="mail-detail">
+      <div class="mail-detail" style="display: none">
         <div class="mail-detail-header">
           <div class="mail-detail-profile">
             <img src="{{ user.profileinfo.profile_picture_url }}" alt=""
@@ -359,7 +360,7 @@
             <input type="range" class="form-range" min="0" max="100" step="1.0" value="0" id="project_progress">
           </div>
 
-          <div class="editor" style="margin-bottom: 30px;">
+          <div class="editor" style="margin-bottom: 30px; display: none;">
             <div class="toolbar">
               <input height="16px"
                      style="padding:1px;"
@@ -377,6 +378,8 @@
               <input height="14px" style="padding: 1px;" type="image" id="linkButton"
                      src="{% static 'project_management/images/link.png' %}"
                      alt="Add Link">
+
+              <i id="update_form_hide" class="fa fa-times fa-lg" aria-hidden="true" style="float: right; display: none;" onclick="hide_update_form()"></i>
 
               <!-- <button id="printButton">
                   <img src="image.jpg" alt="Print HTML">
@@ -397,7 +400,7 @@
             <div class="content" contenteditable="true" id="editorContent3"></div>
 
             <div style="margin-top: 10px; text-align: center">
-              <button class="submit-button">Submit</button>
+              <button class="submit-button" p_id="" onclick="save_comment(this, '{% url "post_update" pk=0 %}', '{{ csrf_token }}')">Submit</button>
             </div>
 
           </div>
@@ -409,6 +412,7 @@
                   <li class="timeline-item">
                     <div class="timeline-info">
                       <span style="padding-top: 20px;">March 12, 2016</span>
+                      <i id="update_edit" class="fa fa-pencil-square-o fa-lg" aria-hidden="true" onclick="show_update_form()" style="display: none; cursor: pointer"></i>
                     </div>
                     <div class="timeline-marker">
                     </div>
