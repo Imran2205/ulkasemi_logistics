@@ -1,0 +1,15 @@
+.copy-button {
+  display: inline-block;
+  padding: 0.5em;
+  background-color: #ccc;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.8em;
+  margin-left: 10px;
+}
+
+.copy-button:hover {
+  background-color: #666;
+}

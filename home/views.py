@@ -14,6 +14,13 @@ def home(request):
     return render(request, 'home/home.html', context)
 
 
+def login(request):
+    context = {
+
+    }
+    return render(request, 'home/login.html', context)
+
+
 @login_required()
 def populate_values(request):
     try:

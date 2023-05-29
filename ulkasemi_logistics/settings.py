@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "lunch_booking.apps.LunchBookingConfig",
     "home.apps.HomeConfig",
+    "lunch_booking_db.apps.LunchBookingDbConfig",
     "project_management.apps.ProjectManagementConfig",
     "widget_tweaks",
     "corsheaders",
@@ -129,7 +130,8 @@ STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
-LOGIN_URL = 'account_login'
+# LOGIN_URL = 'account_login'
+LOGIN_URL = 'login'
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 DJANGO_POPUP_VIEW_FIELD_TEMPLATE_PACK = 'bootstrap4'
 
@@ -169,3 +171,4 @@ SOCIALACCOUNT_PROVIDERS = {
         'OAUTH_PKCE_ENABLED': True,
     }
 }
+SOCIALACCOUNT_LOGIN_ON_GET=True

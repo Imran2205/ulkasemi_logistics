@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+
+
+<html>
+
+
+<head>
+
+
+  <title>Notification Example</title>
+
+
+</head>
+
+
+<body>
+
+
+<h1>Notification Example</h1>
+
+
+<button id="notifyBtn">Notify Me</button>
+
+
+<script>
+
+
+  // Request permission for notifications
+
+
+  function requestPermission() {
+
+
+    if (Notification.permission === "granted") {
+
+
+      // If permission is already granted, show the notification
+
+
+      new Notification("Hello World!");
+
+
+    } else if (Notification.permission !== "denied") {
+
+
+      // If permission is not granted or denied, request permission
+
+
+      Notification.requestPermission().then(function (permission) {
+
+
+        if (permission === "granted") {
+
+
+          // If permission is granted, show the notification
+
+
+          new Notification("Hello World!");
+
+
+        }
+
+
+      });
+
+
+    }
+
+
+  }
+
+
+  // Add event listener to button
+
+
+  document.getElementById("notifyBtn").addEventListener("click", requestPermission);
+
+
+</script>
+
+
+</body>
+
+
+</html>

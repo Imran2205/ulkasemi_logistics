@@ -11,7 +11,6 @@ from .models import (
     Tag, Team, UlkaSupervisor, VendorSupervisor,
     Vendor, ProjectInfo, Status, WeeklyUpdate
 )
-from allauth.socialaccount.models import SocialAccount
 
 
 @login_required
