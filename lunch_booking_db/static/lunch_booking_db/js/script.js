@@ -159,6 +159,7 @@ function postData(e) {
       loader.style.display = 'none';
       tick_div.style.display = 'block';
       setTimeout(() => tick_div.style.display = 'none', 2000)
+      load_calender();
       return response;
     },
     error: function (error) {
@@ -291,3 +292,61 @@ const interval = setInterval(function () {
 }, 1000);
 
 // clearInterval(interval);
+
+function load_calender(){
+  $.ajax({
+    url: "ajax-get-booking-of-date/",
+    method: 'GET',
+    headers: {'X-CSRFToken': csrf_token},
+    success: function (response) {
+      for (var i=0; i<=response['status'].length; i++){
+        let var_date = new Date();
+        var_date.setDate(var_date.getDate() + i - 3);
+        if (response['status'][i] === 'yes') {
+          let id_b = `#cb_${i}`
+          $(id_b).html(`<span class="booked">${var_date.getDate()}</span>`)
+        }
+        else {
+          let id_b = `#cb_${i}`
+          console.log(id_b);
+          $(id_b).html(`<span class="un_booked">${var_date.getDate()}</span>`)
+        }
+      }
+    },
+    error: function (error) {
+      console.log(error);
+      console.log("error");
+    }
+  });
+
+  // for (var i=-3; i<=3; i++){
+  //   let var_date = new Date();
+  //   var_date.setDate(var_date.getDate() + i);
+  //   $.ajax({
+  //     url: "ajax-get-booking-of-date/",
+  //     method: 'GET',
+  //     data: {
+  //       'date': i
+  //     },
+  //     headers: {'X-CSRFToken': csrf_token},
+  //     success: function (response) {
+  //       console.log(response['status']);
+  //       if (response['status'] === 'yes'){
+  //         let id_b = `#cb_${i+4}`
+  //         $(id_b).html(`<span class="booked">${var_date.getDate()}</span>`)
+  //       }
+  //       else {
+  //         let id_b = `#cb_${i+4}`
+  //         console.log(id_b);
+  //         $(id_b).html(`<span class="un_booked">${var_date.getDate()}</span>`)
+  //       }
+  //     },
+  //     error: function (error) {
+  //       console.log(error);
+  //       console.log("error");
+  //     }
+  //   });
+  // }
+}
+
+load_calender();

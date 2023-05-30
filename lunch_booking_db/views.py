@@ -135,6 +135,22 @@ def ajax_get_booking_count(request):
 
 
 @login_required
+def ajax_get_booking_of_date(request):
+    if request.method == "GET" and is_ajax(request=request):
+        final_list = []
+        for i in range(-3, 4, 1):
+            try:
+                booking_status = BookingInfo.objects.filter(user=request.user).get(date=add_days(i)).booked
+                final_list.append(booking_status)
+
+            except Exception as e:
+                final_list.append('n/a')
+
+        return JsonResponse({'success': True, 'status': final_list}, status=200)
+    return JsonResponse({'success': False}, status=400)
+
+
+@login_required
 def ajax_check_office_id(request):
     if request.method == "GET" and is_ajax(request=request):
         try:
