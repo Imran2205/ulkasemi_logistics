@@ -301,7 +301,7 @@ function load_calender(){
     success: function (response) {
       for (var i=0; i<response['status'].length; i++){
         let var_date = new Date();
-        var_date.setDate(var_date.getDate() + i - 3);
+        var_date.setDate(var_date.getDate() + i - 2);
         if (response['status'][i] === 'yes') {
           let id_b = `#cb_${i+1}`
           $(id_b).html(`<span class="booked">${var_date.getDate()}</span>`)

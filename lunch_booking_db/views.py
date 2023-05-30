@@ -138,7 +138,7 @@ def ajax_get_booking_count(request):
 def ajax_get_booking_of_date(request):
     if request.method == "GET" and is_ajax(request=request):
         final_list = []
-        for i in range(-3, 4, 1):
+        for i in range(-2, 5, 1):
             try:
                 booking_status = BookingInfo.objects.filter(user=request.user).get(date=add_days(i)).booked
                 final_list.append(booking_status)
