@@ -307,8 +307,13 @@ function load_calender(){
           $(id_b).html(`<span class="booked">${var_date.getDate()}</span>`)
         }
         else {
-          let id_b = `#cb_${i+1}`
-          $(id_b).html(`<span class="un_booked">${var_date.getDate()}</span>`)
+          let id_b = `#cb_${i+1}`;
+          if (i>3) {
+            $(id_b).html(`<span class="default_booked">${var_date.getDate()}</span>`)
+          }
+          else {
+            $(id_b).html(`<span class="un_booked">${var_date.getDate()}</span>`)
+          }
         }
       }
     },

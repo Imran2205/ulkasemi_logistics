@@ -48,3 +48,7 @@
 .calender_bubble .un_booked{
     color: #d01339;
 }
+
+.calender_bubble .default_booked{
+    color: var(--greyLight-2);
+}
