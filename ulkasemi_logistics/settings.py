@@ -171,4 +171,6 @@ SOCIALACCOUNT_PROVIDERS = {
         'OAUTH_PKCE_ENABLED': True,
     }
 }
-SOCIALACCOUNT_LOGIN_ON_GET=True
+SOCIALACCOUNT_LOGIN_ON_GET = True
+ACCOUNT_ADAPTER = 'lunch_booking_db.adapters.CustomAccountAdapter'
+SOCIALACCOUNT_ADAPTER = 'lunch_booking_db.adapters.CustomSocialAccountAdapter'

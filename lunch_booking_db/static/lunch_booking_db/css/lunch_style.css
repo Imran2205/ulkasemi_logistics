@@ -331,7 +331,7 @@ body {
 #date-picker-container {
   margin: 0 auto;
   padding: 40px;
-  width: 550px;
+  width: 580px;
   border-radius: 20px;
   box-shadow: .3rem .3rem .6rem var(--greyLight-2),
                 -.2rem -.2rem .5rem var(--white),
