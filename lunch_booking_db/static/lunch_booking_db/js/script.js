@@ -299,15 +299,15 @@ function load_calender(){
     method: 'GET',
     headers: {'X-CSRFToken': csrf_token},
     success: function (response) {
-      for (var i=0; i<=response['status'].length; i++){
+      for (var i=0; i<response['status'].length; i++){
         let var_date = new Date();
         var_date.setDate(var_date.getDate() + i - 3);
         if (response['status'][i] === 'yes') {
-          let id_b = `#cb_${i}`
+          let id_b = `#cb_${i+1}`
           $(id_b).html(`<span class="booked">${var_date.getDate()}</span>`)
         }
         else {
-          let id_b = `#cb_${i}`
+          let id_b = `#cb_${i+1}`
           $(id_b).html(`<span class="un_booked">${var_date.getDate()}</span>`)
         }
       }
