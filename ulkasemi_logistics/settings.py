@@ -185,3 +185,8 @@ SOCIALACCOUNT_PROVIDERS = {
 SOCIALACCOUNT_LOGIN_ON_GET = True
 ACCOUNT_ADAPTER = 'lunch_booking_db.adapters.CustomAccountAdapter'
 SOCIALACCOUNT_ADAPTER = 'lunch_booking_db.adapters.CustomSocialAccountAdapter'
+
+
+# mysqlclient installation error
+# solution:
+# sudo apt-get install python3-dev default-libmysqlclient-dev build-essential

@@ -10,7 +10,7 @@ stat2 = [
 
 
 class Department(models.Model):
-    name = models.CharField(max_length=1000, default='', unique=True)
+    name = models.CharField(max_length=255, default='', unique=True)
 
     def __str__(self):
         return f'{self.name} Department'

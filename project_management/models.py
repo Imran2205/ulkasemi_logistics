@@ -47,7 +47,7 @@ class UlkaSupervisor(models.Model):
 
 
 class Tag(models.Model):
-    name = models.CharField(max_length=1000, default='', unique=True)
+    name = models.CharField(max_length=255, default='', unique=True)
 
     def __str__(self):
         return f'{self.name}'
@@ -57,7 +57,7 @@ class Tag(models.Model):
 
 
 class Status(models.Model):
-    name = models.CharField(max_length=1000, default='', unique=True)
+    name = models.CharField(max_length=255, default='', unique=True)
 
     def __str__(self):
         return f'{self.name}'
@@ -67,7 +67,7 @@ class Status(models.Model):
 
 
 class Vendor(models.Model):
-    name = models.CharField(max_length=1000, default='', unique=True)
+    name = models.CharField(max_length=255, default='', unique=True)
 
     def __str__(self):
         return f'{self.name}'
@@ -77,7 +77,7 @@ class Vendor(models.Model):
 
 
 class VendorSupervisor(models.Model):
-    name = models.CharField(max_length=1000, default='', unique=True)
+    name = models.CharField(max_length=255, default='', unique=True)
     vendor = models.ForeignKey(Vendor, on_delete=models.CASCADE, null=True)
     email = models.CharField(max_length=200, default='', null=True)
     profile_picture = models.FileField(upload_to='images/')
@@ -90,8 +90,8 @@ class VendorSupervisor(models.Model):
 
 
 class ProjectInfo(models.Model):
-    name = models.CharField(max_length=1000, default='', unique=True)
-    project_id = models.CharField(max_length=100, unique=True, default='', null=True)
+    name = models.CharField(max_length=255, default='', unique=True)
+    project_id = models.CharField(max_length=255, unique=True, default='', null=True)
     created_by = models.ForeignKey(User, on_delete=models.CASCADE, null=True, related_name='created_by')
     description = models.TextField(max_length=1000, default='', null=True)
     members = models.ManyToManyField(User)
