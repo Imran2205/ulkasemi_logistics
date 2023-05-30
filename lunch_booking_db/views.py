@@ -13,15 +13,24 @@ def lunch_booking_db(request):
     tomorrow = add_days(1)
     try:
         booking = BookingInfo.objects.filter(user=request.user).get(date=tomorrow)
-    except Exception as e:
-        booking = BookingInfo()
-        booking.user = request.user
-        booking.date = tomorrow
         booking.email = request.user.email
         booking.office_id = request.user.profileinfo.office_id_no
         booking.name = f"{request.user.first_name} {request.user.last_name}"
-        booking.booked = 'no'
-        booking.save()
+        booking.save(
+            update_fields=['email', 'office_id', 'name']
+        )
+    except Exception as e:
+        try:
+            booking = BookingInfo()
+            booking.user = request.user
+            booking.date = tomorrow
+            booking.email = request.user.email
+            booking.office_id = request.user.profileinfo.office_id_no
+            booking.name = f"{request.user.first_name} {request.user.last_name}"
+            booking.booked = 'no'
+            booking.save()
+        except Exception as e:
+            return render(request, 'lunch_booking_db/index.html', {})
 
     try:
         user_id = ProfileInfo.objects.get(request.user).office_id_no
@@ -78,12 +87,15 @@ def ajax_register_office_id(request):
 @login_required
 def ajax_save_notification_token(request):
     if request.method == "POST" and is_ajax(request=request):
-        instance = ProfileInfo.objects.get(user=request.user)
-        instance.notification_token = request.POST.get('notification_token', None)
-        instance.save(
-            update_fields=['notification_token']
-        )
-        return JsonResponse({'success': True}, status=200)
+        try:
+            instance = ProfileInfo.objects.get(user=request.user)
+            instance.notification_token = request.POST.get('notification_token', None)
+            instance.save(
+                update_fields=['notification_token']
+            )
+            return JsonResponse({'success': True}, status=200)
+        except Exception as e:
+            return JsonResponse({'success': False}, status=200)
     return JsonResponse({'success': False}, status=400)
 
 
@@ -94,8 +106,11 @@ def ajax_book_lunch(request):
         try:
             instance = BookingInfo.objects.filter(user=request.user).get(date=add_days(days))
             instance.booked = request.POST.get('booking', None)
+            instance.email = request.user.email
+            instance.office_id = request.user.profileinfo.office_id_no
+            instance.name = f"{request.user.first_name} {request.user.last_name}"
             instance.save(
-                update_fields=['booked']
+                update_fields=['booked', 'email', 'office_id', 'name']
             )
         except Exception as e:
             instance = BookingInfo()
@@ -126,7 +141,11 @@ def ajax_check_office_id(request):
             office_id = ProfileInfo.objects.get(user=request.user).office_id_no
         except Exception as e:
             office_id = 'n/a'
-        status = BookingInfo.objects.filter(user=request.user).get(date=add_days(1)).booked
+        try:
+            status = BookingInfo.objects.filter(user=request.user).get(date=add_days(1)).booked
+        except Exception as e:
+            return JsonResponse({'success': True, 'office_id': 'n/a'}, status=200)
+
         if status == 'yes':
             status = 'Y'
         else:

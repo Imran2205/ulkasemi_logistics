@@ -74,7 +74,8 @@ function register(id) {
     success: function (response) {
       console.log(response);
       alert("Your response is stored successfully!!!")
-      reg_div.style.display = 'none';
+      // reg_div.style.display = 'none';
+      location.reload();
       check_email();
     },
     error: function (error) {
@@ -134,46 +135,6 @@ function downloadData(e) {
       console.log("error");
     }
   });
-}
-
-function downloadData2(e) {
-  //date and location selection from input and get the data people who booked lunch
-  // let selectedDate=document.getElementById('booking-date');
-  let dates = selectedDate.innerHTML.split("/")
-  let newDate = dates[1] + "/" + dates[0] + "/" + dates[2];
-  let date = new Date(newDate);
-  date = date.getDate();
-  // console.log(date)
-  e.preventDefault();
-  let lRegnum = regnum2.checked;
-  const selectedLocation = lRegnum ? "Regnum" : "Regnum";
-  //post request paraameters
-  let lunchDict = {download: 'T', date: date, location: selectedLocation};
-  let options = {
-    method: "POST",
-  }
-  //download reqeust from the database for a particular date and location
-  let qs = new URLSearchParams(lunchDict);
-  lunchData = fetch(`${url}?${qs}`, options)
-    .then(res => res.json())
-    .then(resp => {
-      bookingData = []
-      let lunchData = resp['lunchData'];
-
-      // table creation in html <can be ignored>//
-      let ind = 1;
-      lunchData.forEach(element => {
-        bookingData.push([ind, element['email'], element['name'], element['office_id'], ""])
-        ind += 1;
-      });
-
-      // console.log(lunchData);
-      generatePdf(bookingData, newDate);
-      return resp
-    })
-    .catch(err => {
-      console.error(err);
-    });
 }
 
 //update data on the database as per request of the user
