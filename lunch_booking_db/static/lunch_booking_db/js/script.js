@@ -308,7 +308,6 @@ function load_calender(){
         }
         else {
           let id_b = `#cb_${i}`
-          console.log(id_b);
           $(id_b).html(`<span class="un_booked">${var_date.getDate()}</span>`)
         }
       }
