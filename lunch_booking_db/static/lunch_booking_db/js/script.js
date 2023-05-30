@@ -308,7 +308,7 @@ function load_calender(){
             <div class="calender_bubble" >
               <span class="calender_bubble_span booked">${var_date.getDate()}</span>
              </div>
-             <span class="calender_bubble_span default_booked">${dow[var_date.getDay()]}</span>
+             <span class="calender_day_span default_booked">${dow[var_date.getDay()]}</span>
           `)
         }
         else if (response['status'][i] === 'n/a' && i>3) {
@@ -317,7 +317,7 @@ function load_calender(){
             <div class="calender_bubble" >
               <span class="calender_bubble_span default_booked">${var_date.getDate()}</span>
              </div>
-             <span class="calender_bubble_span default_booked">${dow[var_date.getDay()]}</span>
+             <span class="calender_day_span default_booked">${dow[var_date.getDay()]}</span>
           `)
         }
         else {
@@ -326,7 +326,7 @@ function load_calender(){
             <div class="calender_bubble" >
               <span class="calender_bubble_span un_booked">${var_date.getDate()}</span>
              </div>
-             <span class="calender_bubble_span default_booked">${dow[var_date.getDay()]}</span>
+             <span class="calender_day_span default_booked">${dow[var_date.getDay()]}</span>
           `)
         }
       }

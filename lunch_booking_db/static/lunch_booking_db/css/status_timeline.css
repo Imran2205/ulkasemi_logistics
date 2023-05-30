@@ -41,6 +41,11 @@
     font-weight: bold;
 }
 
+.calender_day_span{
+    font-size: 16px;
+    font-weight: bold;
+}
+
 .booked{
     color: #00b33c;
 }
