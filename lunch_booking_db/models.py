@@ -19,6 +19,9 @@ class BookingInfo(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     date = models.DateField(null=True)
     booked = models.CharField(max_length=100, choices=booked_opt, default='no')
+    email = models.CharField(null=True, max_length=100)
+    office_id = models.CharField(null=True, max_length=10)
+    name = models.CharField(null=True, max_length=50)
 
     def __str__(self):
         return f'{self.user.profileinfo.office_id_no} {self.date}'

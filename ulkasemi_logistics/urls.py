@@ -18,7 +18,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-from lunch_booking import views as lb_views
+from lunch_booking_db import views as lb_views
 from project_management import views as pm_views
 
 urlpatterns = [

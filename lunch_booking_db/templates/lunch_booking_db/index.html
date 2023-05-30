@@ -7,10 +7,10 @@
   <meta charset="UTF-8">
   <title>Lunch Booking</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="{% static 'lunch_booking/css/lunch_style.css' %}">
-  <link rel="stylesheet" href="{% static 'lunch_booking/css/waiting_loader.css' %}">
-  <link rel="stylesheet" href="{% static 'lunch_booking/css/loader_bg.css' %}">
-  <link rel="icon" type="image/x-icon" href="{% static 'lunch_booking/images/vegan-food.png' %}">
+  <link rel="stylesheet" href="{% static 'lunch_booking_db/css/lunch_style.css' %}">
+  <link rel="stylesheet" href="{% static 'lunch_booking_db/css/waiting_loader.css' %}">
+  <link rel="stylesheet" href="{% static 'lunch_booking_db/css/loader_bg.css' %}">
+  <link rel="icon" type="image/x-icon" href="{% static 'lunch_booking_db/images/vegan-food.png' %}">
   <link href="https://fonts.googleapis.com/css?family=Coda|Open+Sans" rel="stylesheet">
 </head>
 <body>
@@ -58,7 +58,7 @@
       <div class="switch-holder">
         <div class="switch-label">
           <span>
-            <img style="height: 40px; width: 40px; margin-right: 10px; margin-top: 7px" src="{% static 'lunch_booking/images/vegan-food.png' %}">
+            <img style="height: 40px; width: 40px; margin-right: 10px; margin-top: 7px" src="{% static 'lunch_booking_db/images/vegan-food.png' %}">
           </span>
           <span style="font-size: 20px; margin: auto" class="book_lunch_text">Book Lunch for Tomorrow (25<sup>th</sup> Feb)</span>
         </div>
@@ -125,7 +125,7 @@
           <div>
             <button class="btn">
 <!--              <i class="fa fa-download"></i>-->
-              <img style="height: 40px; width: 40px" src="{% static 'lunch_booking/images/downloading.png' %}">
+              <img style="height: 40px; width: 40px" src="{% static 'lunch_booking_db/images/downloading.png' %}">
               <span style="margin-top: 11px">Download</span>
             </button>
           </div>
@@ -178,7 +178,7 @@
   </div>
 
   <div style="position: fixed; right:40px; bottom: 10px; height: auto; width: auto;">
-    <img height="70vh" width="auto" src="{% static 'lunch_booking/images/automation_Logo.png' %}">
+    <img height="70vh" width="auto" src="{% static 'lunch_booking_db/images/automation_Logo.png' %}">
   </div>
 
   <div class="loader_div" id="loader_div" style="display: none;">
@@ -199,14 +199,14 @@
     document.getElementById("loader_div").style.display = "block"
   </script>
 
-  <script src="{% static 'lunch_booking/js/jwt-decode.js' %}"></script>
+  <script src="{% static 'lunch_booking_db/js/jwt-decode.js' %}"></script>
   <script src="https://accounts.google.com/gsi/client" async defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.0.272/jspdf.debug.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.6/jspdf.plugin.autotable.min.js"></script>
 
   <script type="text/javascript">
-    var csrf_token = {{ csrf_token }}
+    var csrf_token = '{{ csrf_token }}';
   </script>
 
   <script>
@@ -630,7 +630,21 @@
       if (currentToken) {
         {#console.log("token is ", currentToken);#}
         subscribeTokenToTopic(currentToken, 'all');
-        //Send this token to your server and store it.
+        $.ajax({
+          url: "ajax-save-notification-token/",
+          method: 'POST',
+          data: {
+            "notification_token": currentToken
+          },
+          headers: {'X-CSRFToken': '{{ csrf_token }}'},
+          success: function (response) {
+            console.log(response);
+          },
+          error: function (error) {
+            console.log(error);
+            console.log("error");
+          }
+        });
       } else {
         console.log('No registration token available. Request permission to generate one.');
       }
@@ -656,7 +670,7 @@
 
       const notificationOptions = {
         body: payload['data']['text'],
-        icon: 'https://www.ulka.autos/static/lunch_booking/images/vegan-food.png'
+        icon: 'https://www.ulka.autos/static/lunch_booking_db/images/vegan-food.png'
       };
       var notification = new Notification(title, notificationOptions);
       notification.onclick = function() {

@@ -86,7 +86,57 @@ function register(id) {
   });
 }
 
+function formatDate(date) {
+    var d = new Date(date),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
+
+    if (month.length < 2)
+        month = '0' + month;
+    if (day.length < 2)
+        day = '0' + day;
+
+    return [year, month, day].join('-');
+}
+
 function downloadData(e) {
+  let dates = selectedDate.innerHTML.split("/")
+  let newDate = dates[1] + "/" + dates[0] + "/" + dates[2];
+  let date = new Date(newDate);
+  date = formatDate(date);
+  console.log(date);
+  $.ajax({
+    url: "serve-booking-list/",
+    method: 'GET',
+    data: {
+      'date': date
+    },
+    headers: {'X-CSRFToken': csrf_token},
+    success: function (response) {
+      console.log(response);
+      bookingData = []
+      let lunchData = response['lunch_data'];
+
+      // table creation in html <can be ignored>//
+      let ind = 1;
+      lunchData.forEach(element => {
+        bookingData.push([ind, element['email'], element['name'], element['office_id'], ""])
+        ind += 1;
+      });
+
+      // console.log(lunchData);
+      generatePdf(bookingData, newDate);
+      return response
+    },
+    error: function (error) {
+      console.log(error);
+      console.log("error");
+    }
+  });
+}
+
+function downloadData2(e) {
   //date and location selection from input and get the data people who booked lunch
   // let selectedDate=document.getElementById('booking-date');
   let dates = selectedDate.innerHTML.split("/")
@@ -113,7 +163,7 @@ function downloadData(e) {
       // table creation in html <can be ignored>//
       let ind = 1;
       lunchData.forEach(element => {
-        bookingData.push([ind, element['email'], element['name'], element['id'], ""])
+        bookingData.push([ind, element['email'], element['name'], element['office_id'], ""])
         ind += 1;
       });
 
@@ -131,33 +181,34 @@ function postData(e) {
   loader.style.display = 'block';
   e.preventDefault();
   //locatioin selection
-  let lRegnum = regnum.checked;
-  const selectedLocation = lRegnum ? "Regnum" : "Regnum";
-  let status = checkbox.checked ? "Y" : "N";
-  let dateDict = {email: cookie_email, status: status, location: selectedLocation};
-  // console.log(dateDict);
-  let qs = new URLSearchParams(dateDict);
-  let options = {
-    method: "POST"
-  }
-  fetch(`${url}?${qs}`, options)
-    .then(res => res.json())
-    .then(resp => {
-      // console.log(resp);
-      // alert("booking status updated successfully");
+  // let lRegnum = regnum.checked;
+  // const selectedLocation = lRegnum ? "Regnum" : "Regnum";
+  let status = checkbox.checked ? "yes" : "no";
+
+  $.ajax({
+    url: "ajax-book-lunch/",
+    method: 'POST',
+    data: {
+      'booking': status,
+      'day': 1
+    },
+    headers: {'X-CSRFToken': csrf_token},
+    success: function (response) {
+      console.log(response);
       loader.style.display = 'none';
       tick_div.style.display = 'block';
       setTimeout(() => tick_div.style.display = 'none', 2000)
-      return resp;
-    })
-    .catch(err => {
-      console.error(err);
-      // alert("booking status update failed");
+      return response;
+    },
+    error: function (error) {
+      console.log(error);
+      console.log("error");
       cross_div.style.display = 'block';
       setTimeout(() => cross_div.style.display = 'none', 2000)
       loader.style.display = 'none';
       checkbox.checked = !checkbox.checked;
-    });
+    }
+  });
 }
 
 
@@ -222,6 +273,7 @@ function check_email() {
 }
 
 cookie_email ? check_email() : null;
+console.log(cookie_email);
 // var dateString = tomorrow.toLocaleDateString();
 // var dateElement = document.getElementById("date");
 // dateElement.innerHTML = dateString;
@@ -255,25 +307,20 @@ function generatePdf(elements, q_date) {
 }
 
 function get_booking_count() {
-  let dateDict = {date: dates[2].getDate(), totalBookings: 1};
-  // console.log(dateDict);
-  let qs = new URLSearchParams(dateDict);
-  let options = {
-    method: "POST"
-  }
-
-  fetch(`${url}?${qs}`, options)
-    .then(res => res.json())
-    .then(resp => {
-      // console.log(resp);
-
-      document.getElementById("total_booking").innerHTML = resp['total'];
-    })
-    .catch(err => {
-      // console.error(err);
-      // alert("booking status update failed");
+  $.ajax({
+    url: "ajax-get-booking-count/",
+    method: 'GET',
+    headers: {'X-CSRFToken': csrf_token},
+    success: function (response) {
+      // console.log(response);
+      document.getElementById("total_booking").innerHTML = response['count'];
+    },
+    error: function (error) {
+      console.log(error);
+      console.log("error");
       document.getElementById("total_booking").innerHTML = "n/a";
-    });
+    }
+  });
 }
 
 get_booking_count();
