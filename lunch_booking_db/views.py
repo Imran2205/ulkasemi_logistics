@@ -170,7 +170,7 @@ def serve_booking_list(request):
 
         bookings = list(BookingInfo.objects.filter(
             date=date
-        ).filter(booked='yes').values())
+        ).filter(booked='yes').order_by('office_id').values())
 
         return JsonResponse(data={"lunch_data": bookings}, status=200, safe=False)
     return JsonResponse({}, status=400)
