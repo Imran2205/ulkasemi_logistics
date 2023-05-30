@@ -61,7 +61,7 @@
           <span>
             <img style="height: 40px; width: 40px; margin-right: 10px; margin-top: 7px" src="{% static 'lunch_booking_db/images/vegan-food.png' %}">
           </span>
-          <span style="font-size: 20px; margin: auto" class="book_lunch_text">Book Lunch for Tomorrow (25<sup>th</sup> Feb)</span>
+          <span style="font-size: 20px; margin: auto" class="book_lunch_text">Book Lunch for Tomorrow (Sun, 25<sup>th</sup> Feb)</span>
         </div>
         <div class="switch-toggle">
           <input type="checkbox" id="lunch-book">
@@ -72,33 +72,47 @@
 <!--        <button id="notifyBtn">Notify Me</button>-->
 <!--      </div>-->
       <div id="calender_div" style="padding-top: 10px; display: flex; justify-content: center; align-items: center; text-align: center">
-        <div class="calender_bubble" id="cb_1">
-          <span class="un_booked">88</span>
-
+        <div id="cb_1">
+          <div class="calender_bubble_span un_booked" >
+            <span class="un_booked">88</span>
+          </div>
+          <span class="calender_bubble_span un_booked">Sun</span>
         </div>
-        <div class="calender_bubble" id="cb_2">
-          <span>88</span>
-
+        <div id="cb_2">
+          <div class="calender_bubble_span un_booked" >
+            <span class="un_booked">88</span>
+          </div>
+          <span class="calender_bubble_span un_booked">Sun</span>
         </div>
-        <div class="calender_bubble" id="cb_3">
-          <span>22</span>
-
+        <div id="cb_3">
+          <div class="calender_bubble_span un_booked" >
+            <span class="un_booked">88</span>
+          </div>
+          <span class="calender_bubble_span un_booked">Sun</span>
         </div>
-        <div class="calender_bubble" id="cb_4">
-          <span>12</span>
-
+        <div id="cb_4">
+          <div class="calender_bubble" >
+            <span class="calender_bubble_span un_booked">88</span>
+          </div>
+          <span class="calender_bubble_span un_booked">Sun</span>
         </div>
-        <div class="calender_bubble" id="cb_5">
-          <span>12</span>
-
+        <div id="cb_5">
+          <div class="calender_bubble_span un_booked" >
+            <span class="un_booked">88</span>
+          </div>
+          <span class="calender_bubble_span un_booked">Sun</span>
         </div>
-        <div class="calender_bubble" id="cb_6">
-          <span>12</span>
-
+        <div id="cb_6">
+          <div class="calender_bubble_span un_booked" >
+            <span class="un_booked">88</span>
+          </div>
+          <span class="calender_bubble_span un_booked">Sun</span>
         </div>
-        <div class="calender_bubble" id="cb_7">
-          <span class="booked">12</span>
-
+        <div id="cb_7">
+          <div class="calender_bubble_span un_booked" >
+            <span class="un_booked">88</span>
+          </div>
+          <span class="calender_bubble_span un_booked">Sun</span>
         </div>
       </div>
 
@@ -286,6 +300,15 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 
   <script type="text/javascript">
+    let dow = {
+      0: 'Sun',
+      1: 'Mon',
+      2: 'Tue',
+      3: 'Wed',
+      4: 'Thu',
+      5: 'Fri',
+      6: 'Sat'
+    }
     var monthFormatter = new Intl.DateTimeFormat("en-us", {month: "long"});
     var weekdayFormatter = new Intl.DateTimeFormat("en-us", {weekday: "long"});
 
@@ -296,7 +319,7 @@
 
     // console.log(dates[0].getDate() + " " + monthFormatter.format(dates[0]).slice(0, 3));
     $(".book_lunch_text").html(
-      "Book Lunch for Tomorrow (" + dates[2].getDate() + ' ' + monthFormatter.format(dates[2]).slice(0, 3) + ")"
+      `Book Lunch for Tomorrow (${dow[dates[2].getDay()]}, ` + dates[2].getDate() + ' ' + monthFormatter.format(dates[2]).slice(0, 3) + ")"
     );
 
     var currentDate = 0; // index into dates[]

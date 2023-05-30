@@ -304,15 +304,30 @@ function load_calender(){
         var_date.setDate(var_date.getDate() + i - 2);
         if (response['status'][i] === 'yes') {
           let id_b = `#cb_${i+1}`
-          $(id_b).html(`<span class="booked">${var_date.getDate()}</span>`)
+          $(id_b).html(`
+            <div class="calender_bubble" >
+              <span class="calender_bubble_span booked">${var_date.getDate()}</span>
+             </div>
+             <span class="calender_bubble_span default_booked">${dow[var_date.getDay()]}</span>
+          `)
         }
         else if (response['status'][i] === 'n/a' && i>3) {
           let id_b = `#cb_${i+1}`
-          $(id_b).html(`<span class="default_booked">${var_date.getDate()}</span>`)
+          $(id_b).html(`
+            <div class="calender_bubble" >
+              <span class="calender_bubble_span default_booked">${var_date.getDate()}</span>
+             </div>
+             <span class="calender_bubble_span default_booked">${dow[var_date.getDay()]}</span>
+          `)
         }
         else {
           let id_b = `#cb_${i+1}`
-          $(id_b).html(`<span class="un_booked">${var_date.getDate()}</span>`)
+          $(id_b).html(`
+            <div class="calender_bubble" >
+              <span class="calender_bubble_span un_booked">${var_date.getDate()}</span>
+             </div>
+             <span class="calender_bubble_span default_booked">${dow[var_date.getDay()]}</span>
+          `)
         }
       }
     },

@@ -92,7 +92,7 @@ body {
                 inset .2rem .2rem .5rem var(--greyLight-2),
                 inset -.2rem -.2rem .5rem var(--white);
   padding: 35px 35px 35px 35px;
-  width: 555px;
+  width: 570px;
   border-radius: 20px;
   margin-bottom: 50px;
 }
@@ -111,7 +111,7 @@ body {
                 inset -.2rem -.2rem .5rem var(--white);
   justify-content: space-between;
   align-items: center;
-  width: 520px;
+  width: 550px;
   margin-top: 1px;
 }
 

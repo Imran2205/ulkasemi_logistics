@@ -36,19 +36,19 @@
 /*     color: var(--primary);*/
 /*}*/
 
-.calender_bubble span{
+.calender_bubble_span{
     font-size: 18px;
     font-weight: bold;
 }
 
-.calender_bubble .booked{
+.booked{
     color: #00b33c;
 }
 
-.calender_bubble .un_booked{
+.un_booked{
     color: #d01339;
 }
 
-.calender_bubble .default_booked{
+.default_booked{
     color: var(--greyLight-2);
 }
