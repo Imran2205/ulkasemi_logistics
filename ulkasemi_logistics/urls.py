@@ -24,8 +24,8 @@ from project_management import views as pm_views
 urlpatterns = [
     path("admin/", admin.site.urls),
     path('', include('home.urls')),
-    path('lunch-booking/', include('lunch_booking.urls')),
-    path('lunch-booking-db/', include('lunch_booking_db.urls')),
+    path('lunch-booking-bk/', include('lunch_booking.urls')),
+    path('lunch-booking/', include('lunch_booking_db.urls')),
     path('project-management/', include('project_management.urls')),
     path('firebase-messaging-sw.js', lb_views.service_worker),
     path('accounts/', include('allauth.urls')),
