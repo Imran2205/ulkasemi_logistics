@@ -8,7 +8,7 @@
     transition: all 0.1s linear ;
 }
 
-.proj_stat_div .btn{
+.proj_stat_div .btn_st{
     padding: 3px 5px;
     color: #F5F5F5;
     display: inline-block;
@@ -16,8 +16,8 @@
     transition: all 0.2s ease;
     font-size: 14px;
 }
-.proj_stat_div .btn:hover{box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); opacity:0.9}
-.proj_stat_div .btn:active {box-shadow: none; }
+.proj_stat_div .btn_st:hover{box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); opacity:0.9}
+.proj_stat_div .btn_st:active {box-shadow: none; }
 
 .proj_stat_div  .defult-btn{
     background-color: #2196F3;

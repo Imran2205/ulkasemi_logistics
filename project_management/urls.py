@@ -7,4 +7,6 @@ urlpatterns = [
     path('ajax/create_project', views.ajax_create_project, name='create_project'),
     path('ajax/get_project/<int:pk>', views.ajax_get_proj, name='get_proj'),
     path('ajax/post_update/<int:pk>', views.ajax_post_update, name='post_update'),
+    path('ajax/set_project_progress/', views.set_project_progress, name='set_project_progress'),
+    path('ajax/set_project_status/', views.set_project_status, name='set_project_status'),
 ]

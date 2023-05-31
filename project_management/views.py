@@ -183,3 +183,24 @@ def ajax_post_update(request, pk):
         return JsonResponse({"success": True}, status=200)
     return JsonResponse({"success": False}, status=400)
 
+
+def set_project_progress(request):
+    if request.method == "POST" and is_ajax(request=request):
+        proj = ProjectInfo.objects.get(id=int(request.POST.get('proj_id', None)))
+        proj.progress = int(request.POST.get('progress', None))
+        proj.save(
+            update_fields=['progress']
+        )
+        return JsonResponse({"success": True}, status=200)
+    return JsonResponse({"success": False}, status=400)
+
+
+def set_project_status(request):
+    if request.method == "POST" and is_ajax(request=request):
+        proj = ProjectInfo.objects.get(id=int(request.POST.get('proj_id', None)))
+        proj.status = Status.objects.get(name=request.POST.get('status', None))
+        proj.save(
+            update_fields=['status']
+        )
+        return JsonResponse({"success": True}, status=200)
+    return JsonResponse({"success": False}, status=400)

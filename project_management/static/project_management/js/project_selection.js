@@ -132,7 +132,8 @@ function setup_timeline(proj_id, req_url, token) {
           document.getElementById('editorContent2').innerHTML = "";
           document.getElementById('editorContent3').innerHTML = "";
         }
-      } else {
+      }
+      else {
         $('.editor').show();
         $('#update_edit').hide();
         $('#update_form_hide').hide();
@@ -140,6 +141,16 @@ function setup_timeline(proj_id, req_url, token) {
         document.getElementById('editorContent2').innerHTML = "";
         document.getElementById('editorContent3').innerHTML = "";
       }
+      $(".btn_st").each(function( index ) {
+        if ($(this).text() === response['proj_status']) {
+          $(this).removeClass('defult-btn');
+          $(this).addClass('defult-green');
+        }
+        else {
+          $(this).removeClass('defult-green');
+          $(this).addClass('defult-btn');
+        }
+      });
     },
     error: function (error) {
       console.log(error);
@@ -185,4 +196,27 @@ function show_update_form(){
 
 function hide_update_form(){
   $('.editor').hide()
+}
+
+function set_project_status(status, token) {
+  let proj_id = document.getElementById('submit-button').getAttribute('p_id');
+  var proj_req_url = document.getElementById('submit-button').getAttribute('p_req_url');
+
+  $.ajax({
+    url: "ajax/set_project_status/",
+    method: 'POST',
+    data: {
+      "proj_id": proj_id,
+      "status": status
+    },
+    headers: {'X-CSRFToken': token},
+    success: function (response) {
+      console.log(response);
+      setup_timeline(proj_id, proj_req_url, token);
+    },
+    error: function (error) {
+      console.log(error);
+      console.log("error");
+    }
+  });
 }
