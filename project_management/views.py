@@ -182,3 +182,4 @@ def ajax_post_update(request, pk):
 
         return JsonResponse({"success": True}, status=200)
     return JsonResponse({"success": False}, status=400)
+

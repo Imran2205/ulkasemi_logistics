@@ -18,6 +18,7 @@
       <excludeFolder url="file://$MODULE_DIR$/project_management/migrations" />
       <excludeFolder url="file://$MODULE_DIR$/venv" />
       <excludeFolder url="file://$MODULE_DIR$/lunch_booking_db/migrations" />
+      <excludeFolder url="file://$MODULE_DIR$/media" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
