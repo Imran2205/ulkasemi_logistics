@@ -99,7 +99,7 @@ def ajax_create_project(request):
             instance.created_by = request.user
             instance.status = Status.objects.get(name="Pending")
 
-            instance.project_id = str(instance.id).zfill(8)
+            instance.project_id = f'{datetime.datetime.now().year}{str(instance.id).zfill(8)}'
             instance.save(update_fields=[
                 'project_id', 'vendor', 'start_date', 'deadline', 'entry_date', 'status', 'created_by'
             ])
@@ -132,7 +132,7 @@ def ajax_get_proj(request, pk):
         week_number = datetime.datetime.now().isocalendar()[1]
 
         updates_others = WeeklyUpdate.objects.filter(
-            project=proj).filter(creator=request.user).filter(~Q(week=week_number)).values()
+            project=proj).filter(creator=request.user).filter(~Q(week=week_number)).values()[:10:-1]
         updates_this_week = WeeklyUpdate.objects.filter(
             project=proj).filter(creator=request.user).filter(week=week_number).values()
 
@@ -158,69 +158,27 @@ def ajax_post_update(request, pk):
 
         week_number = datetime.datetime.now().isocalendar()[1]
 
-        state = ['c', 'c', 'c']
+        query = WeeklyUpdate.objects.filter(
+            project=proj).filter(creator=request.user).filter(week=week_number)
+        if query.exists():
+            instance = WeeklyUpdate.objects.filter(
+                project=proj).filter(creator=request.user).get(
+                week=week_number)
+        else:
+            instance = WeeklyUpdate()
+        instance.week = week_number
+        instance.created_at = datetime.datetime.now()
+        instance.project = proj
+        instance.creator = request.user
+        instance.creator_pp_url = request.user.profileinfo.profile_picture_url
+        instance.description_this_week = this_week
+        instance.description_next_week = next_week
+        instance.description_comment = comment
+        if query.exists():
+            instance.save(update_fields=['week', 'created_at', 'project', 'description_this_week',
+                                         'description_next_week', 'description_comment'])
+        else:
+            instance.save()
 
-        if this_week:
-            query = WeeklyUpdate.objects.filter(
-                project=proj).filter(creator=request.user).filter(week=week_number).filter(type='this_week')
-            if query.exists():
-                instance = WeeklyUpdate.objects.filter(
-                    project=proj).filter(creator=request.user).filter(
-                    week=week_number).get(type='this_week')
-            else:
-                instance = WeeklyUpdate()
-            instance.week = week_number
-            instance.created_at = datetime.datetime.now()
-            instance.project = proj
-            instance.creator = request.user
-            instance.type = 'this_week'
-            instance.description = this_week
-            if query.exists():
-                instance.save(update_fields=['week', 'created_at', 'project', 'type', 'description'])
-                state[0] = 'u'
-            else:
-                instance.save()
-        if next_week:
-            query = WeeklyUpdate.objects.filter(
-                project=proj).filter(creator=request.user).filter(week=week_number).filter(type='next_week')
-            if query.exists():
-                instance = WeeklyUpdate.objects.filter(
-                    project=proj).filter(creator=request.user).filter(
-                    week=week_number).get(type='next_week')
-            else:
-                instance = WeeklyUpdate()
-            instance.week = week_number
-            instance.created_at = datetime.datetime.now()
-            instance.project = proj
-            instance.creator = request.user
-            instance.type = 'next_week'
-            instance.description = next_week
-            if query.exists():
-                instance.save(update_fields=['week', 'created_at', 'project', 'type', 'description'])
-                state[1] = 'u'
-            else:
-                instance.save()
-
-        if comment:
-            query = WeeklyUpdate.objects.filter(
-                project=proj).filter(creator=request.user).filter(week=week_number).filter(type='comment')
-            if query.exists():
-                instance = WeeklyUpdate.objects.filter(
-                    project=proj).filter(creator=request.user).filter(
-                    week=week_number).get(type='comment')
-            else:
-                instance = WeeklyUpdate()
-            instance.week = week_number
-            instance.created_at = datetime.datetime.now()
-            instance.project = proj
-            instance.creator = request.user
-            instance.type = 'comment'
-            instance.description = comment
-            if query.exists():
-                instance.save(update_fields=['week', 'created_at', 'project', 'type', 'description'])
-                state[2] = 'u'
-            else:
-                instance.save()
-
-        return JsonResponse({"success": True, "state": state}, status=200)
+        return JsonResponse({"success": True}, status=200)
     return JsonResponse({"success": False}, status=400)
