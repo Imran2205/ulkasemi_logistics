@@ -18,7 +18,7 @@
   <script type="text/javascript">
     fetch("{% url 'update_profile_picture' %}")
     .then((response) => response.json())
-    .then((json) => console.log(json));
+    .then((json) => console.log('update_profile_picture', json));
   </script>
   <div class="parent-container vertical-center" id="main_ele" style="display: none">
     <div class="register_container" style="display: none" id="reg_div">
