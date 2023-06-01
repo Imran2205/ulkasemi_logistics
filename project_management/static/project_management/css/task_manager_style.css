@@ -1372,10 +1372,6 @@ img {
   border-radius: 50%;
 }
 
-.members:first-child {
-  margin-left: 0;
-}
-
 .team-member {
   /* display: flex; */
   display: block;
