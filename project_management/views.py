@@ -218,3 +218,19 @@ def set_project_status(request):
         )
         return JsonResponse({"success": True}, status=200)
     return JsonResponse({"success": False}, status=400)
+
+
+def create_teams(request):
+    if request.method == "POST":
+        name = request.POST.get('name', None)
+
+        instance = Team()
+        instance.name = name
+        instance.save()
+
+        members = request.POST.getlist('members', None)
+        for member in members:
+            instance.members.add(ProfileInfo.objects.get(office_id_no=member).user)
+
+        return JsonResponse({"success": True}, status=200)
+    return JsonResponse({"success": False}, status=400)

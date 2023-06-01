@@ -99,17 +99,24 @@
       <div class="project-name">
         {% for team in user_teams %}
           <div class="project-department">{{ team.name }}</div>
+            <div class="team-member">
+              {% for member in team.members.all %}
+                <img
+                    src="{{ member.profileinfo.profile_picture_url }}"
+                    alt="" class="members">
+              {% endfor %}
+            </div>
         {% endfor %}
       </div>
     </div>
-    <div class="side-wrapper">
+     <!-- <div class="side-wrapper">
       <div class="project-title">Members</div>
       <div class="team-member">
-        <!-- <img
+        <img
             src="https://images.unsplash.com/flagged/photo-1574282893982-ff1675ba4900?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=80"
-            alt="" class="members"> -->
+            alt="" class="members">
       </div>
-    </div>
+    </div>-->
   </div>
   <div class="main-area">
     <div class="header">
