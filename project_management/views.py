@@ -26,7 +26,7 @@ def project_management(request):
 
     user_teams = Team.objects.filter(members=request.user)
     project_counts_c1 = {
-        'all': len(ProjectInfo.objects.filter(members=request.user))
+        'All': len(ProjectInfo.objects.filter(members=request.user))
     }
     project_counts_c2 = {}
     for i, status in enumerate(statuses):

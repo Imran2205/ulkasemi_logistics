@@ -1367,11 +1367,10 @@ img {
 .members {
   width: 30px;
   height: 30px;
-  margin: 5px 5px;
+  margin: 5px 2px 2px 0px;
   object-fit: cover;
   border-radius: 50%;
 }
-
 .team-member {
   /* display: flex; */
   display: block;
