@@ -101,12 +101,12 @@
           <div class="project-department">{{ team.name }}</div>
             <div class="team-member">
               {% for member in team.members.all %}
-                {% if member.profileinfo.office_id == user.profileinfo.office_id %}
+                {% if member.profileinfo.office_id_no == user.profileinfo.office_id_no %}
                   <img src="{{ member.profileinfo.profile_picture_url }}" alt="" class="members">
                 {% endif %}
               {% endfor %}
               {% for member in team.members.all %}
-                {% if member.profileinfo.office_id != user.profileinfo.office_id %}
+                {% if member.profileinfo.office_id_no != user.profileinfo.office_id_no %}
                   <img src="{{ member.profileinfo.profile_picture_url }}" alt="" class="members">
                 {% endif %}
               {% endfor %}
