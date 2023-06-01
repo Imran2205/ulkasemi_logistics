@@ -223,6 +223,7 @@ def set_project_status(request):
 @csrf_exempt
 def create_teams(request):
     if request.method == "POST":
+        added_user = []
         try:
             name = request.POST.get('Team', None)
             dept = request.POST.get('Department', None)
@@ -235,7 +236,7 @@ def create_teams(request):
             instance.save()
 
             members = request.POST.getlist('Members', None)
-            added_user = []
+
             for member in members:
                 instance.members.add(ProfileInfo.objects.get(office_id_no=member).user)
                 added_user.append(ProfileInfo.objects.get(office_id_no=member).user.profileinfo.office_id_no)
