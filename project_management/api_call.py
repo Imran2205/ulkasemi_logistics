@@ -1,9 +1,9 @@
 import requests
 
 x = requests.post(
-    'http://127.0.0.1:8000/project-management/create_teams/',
+    'https://www.ulka.autos/project-management/create_teams/',
     data={
-        "Team": "Automation2",
+        "Team": "Automation",
         "Department": "Circuit and System Design",
         "Members": [
             "210113",

@@ -15,6 +15,11 @@
   <link href="https://fonts.googleapis.com/css?family=Coda|Open+Sans" rel="stylesheet">
 </head>
 <body>
+  <script type="text/javascript">
+    fetch("{% url 'update_profile_picture' %}")
+    .then((response) => response.json())
+    .then((json) => console.log(json));
+  </script>
   <div class="parent-container vertical-center" id="main_ele" style="display: none">
     <div class="register_container" style="display: none" id="reg_div">
       <div style="margin-bottom: 10px">
