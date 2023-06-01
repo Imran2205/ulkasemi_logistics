@@ -101,9 +101,14 @@
           <div class="project-department">{{ team.name }}</div>
             <div class="team-member">
               {% for member in team.members.all %}
-                <img
-                    src="{{ member.profileinfo.profile_picture_url }}"
-                    alt="" class="members">
+                {% if member.profileinfo.office_id == user.profileinfo.office_id %}
+                  <img src="{{ member.profileinfo.profile_picture_url }}" alt="" class="members">
+                {% endif %}
+              {% endfor %}
+              {% for member in team.members.all %}
+                {% if member.profileinfo.office_id != user.profileinfo.office_id %}
+                  <img src="{{ member.profileinfo.profile_picture_url }}" alt="" class="members">
+                {% endif %}
               {% endfor %}
             </div>
         {% endfor %}
