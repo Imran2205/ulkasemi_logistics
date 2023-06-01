@@ -1311,6 +1311,7 @@ img {
 }
 .task-stat {
   text-align: center;
+  min-width: 80px;
 }
 .task-number {
   font-size: 17px;
@@ -1318,13 +1319,13 @@ img {
   margin-bottom: 5px;
 }
 .task-condition {
-  font-size: 14px;
+  font-size: 12px;
   color: var(--main-color);
   font-weight: 700;
 }
 .task-tasks {
   margin-top: -2px;
-  font-size: 13px;
+  font-size: 10px;
   font-weight: 600;
   color: var(--main-light-color);
 }

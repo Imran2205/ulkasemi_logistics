@@ -22,7 +22,7 @@ def project_management(request):
     vendors = Vendor.objects.all()
     vendor_supervisors = VendorSupervisor.objects.all()
     members = ProfileInfo.objects.all()
-    statuses = Status.objects.all()
+    statuses = Status.objects.all().order_by('id')
 
     user_teams = Team.objects.filter(members=request.user)
     project_counts_c1 = {
@@ -30,7 +30,7 @@ def project_management(request):
     }
     project_counts_c2 = {}
     for i, status in enumerate(statuses):
-        if i < 3:
+        if i < 2:
             project_counts_c1[status.name] = len(ProjectInfo.objects.filter(members=request.user).filter(status=status))
         else:
             project_counts_c2[status.name] = len(ProjectInfo.objects.filter(members=request.user).filter(status=status))
