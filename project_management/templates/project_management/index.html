@@ -207,7 +207,7 @@
               </div>
               <!---Project Status-->
               <div class="mail-members">
-                <div class="tag ongoing chatStatus" id="status_{{ project.id }}">{{ project.status }}</div>
+                <div class="tag {% spaceless %}{{ project.status|lower }}{% endspaceless %} chatStatus" id="status_{{ project.id }}">{{ project.status }}</div>
 
                 <div class="progress-pie-chart" data-percent="{{ project.progress }}" id="progress_{{ project.id }}">
                   <div class="ppc-progress">
