@@ -1315,16 +1315,16 @@ img {
 .task-number {
   font-size: 17px;
   font-weight: 700;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
 }
 .task-condition {
-  font-size: 12px;
+  font-size: 14px;
   color: var(--main-color);
   font-weight: 700;
 }
 .task-tasks {
-  margin-top: 4px;
-  font-size: 10px;
+  margin-top: -2px;
+  font-size: 13px;
   font-weight: 600;
   color: var(--main-light-color);
 }

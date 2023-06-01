@@ -151,6 +151,8 @@ function setup_timeline(proj_id, req_url, token) {
           $(this).addClass('defult-btn');
         }
       });
+      $("#project_progress").val(response['proj_progress']);
+      $("#project_progress_value").val(response['proj_progress']);
     },
     error: function (error) {
       console.log(error);
@@ -178,7 +180,7 @@ function save_comment(e, req_url, token) {
       },
       headers: {'X-CSRFToken': token},
       success: function (response) {
-        console.log(response);
+        // console.log(response);
         alert("Your response is stored successfully!!!");
         setup_timeline(proj_id, proj_req_url, token);
       },
@@ -198,7 +200,32 @@ function hide_update_form(){
   $('.editor').hide()
 }
 
-function set_project_status(status, token) {
+function set_project_progress(e, token) {
+  let proj_id = document.getElementById('submit-button').getAttribute('p_id');
+  var proj_req_url = document.getElementById('submit-button').getAttribute('p_req_url');
+
+  $.ajax({
+    url: "ajax/set_project_progress/",
+    method: 'POST',
+    data: {
+      "proj_id": proj_id,
+      "progress": e.value
+    },
+    headers: {'X-CSRFToken': token},
+    success: function (response) {
+      // console.log(response);
+      // setup_timeline(proj_id, proj_req_url, token);
+      // console.log(e.value);
+      progress_set(proj_id, e.value);
+    },
+    error: function (error) {
+      console.log(error);
+      console.log("error");
+    }
+  });
+}
+
+function set_project_status(status, token){
   let proj_id = document.getElementById('submit-button').getAttribute('p_id');
   var proj_req_url = document.getElementById('submit-button').getAttribute('p_req_url');
 
@@ -213,6 +240,7 @@ function set_project_status(status, token) {
     success: function (response) {
       console.log(response);
       setup_timeline(proj_id, proj_req_url, token);
+      $(`#status_${proj_id}`).html(status);
     },
     error: function (error) {
       console.log(error);

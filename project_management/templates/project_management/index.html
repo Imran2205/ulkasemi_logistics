@@ -22,6 +22,14 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/css/select2.min.css"/>
 </head>
 <body>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+        integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
+        crossorigin="anonymous"></script>
+<script src="{% static 'project_management/js/progress.js' %}"></script>
 <script type="text/javascript">
   fetch("{% url 'update_profile_picture' %}")
   .then((response) => response.json())
@@ -66,54 +74,40 @@
         <div class="progress-bar"></div>
       </div>
       <div class="task-status">
-        <div class="task-stat">
-          <div class="task-number">300</div>
-          <div class="task-condition">All</div>
-          <div class="task-tasks">Projects</div>
-        </div>
-        <div class="task-stat">
-          <div class="task-number">34</div>
-          <div class="task-condition">Ongoing</div>
-          <div class="task-tasks">Projects</div>
-        </div>
-        <div class="task-stat">
-          <div class="task-number">12</div>
-          <div class="task-condition">On Hold</div>
-          <div class="task-tasks">Projects</div>
-        </div>
-        <div class="task-stat">
-          <div class="task-number">243</div>
-          <div class="task-condition">Completed</div>
-          <div class="task-tasks">Projects</div>
-        </div>
+        {% for k, v in project_counts_c1.items %}
+
+          <div class="task-stat">
+            <div class="task-number">{{ v }}</div>
+            <div class="task-condition">{{ k }}</div>
+            <div class="task-tasks">Projects</div>
+          </div>
+        {% endfor %}
+      </div>
+      <div class="task-status">
+        {% for k, v in project_counts_c2.items %}
+
+          <div class="task-stat">
+            <div class="task-number">{{ v }}</div>
+            <div class="task-condition">{{ k }}</div>
+            <div class="task-tasks">Projects</div>
+          </div>
+        {% endfor %}
       </div>
     </div>
     <div class="side-wrapper">
       <div class="project-title">Teams</div>
       <div class="project-name">
-        <div class="project-department">Memory</div>
-        <div class="project-department">Analog</div>
-        <div class="project-department">Automation</div>
-        <div class="project-department">Layout</div>
+        {% for team in user_teams %}
+          <div class="project-department">{{ team.name }}</div>
+        {% endfor %}
       </div>
     </div>
     <div class="side-wrapper">
       <div class="project-title">Members</div>
       <div class="team-member">
-        <img
+        <!-- <img
             src="https://images.unsplash.com/flagged/photo-1574282893982-ff1675ba4900?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=80"
-            alt="" class="members">
-        <img src="https://assets.codepen.io/3364143/Screen+Shot+2020-08-01+at+12.24.16.png" alt=""
-             class="members">
-        <img
-            src="https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60"
-            alt="" class="members">
-        <img
-            src="https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-1.2.1&auto=format&fit=crop&w=998&q=80"
-            alt="" class="members">
-        <img
-            src="https://images.unsplash.com/photo-1541647376583-8934aaf3448a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=934&q=80"
-            alt="" class="members">
+            alt="" class="members"> -->
       </div>
     </div>
   </div>
@@ -198,20 +192,21 @@
               </div>
               <!---Project Status-->
               <div class="mail-members">
-                <div class="tag ongoing chatStatus">{{ project.status }}</div>
+                <div class="tag ongoing chatStatus" id="status_{{ project.id }}">{{ project.status }}</div>
 
-                <div class="progress-pie-chart" data-percent="{{ project.progress }}">
+                <div class="progress-pie-chart" data-percent="{{ project.progress }}" id="progress_{{ project.id }}">
                   <div class="ppc-progress">
-                    <div class="ppc-progress-fill"></div>
+                    <div class="ppc-progress-fill" id="progres_fill_{{ project.id }}"></div>
                   </div>
-                  <div class="ppc-percents">
+                  <div class="ppc-percents" id="progress_percent_{{ project.id }}">
                     <div class="pcc-percents-wrapper">
-                      <span>{{ project.progress }}</span>
+                      <span></span>
                     </div>
                   </div>
+                  <script type="text/javascript">
+                      progress_set('{{ project.id }}', '{{ project.progress }}');
+                  </script>
                 </div>
-
-
               </div>
             </div>
 
@@ -269,20 +264,21 @@
               </div>
               <!---Project Status-->
               <div class="mail-members">
-                <div class="tag ongoing chatStatus">{{ project.status }}</div>
+                <div class="tag ongoing chatStatus" id="status_{{ project.id }}">{{ project.status }}</div>
 
-                <div class="progress-pie-chart" data-percent="{{ project.progress }}">
+                <div class="progress-pie-chart" data-percent="{{ project.progress }}" id="progress_{{ project.id }}">
                   <div class="ppc-progress">
-                    <div class="ppc-progress-fill"></div>
+                    <div class="ppc-progress-fill" id="progres_fill_{{ project.id }}"></div>
                   </div>
-                  <div class="ppc-percents">
+                  <div class="ppc-percents" id="progress_percent_{{ project.id }}">
                     <div class="pcc-percents-wrapper">
-                      <span>{{ project.progress }}</span>
+                      <span></span>
                     </div>
                   </div>
+                  <script type="text/javascript">
+                      progress_set('{{ project.id }}', '{{ project.progress }}');
+                  </script>
                 </div>
-
-
               </div>
             </div>
 
@@ -357,7 +353,11 @@
           </div>
           <div class="mb-4">
             <label for="project_progress" class="form-label">Progress</label>
-            <input type="range" class="form-range" min="0" max="100" step="1.0" value="0" id="project_progress">
+            <input type="range" class="form-range" min="0" max="100" step="1.0" value="0"
+                   id="project_progress" onchange="set_project_progress(this, '{{ csrf_token  }}')"
+                   oninput="this.nextElementSibling.value = this.value"
+            >
+            <output id="project_progress_value">0</output>
           </div>
 
           <div class="editor" style="margin-bottom: 30px; display: none;">
@@ -853,13 +853,6 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"
-        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-        crossorigin="anonymous"></script>
-
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
-        integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
-        crossorigin="anonymous"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/select2.full.min.js"></script>
 
@@ -1069,8 +1062,6 @@
 </script>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
-<script src="{% static 'project_management/js/progress.js' %}"></script>
-
 
 <script type="text/javascript">
     $('.mail-choice').change(function () {

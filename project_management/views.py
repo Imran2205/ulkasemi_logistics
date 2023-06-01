@@ -24,6 +24,17 @@ def project_management(request):
     members = ProfileInfo.objects.all()
     statuses = Status.objects.all()
 
+    user_teams = Team.objects.filter(members=request.user)
+    project_counts_c1 = {
+        'all': len(ProjectInfo.objects.filter(members=request.user))
+    }
+    project_counts_c2 = {}
+    for i, status in enumerate(statuses):
+        if i < 3:
+            project_counts_c1[status.name] = len(ProjectInfo.objects.filter(members=request.user).filter(status=status))
+        else:
+            project_counts_c2[status.name] = len(ProjectInfo.objects.filter(members=request.user).filter(status=status))
+
     cond1 = Q(members=request.user)
     # cond2 = Q(ulka_supervisors=request.user)
     cond3 = Q(created_by=request.user)
@@ -49,7 +60,10 @@ def project_management(request):
         "projects_1": projects_1,
         "project_rest": projects_rest,
         "today": datetime.date.today,
-        "statuses": statuses
+        "statuses": statuses,
+        "user_teams": user_teams,
+        "project_counts_c1": project_counts_c1,
+        "project_counts_c2": project_counts_c2
     }
     return render(request, 'project_management/index.html', context)
 

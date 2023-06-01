@@ -9,4 +9,5 @@ urlpatterns = [
     path('ajax/post_update/<int:pk>', views.ajax_post_update, name='post_update'),
     path('ajax/set_project_progress/', views.set_project_progress, name='set_project_progress'),
     path('ajax/set_project_status/', views.set_project_status, name='set_project_status'),
+    path('ajax/set_project_progress/', views.set_project_progress, name='set_project_progress'),
 ]
