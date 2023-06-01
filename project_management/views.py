@@ -223,19 +223,24 @@ def set_project_status(request):
 @csrf_exempt
 def create_teams(request):
     if request.method == "POST":
-        name = request.POST.get('Team', None)
-        dept = request.POST.get('Department', None)
+        try:
+            name = request.POST.get('Team', None)
+            dept = request.POST.get('Department', None)
 
-        print(name, dept)
+            print(name, dept)
 
-        instance = Team()
-        instance.name = name
-        instance.department = Department.objects.get(name=dept)
-        instance.save()
+            instance = Team()
+            instance.name = name
+            instance.department = Department.objects.get(name=dept)
+            instance.save()
 
-        members = request.POST.getlist('Members', None)
-        for member in members:
-            instance.members.add(ProfileInfo.objects.get(office_id_no=member).user)
+            members = request.POST.getlist('Members', None)
+            added_user = []
+            for member in members:
+                instance.members.add(ProfileInfo.objects.get(office_id_no=member).user)
+                added_user.append(ProfileInfo.objects.get(office_id_no=member).user.profileinfo.office_id_no)
 
-        return JsonResponse({"success": True}, status=200)
-    return JsonResponse({"success": False}, status=400)
+            return JsonResponse({"success": True}, status=200)
+        except Exception as e:
+            return JsonResponse({"success": False, "error": e, "added": added_user}, status=200)
+    return JsonResponse({"success": False}, status=200)
