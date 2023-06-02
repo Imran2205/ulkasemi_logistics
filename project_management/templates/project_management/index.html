@@ -969,7 +969,7 @@
     $('.member_selection').select2({
         data: [
             {% for member in members  %}
-                "{{ member.user.first_name }} {{ member.user.last_name }} ({{ member.office_id_no }})",
+                "{{ member.first_name }} {{ member.last_name }} ({{ member.profileinfo.office_id_no }})",
             {% endfor %}
 
         ],
