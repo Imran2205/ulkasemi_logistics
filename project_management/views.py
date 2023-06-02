@@ -158,19 +158,19 @@ def ajax_create_project(request):
                 pass
 
             for pm in pms:
-                instance.vendor_supervisors.add(ProfileInfo.objects.get(
+                instance.ulka_pm.add(ProfileInfo.objects.get(
                     office_id_no=pm.split('(')[-1].replace(')', '')).user)
 
             for manager in managers:
-                instance.vendor_supervisors.add(ProfileInfo.objects.get(
+                instance.ulka_manager.add(ProfileInfo.objects.get(
                     office_id_no=manager.split('(')[-1].replace(')', '')).user)
 
             for ack_per in ack_pers:
-                instance.vendor_supervisors.add(ProfileInfo.objects.get(
+                instance.ulka_ack_person.add(ProfileInfo.objects.get(
                     office_id_no=ack_per.split('(')[-1].replace(')', '')).user)
 
             for ulka_supervisor in ulka_supervisors:
-                instance.vendor_supervisors.add(ProfileInfo.objects.get(
+                instance.ulka_supervisors.add(ProfileInfo.objects.get(
                     office_id_no=ulka_supervisor.split('(')[-1].replace(')', '')).user)
 
         except Exception as e:

@@ -100,6 +100,7 @@ class ProjectInfo(models.Model):
     last_updated = models.DateTimeField(default=datetime.datetime.now, null=True)
     ulka_manager = models.ManyToManyField(User, related_name='ulka_manager')
     ulka_pm = models.ManyToManyField(User, related_name='ulka_pm')
+    ulka_ack_person = models.ManyToManyField(User, related_name='ulka_ack_person')
     progress = models.IntegerField()
 
     def __str__(self):
