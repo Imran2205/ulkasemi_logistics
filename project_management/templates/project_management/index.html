@@ -80,9 +80,9 @@
         {% for k, v in project_counts_c1.items %}
 
           <div class="task-stat">
-            <div class="task-number">{{ v }}</div>
+            <div class="task-number color_{{ k|lower|cut:' ' }}" style="opacity: 0.7;">{{ v }}</div>
             <div class="task-condition color_{{ k|lower|cut:' ' }}">{{ k }}</div>
-            <div class="task-tasks">Projects</div>
+            <div class="task-tasks color_{{ k|lower|cut:' ' }}" style="opacity: 0.5;">Projects</div>
           </div>
         {% endfor %}
       </div>
@@ -90,9 +90,9 @@
         {% for k, v in project_counts_c2.items %}
 
           <div class="task-stat">
-            <div class="task-number">{{ v }}</div>
+            <div class="task-number color_{{ k|lower|cut:' ' }}" style="opacity: 0.7;">{{ v }}</div>
             <div class="task-condition color_{{ k|lower|cut:' ' }}">{{ k }}</div>
-            <div class="task-tasks">Projects</div>
+            <div class="task-tasks color_{{ k|lower|cut:' ' }}" style="opacity: 0.5;">Projects</div>
           </div>
         {% endfor %}
       </div>

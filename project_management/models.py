@@ -2,6 +2,7 @@ from django.db import models
 from home.models import Department
 from django.contrib.auth.models import User
 import datetime
+from colorfield.fields import ColorField
 
 
 update_type = [
@@ -16,6 +17,7 @@ class Team(models.Model):
     name = models.CharField(max_length=1000, default='')
     department = models.ForeignKey(Department, on_delete=models.CASCADE, null=True)
     members = models.ManyToManyField(User)
+    color = ColorField(default='#FF0000', format="hexa")
 
     def __str__(self):
         return f'{self.name} Team'
@@ -48,6 +50,7 @@ class UlkaSupervisor(models.Model):
 
 class Tag(models.Model):
     name = models.CharField(max_length=255, default='', unique=True)
+    color = ColorField(default='#FF0000')
 
     def __str__(self):
         return f'{self.name}'
