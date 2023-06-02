@@ -81,7 +81,7 @@
 
           <div class="task-stat">
             <div class="task-number">{{ v }}</div>
-            <div class="task-condition">{{ k }}</div>
+            <div class="task-condition color_{{ k|lower|cut:' ' }}">{{ k }}</div>
             <div class="task-tasks">Projects</div>
           </div>
         {% endfor %}
@@ -91,7 +91,7 @@
 
           <div class="task-stat">
             <div class="task-number">{{ v }}</div>
-            <div class="task-condition">{{ k }}</div>
+            <div class="task-condition color_{{ k|lower|cut:' ' }}">{{ k }}</div>
             <div class="task-tasks">Projects</div>
           </div>
         {% endfor %}
@@ -111,7 +111,7 @@
             {% for member in team.members.all %}
               {% if member.profileinfo.office_id_no == user.profileinfo.office_id_no %}
                 <div class="circle-image">
-                  {% if member.profileinfo.profile_picture_url == 'na' %}
+                  {% if member.profileinfo.profile_picture_url == 'na' or member.profileinfo.profile_picture_url == '' %}
                     <img src="{% static 'project_management/images/avatar.png' %}" alt="" class="members_team">
                   {% else %}
                     <img src="{{ member.profileinfo.profile_picture_url }}" alt="" class="members_team">
@@ -122,7 +122,7 @@
             {% for member in team.members.all %}
               {% if member.profileinfo.office_id_no != user.profileinfo.office_id_no %}
                 <div class="circle-image">
-                  {% if member.profileinfo.profile_picture_url == 'na' %}
+                  {% if member.profileinfo.profile_picture_url == 'na' or member.profileinfo.profile_picture_url == '' %}
                     <img src="{% static 'project_management/images/avatar.png' %}" alt="" class="members_team">
                   {% else %}
                     <img src="{{ member.profileinfo.profile_picture_url }}" alt="" class="members_team">
@@ -224,7 +224,7 @@
               </div>
               <!---Project Status-->
               <div class="mail-members">
-                <div class="tag {% spaceless %}{{ project.status|lower }}{% endspaceless %} chatStatus" id="status_{{ project.id }}">{{ project.status }}</div>
+                <div class="tag {{ project.status|lower|cut:' ' }} chatStatus" id="status_{{ project.id }}">{{ project.status }}</div>
 
                 <div class="progress-pie-chart" data-percent="{{ project.progress }}" id="progress_{{ project.id }}">
                   <div class="ppc-progress">
@@ -296,7 +296,7 @@
               </div>
               <!---Project Status-->
               <div class="mail-members">
-                <div class="tag ongoing chatStatus" id="status_{{ project.id }}">{{ project.status }}</div>
+                <div class="tag {{ project.status|lower|cut:' ' }} chatStatus" id="status_{{ project.id }}">{{ project.status }}</div>
 
                 <div class="progress-pie-chart" data-percent="{{ project.progress }}" id="progress_{{ project.id }}">
                   <div class="ppc-progress">

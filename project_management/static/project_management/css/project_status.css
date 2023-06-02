@@ -44,6 +44,22 @@
   color: var(--tag-color-text-five);
 }
 
+.color_ongoing {
+  color: var(--tag-color-text-one);
+}
+.color_completed {
+  color: var(--tag-color-text-two);
+}
+.color_onreview {
+  color: var(--tag-color-text-three);
+}
+.color_pending {
+  color: var(--tag-color-text-four);
+}
+.color_onhold {
+  color: var(--tag-color-text-five);
+}
+
 .chatStatus{
   font-size: 12px;
 }
