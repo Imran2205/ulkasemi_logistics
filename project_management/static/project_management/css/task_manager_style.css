@@ -1387,7 +1387,7 @@ img {
   border-radius: 50%;
   width: 35px;
   height: 35px;
-  margin: 5px 2px 2px 0px;
+  margin: 3px 2px 0 0;
 }
 
 .circle-image::after {
@@ -1402,27 +1402,11 @@ img {
   border: 1px solid white;
 }
 
-/*.circle-image img {*/
-/*  width: 100%;*/
-/*  height: auto;*/
-/*}*/
-
-.active-status {
-  position: absolute;
-  bottom: 12%;
-  right: 13%;
-  width: 5px;
-  height: 5px;
-  background-color: green;
-  border-radius: 50%;
-}
-
 .team-member {
   display: flex;
   flex-wrap: wrap;
-  /*display: block;*/
-  /* justify-content: space-between;*/
 }
+
 .main-area {
   display: flex;
   flex-direction: column;
