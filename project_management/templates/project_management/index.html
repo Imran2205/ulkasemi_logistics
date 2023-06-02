@@ -1171,7 +1171,7 @@
 <script>
     $('.ulka_supervisors_selection').select2({
         data: [
-            {% for v_s in ulka_supervisors  %}
+            {% for pm in ulka_supervisors  %}
                  "{{ pm.first_name }} {{ pm.last_name }} ({{ pm.profileinfo.office_id_no }})",
             {% endfor %}
 
@@ -1200,7 +1200,7 @@
 <script>
     $('.ack_pers_selection').select2({
         data: [
-            {% for v_s in ack_pers  %}
+            {% for pm in ack_pers  %}
                 "{{ pm.first_name }} {{ pm.last_name }} ({{ pm.profileinfo.office_id_no }})",
             {% endfor %}
 
