@@ -1334,7 +1334,14 @@ img {
 .task-stat {
   text-align: center;
   min-width: 80px;
+  border-radius: 12px;
+  padding-bottom: 3px;
 }
+
+.task-stat:hover {
+  background-color: #f2f2f2;
+}
+
 .task-number {
   font-size: 17px;
   font-weight: 700;
