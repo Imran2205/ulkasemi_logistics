@@ -32,7 +32,7 @@ def project_management(request):
         ack_pers = []
     vendors = Vendor.objects.all()
     vendor_supervisors = VendorSupervisor.objects.all()
-    members = ProfileInfo.objects.filter(~Q(profileinfo__office_id_no="000000"))
+    members = User.objects.filter(~Q(profileinfo__office_id_no="000000"))
     statuses = Status.objects.all().order_by('id')
 
     user_teams = Team.objects.filter(members=request.user)
