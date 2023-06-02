@@ -240,7 +240,19 @@ function set_project_status(status, token){
     success: function (response) {
       console.log(response);
       setup_timeline(proj_id, proj_req_url, token);
-      $(`#status_${proj_id}`).html(status);
+      let status_show = $(`#status_${proj_id}`);
+      status_show.html(status);
+      let current_classes = status_show.attr('class').split(/\s+/);
+      let keep_class = ['tag', 'chatStatus']
+      $.each(current_classes, function(index, item) {
+        if (! keep_class.includes(item)) {
+          console.log("removing..", item);
+          status_show.removeClass(item);
+        }
+      });
+      let css_class = status.replaceAll(' ', '').toLowerCase();
+      console.log("adding..", css_class);
+      status_show.addClass(css_class);
     },
     error: function (error) {
       console.log(error);

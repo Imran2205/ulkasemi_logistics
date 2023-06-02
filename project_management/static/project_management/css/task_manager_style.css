@@ -1353,18 +1353,19 @@ img {
   top: 4px;
   left: 0;
 }
-.project-department:nth-child(1):before {
-  border: 3px solid #b36dfb;
-}
-.project-department:nth-child(2):before {
-  border: 3px solid #625be8;
-}
-.project-department:nth-child(3):before {
-  border: 3px solid #fec267;
-}
-.project-department:nth-child(4):before {
-  border: 3px solid #fc6679;
-}
+/*.project-department:nth-child(1):before {*/
+/*  border: 3px solid #b36dfb;*/
+/*}*/
+/*.project-department:nth-child(2):before {*/
+/*  border: 3px solid #625be8;*/
+/*}*/
+/*.project-department:nth-child(3):before {*/
+/*  border: 3px solid #fec267;*/
+/*}*/
+/*.project-department:nth-child(4):before {*/
+/*  border: 3px solid #fc6679;*/
+/*}*/
+
 .members {
   width: 30px;
   height: 30px;
@@ -1372,10 +1373,54 @@ img {
   object-fit: cover;
   border-radius: 50%;
 }
+
+.members_team {
+  width: 35px;
+  height: 35px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2px solid white;
+}
+
+.circle-image {
+  position: relative;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  margin: 5px 2px 2px 0px;
+}
+
+.circle-image::after {
+  position: absolute;
+  width: 8px;
+  content: "";
+  height: 8px;
+  border-radius: 50%;
+  top: 22px;
+  right: 5px;
+  background-color: #00b33c;
+  border: 1px solid white;
+}
+
+/*.circle-image img {*/
+/*  width: 100%;*/
+/*  height: auto;*/
+/*}*/
+
+.active-status {
+  position: absolute;
+  bottom: 12%;
+  right: 13%;
+  width: 5px;
+  height: 5px;
+  background-color: green;
+  border-radius: 50%;
+}
+
 .team-member {
-  /* display: flex; */
-  display: block;
-  /* justify-content: space-between; */
+   display: flex;
+  /*display: block;*/
+   /*justify-content: space-between; */
 }
 .main-area {
   display: flex;

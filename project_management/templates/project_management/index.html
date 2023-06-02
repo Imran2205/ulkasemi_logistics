@@ -101,19 +101,36 @@
       <div class="project-title">Teams</div>
       <div class="project-name">
         {% for team in user_teams %}
-          <div class="project-department">{{ team.name }}</div>
-            <div class="team-member"  style="padding-left: 20px;">
-              {% for member in team.members.all %}
-                {% if member.profileinfo.office_id_no == user.profileinfo.office_id_no %}
-                  <img src="{{ member.profileinfo.profile_picture_url }}" alt="" class="members">
-                {% endif %}
-              {% endfor %}
-              {% for member in team.members.all %}
-                {% if member.profileinfo.office_id_no != user.profileinfo.office_id_no %}
-                  <img src="{{ member.profileinfo.profile_picture_url }}" alt="" class="members">
-                {% endif %}
-              {% endfor %}
-            </div>
+          <style>
+            .team_color_{{ team.id }}:before {
+                border: 3px solid #fec267;
+            }
+          </style>
+          <div class="project-department team_color_{{ team.id }}">{{ team.name }}</div>
+          <div class="team-member"  style="padding-left: 20px;">
+            {% for member in team.members.all %}
+              {% if member.profileinfo.office_id_no == user.profileinfo.office_id_no %}
+                <div class="circle-image">
+                  {% if member.profileinfo.profile_picture_url == 'na' %}
+                    <img src="{% static 'project_management/images/avatar.png' %}" alt="" class="members_team">
+                  {% else %}
+                    <img src="{{ member.profileinfo.profile_picture_url }}" alt="" class="members_team">
+                  {% endif %}
+                </div>
+              {% endif %}
+            {% endfor %}
+            {% for member in team.members.all %}
+              {% if member.profileinfo.office_id_no != user.profileinfo.office_id_no %}
+                <div class="circle-image">
+                  {% if member.profileinfo.profile_picture_url == 'na' %}
+                    <img src="{% static 'project_management/images/avatar.png' %}" alt="" class="members_team">
+                  {% else %}
+                    <img src="{{ member.profileinfo.profile_picture_url }}" alt="" class="members_team">
+                  {% endif %}
+                </div>
+              {% endif %}
+            {% endfor %}
+          </div>
         {% endfor %}
       </div>
     </div>

@@ -21,6 +21,7 @@
   justify-content: center;
   text-align: center;
   align-items: center;
+  min-width: 80px;
 }
 .tag.ongoing {
   background-color: var(--tag-color-one);
