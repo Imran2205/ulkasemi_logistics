@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="PublishConfigData" serverName="ulkasemi-logistics" remoteFilesAllowedToDisappearOnAutoupload="false" showExcludedInSync="true">
+  <component name="PublishConfigData" serverName="ulkasemi-logistics" remoteFilesAllowedToDisappearOnAutoupload="false">
     <serverData>
       <paths name="ulkasemi-logistics">
         <serverdata>
@@ -13,6 +13,14 @@
             <excludedPath path="/lunch_booking/migrations" />
             <excludedPath path="/project_update/migrations" />
             <excludedPath path="/static" />
+            <excludedPath path="/home/__pycache__" />
+            <excludedPath path="/home/migrations" />
+            <excludedPath path="/project_management/__pycache__" />
+            <excludedPath path="/project_management/migrations" />
+            <excludedPath path="/lunch_booking/__pycache__" />
+            <excludedPath path="/lunch_booking_db/__pycache__" />
+            <excludedPath path="/lunch_booking_db/migrations" />
+            <excludedPath path="/ulkasemi_logistics/__pycache__" />
           </excludedPaths>
         </serverdata>
       </paths>

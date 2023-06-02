@@ -86,7 +86,7 @@ class ProjectInfo(models.Model):
     project_id = models.CharField(max_length=255, unique=True, default='', null=True)
     created_by = models.ForeignKey(User, on_delete=models.CASCADE, null=True, related_name='created_by')
     description = models.TextField(max_length=1000, default='', null=True)
-    members = models.ManyToManyField(User)
+    members = models.ManyToManyField(User, related_name='members')
     vendor = models.ForeignKey(Vendor, on_delete=models.CASCADE, null=True)
     vendor_supervisors = models.ManyToManyField(VendorSupervisor)
     ulka_supervisors = models.ManyToManyField(User)
@@ -98,8 +98,8 @@ class ProjectInfo(models.Model):
     deadline = models.DateField(default=None, null=True)
     entry_date = models.DateField(default=datetime.date.today, null=True)
     last_updated = models.DateTimeField(default=datetime.datetime.now, null=True)
-    ulka_manager = models.ManyToManyField(User)
-    ulka_pm = models.ManyToManyField(User)
+    ulka_manager = models.ManyToManyField(User, related_name='ulka_manager')
+    ulka_pm = models.ManyToManyField(User, related_name='ulka_pm')
     progress = models.IntegerField()
 
     def __str__(self):
