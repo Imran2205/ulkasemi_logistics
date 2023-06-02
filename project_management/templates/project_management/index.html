@@ -829,6 +829,46 @@
           <div class="row mb-1">
             <div class="col">
               <div class="form-outline mb-1">
+                <label for="pms">Program Manager</label>
+                <div style="font-size: 14px;">
+                  <select id="pms" class="form-control pms_selection" name="pms" multiple="multiple"></select>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-outline mb-1">
+                <label for="managers">Managers</label>
+                <div style="font-size: 14px;">
+                  <select id="managers" class="form-control managers_selection"
+                          name="managers" multiple="multiple"></select>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row mb-1">
+            <div class="col">
+              <div class="form-outline mb-1">
+                <label for="ulka_supervisors">Ulka Supervisor</label>
+                <div style="font-size: 14px;">
+                  <select id="ulka_supervisors" class="form-control ulka_supervisors_selection" name="ulka_supervisors" multiple="multiple"></select>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-outline mb-1">
+                <label for="ack_pers">Acknowledgement Person</label>
+                <div style="font-size: 14px;">
+                  <select id="ack_pers" class="form-control ack_pers_selection"
+                          name="ack_pers" multiple="multiple"></select>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row mb-1">
+            <div class="col">
+              <div class="form-outline mb-1">
                 <label for="vendor">Vendor</label>
                 <div style="font-size: 14px;">
                   <select id="vendor" class="form-control vendor_selection" name="vendor" multiple="multiple"></select>
@@ -1046,6 +1086,122 @@
         data: [
             {% for team in teams  %}
                 "{{ team.name }}",
+            {% endfor %}
+
+        ],
+
+        maximumSelectionLength: 10,
+
+        placeholder: "Select or type keywords",
+        //minimumInputLength: 1,
+        //ajax: {
+        //   url: "you url to data",
+        //   dataType: 'json',
+        //  quietMillis: 250,
+        //  data: function (term, page) {
+        //     return {
+        //         q: term, // search term
+        //    };
+        //  },
+        //  results: function (data, page) {
+        //  return { results: data.items };
+        //   },
+        //   cache: true
+        // }
+    });
+</script>
+<script>
+    $('.pms_selection').select2({
+        data: [
+            {% for pm in pms  %}
+                "{{ pm.first_name }} {{ pm.last_name }} ({{ pm.profileinfo.office_id_no }})",
+            {% endfor %}
+
+        ],
+
+        maximumSelectionLength: 10,
+
+        placeholder: "Select or type keywords",
+        //minimumInputLength: 1,
+        //ajax: {
+        //   url: "you url to data",
+        //   dataType: 'json',
+        //  quietMillis: 250,
+        //  data: function (term, page) {
+        //     return {
+        //         q: term, // search term
+        //    };
+        //  },
+        //  results: function (data, page) {
+        //  return { results: data.items };
+        //   },
+        //   cache: true
+        // }
+    });
+</script>
+<script>
+    $('.managers_selection').select2({
+        data: [
+            {% for pm in managers  %}
+                "{{ pm.first_name }} {{ pm.last_name }} ({{ pm.profileinfo.office_id_no }})",
+            {% endfor %}
+
+        ],
+
+        maximumSelectionLength: 10,
+
+        placeholder: "Select or type keywords",
+        //minimumInputLength: 1,
+        //ajax: {
+        //   url: "you url to data",
+        //   dataType: 'json',
+        //  quietMillis: 250,
+        //  data: function (term, page) {
+        //     return {
+        //         q: term, // search term
+        //    };
+        //  },
+        //  results: function (data, page) {
+        //  return { results: data.items };
+        //   },
+        //   cache: true
+        // }
+    });
+</script>
+<script>
+    $('.ulka_supervisors_selection').select2({
+        data: [
+            {% for v_s in ulka_supervisors  %}
+                 "{{ pm.first_name }} {{ pm.last_name }} ({{ pm.profileinfo.office_id_no }})",
+            {% endfor %}
+
+        ],
+
+        maximumSelectionLength: 10,
+
+        placeholder: "Select or type keywords",
+        //minimumInputLength: 1,
+        //ajax: {
+        //   url: "you url to data",
+        //   dataType: 'json',
+        //  quietMillis: 250,
+        //  data: function (term, page) {
+        //     return {
+        //         q: term, // search term
+        //    };
+        //  },
+        //  results: function (data, page) {
+        //  return { results: data.items };
+        //   },
+        //   cache: true
+        // }
+    });
+</script>
+<script>
+    $('.ack_pers_selection').select2({
+        data: [
+            {% for v_s in ack_pers  %}
+                "{{ pm.first_name }} {{ pm.last_name }} ({{ pm.profileinfo.office_id_no }})",
             {% endfor %}
 
         ],

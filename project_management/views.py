@@ -22,8 +22,14 @@ def project_management(request):
     tags = Tag.objects.all()
     try:
         ulka_supervisors = User.objects.filter(profileinfo__role=Role.objects.get(name='Supervisor'))
+        pms = User.objects.filter(profileinfo__role=Role.objects.get(name='PM'))
+        managers = User.objects.filter(profileinfo__role=Role.objects.get(name='Manager'))
+        ack_pers = pms = User.objects.filter(profileinfo__role=Role.objects.get(name='Ack Person'))
     except:
         ulka_supervisors = []
+        pms = []
+        managers = []
+        ack_pers = []
     vendors = Vendor.objects.all()
     vendor_supervisors = VendorSupervisor.objects.all()
     members = ProfileInfo.objects.all()
@@ -59,6 +65,9 @@ def project_management(request):
         "teams": teams,
         "tags": tags,
         "ulka_supervisors": ulka_supervisors,
+        "pms": pms,
+        "managers": managers,
+        "ack_pers": ack_pers,
         "vendors": vendors,
         "vendor_supervisors": vendor_supervisors,
         "members": members,
@@ -88,6 +97,10 @@ def ajax_create_project(request):
         teams = request.POST.getlist('teams', None)
         vendor = request.POST.get('vendor', None)
         vendor_supervisors = request.POST.getlist('vendor_supervisors', None)
+        pms = request.POST.getlist('pms', None)
+        managers = request.POST.getlist('managers', None)
+        ulka_supervisors = request.POST.getlist('ulka_supervisors', None)
+        ack_pers = request.POST.getlist('ack_pers', None)
         start_date = request.POST.get('start_date', None)
         end_date = request.POST.get('end_date', None)
         tags = request.POST.getlist('tags', None)
@@ -143,6 +156,22 @@ def ajax_create_project(request):
                     ))
             except:
                 pass
+
+            for pm in pms:
+                instance.vendor_supervisors.add(ProfileInfo.objects.get(
+                    office_id_no=pm.split('(')[-1].replace(')', '')).user)
+
+            for manager in managers:
+                instance.vendor_supervisors.add(ProfileInfo.objects.get(
+                    office_id_no=manager.split('(')[-1].replace(')', '')).user)
+
+            for ack_per in ack_pers:
+                instance.vendor_supervisors.add(ProfileInfo.objects.get(
+                    office_id_no=ack_per.split('(')[-1].replace(')', '')).user)
+
+            for ulka_supervisor in ulka_supervisors:
+                instance.vendor_supervisors.add(ProfileInfo.objects.get(
+                    office_id_no=ulka_supervisor.split('(')[-1].replace(')', '')).user)
 
         except Exception as e:
             return JsonResponse({"success": False, "error": e}, status=400)
