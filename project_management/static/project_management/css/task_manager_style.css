@@ -1418,9 +1418,10 @@ img {
 }
 
 .team-member {
-   display: flex;
+  display: flex;
+  flex-wrap: wrap;
   /*display: block;*/
-   /*justify-content: space-between; */
+  /* justify-content: space-between;*/
 }
 .main-area {
   display: flex;
