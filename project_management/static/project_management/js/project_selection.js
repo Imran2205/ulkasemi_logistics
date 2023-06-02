@@ -43,8 +43,10 @@ function setup_timeline(proj_id, req_url, token) {
                 <li class="timeline-item-member">
                   <div class="timeline-info-member"></div>
                   <div class="timeline-marker-member">
-                    <img src="${response["updates_this_week"][j]['creator_pp_url']}"
-                         alt="" class="members">
+                    <div class="circle-image">
+                      <img src="${response["updates_this_week"][j]['creator_pp_url']}"
+                         alt="" class="members_team">
+                    </div>
                   </div>
                   <div style="text-align: justify">
                     <p class="justify-align-text" style="font-size: 15px;">
@@ -84,8 +86,10 @@ function setup_timeline(proj_id, req_url, token) {
                 <li class="timeline-item-member">
                   <div class="timeline-info-member"></div>
                   <div class="timeline-marker-member">
-                    <img src="${response["updates_others"][k]['creator_pp_url']}"
-                         alt="" class="members">
+                    <div class="circle-image">
+                      <img src="${response["updates_others"][k]['creator_pp_url']}"
+                         alt="" class="members_team">
+                    </div>
                   </div>
                   <div style="text-align: justify">
                     <p class="justify-align-text" style="font-size: 15px;">

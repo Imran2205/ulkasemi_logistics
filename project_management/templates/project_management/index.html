@@ -40,8 +40,10 @@
     <div class="task-manager">ulka life</div>
     <div class="side-wrapper">
       <div class="user-profile">
-        <img src="{{ user.profileinfo.profile_picture_url }}" alt="PP"
-             class="user-photo">
+        <div class="circle-image-up">
+          <img src="{{ user.profileinfo.profile_picture_url }}" alt="PP"
+             class="user-photo-status">
+        </div>
         <div class="user-name">{{ user.first_name }} {{ user.last_name }}</div>
         <div class="user-mail">{{ user.email }}</div>
         {#        <div class="user-mail">{{ {{ user.email }} }}</div>#}
@@ -102,8 +104,8 @@
       <div class="project-name">
         {% for team in user_teams %}
           <style>
-            .team_color_{{ team.id }}:before {
-                border: 3px solid #fec267;
+            .team_color_{{ team.id }}::before {
+                border: 3px solid {{ team.color }};
             }
           </style>
           <div class="project-department team_color_{{ team.id }}">{{ team.name }}</div>
@@ -215,9 +217,11 @@
                 <!-- <div class="project-title">Team</div> -->
                 <div class="team-member">
                   {% for member in project.members.all %}
-                    <img
+                    <div class="circle-image">
+                      <img
                         src="{{ member.profileinfo.profile_picture_url }}"
-                        alt="PP" class="members">
+                        alt="PP" class="members_team">
+                    </div>
                   {% endfor %}
                 </div>
                 <!-- </div> -->
@@ -287,9 +291,11 @@
                 <!-- <div class="project-title">Team</div> -->
                 <div class="team-member">
                   {% for member in project.members.all %}
-                    <img
+                    <div class="circle-image">
+                      <img
                         src="{{ member.profileinfo.profile_picture_url }}"
-                        alt="PP" class="members">
+                        alt="PP" class="members_team">
+                    </div>
                   {% endfor %}
                 </div>
                 <!-- </div> -->
@@ -323,8 +329,10 @@
       <div class="mail-detail" style="display: none; width: 100%;">
         <div class="mail-detail-header">
           <div class="mail-detail-profile">
-            <img src="{{ user.profileinfo.profile_picture_url }}" alt=""
-                 class="members inbox-detail"/>
+            <div class="circle-image-rp">
+              <img src="{{ user.profileinfo.profile_picture_url }}" alt=""
+                 class="members_team_rp"/>
+            </div>
             <div class="mail-detail-name">{{ user.first_name }} {{ user.last_name }}</div>
           </div>
           <div class="mail-icons">

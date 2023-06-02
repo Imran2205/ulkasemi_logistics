@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="PublishConfigData" serverName="ulkasemi-logistics" remoteFilesAllowedToDisappearOnAutoupload="false">
+  <component name="PublishConfigData" serverName="ulkasemi-logistics" remoteFilesAllowedToDisappearOnAutoupload="false" showExcludedInSync="true">
     <serverData>
       <paths name="ulkasemi-logistics">
         <serverdata>

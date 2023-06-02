@@ -1193,12 +1193,34 @@ img {
   background-color: var(--theme-bg-color);
   border-bottom: 1px solid var(--border-color);
 }
-.user-photo {
+
+.user-photo-status {
   width: 70px;
   height: 70px;
-  border-radius: 50%;
   object-fit: cover;
+  border-radius: 50%;
+  border: 2px solid white; /*#ff7d00;*/
 }
+
+.circle-image-up {
+  position: relative;
+  border-radius: 50%;
+  width: 70px;
+  height: 70px;
+}
+
+.circle-image-up::after {
+  position: absolute;
+  width: 25px;
+  content: "";
+  height: 25px;
+  border-radius: 50%;
+  top: 46px;
+  right: 2px;
+  background-color: #00b33c;
+  border: 4px solid white;
+}
+
 .user-name {
   font-weight: 600;
   margin: 15px 0 8px;
@@ -1379,7 +1401,7 @@ img {
   height: 35px;
   object-fit: cover;
   border-radius: 50%;
-  border: 2px solid white;
+  border: 2px solid white; /*#ff7d00;*/
 }
 
 .circle-image {
@@ -1392,14 +1414,42 @@ img {
 
 .circle-image::after {
   position: absolute;
-  width: 8px;
+  width: 12px;
   content: "";
-  height: 8px;
+  height: 12px;
   border-radius: 50%;
-  top: 22px;
-  right: 5px;
+  top: 23px;
+  right: 1px;
   background-color: #00b33c;
-  border: 1px solid white;
+  border: 2px solid white;
+}
+
+
+.members_team_rp {
+  width: 44px;
+  height: 44px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2px solid white; /*#ff7d00;*/
+}
+
+.circle-image-rp {
+  position: relative;
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+}
+
+.circle-image-rp::after {
+  position: absolute;
+  width: 15px;
+  content: "";
+  height: 15px;
+  border-radius: 50%;
+  top: 28px;
+  right: 2px;
+  background-color: #00b33c;
+  border: 3px solid white;
 }
 
 .team-member {
