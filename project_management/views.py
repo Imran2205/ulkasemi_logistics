@@ -6,11 +6,13 @@ from django.utils.dateparse import parse_date
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 import datetime
+from django.contrib.auth.models import User
 from django.core import serializers
 from .models import (
-    Tag, Team, UlkaSupervisor, VendorSupervisor,
+    Tag, Team, VendorSupervisor,
     Vendor, ProjectInfo, Status, WeeklyUpdate
 )
+from home.models import Role
 
 
 @login_required
@@ -18,7 +20,10 @@ def project_management(request):
     departments = Department.objects.all()
     teams = Team.objects.all()
     tags = Tag.objects.all()
-    ulka_supervisors = UlkaSupervisor.objects.all()
+    try:
+        ulka_supervisors = User.objects.filter(profileinfo__role=Role.objects.get(name='Supervisor'))
+    except:
+        ulka_supervisors = []
     vendors = Vendor.objects.all()
     vendor_supervisors = VendorSupervisor.objects.all()
     members = ProfileInfo.objects.all()
@@ -107,7 +112,10 @@ def ajax_create_project(request):
             instance.progress = 0
             instance.save()
 
-            instance.vendor = Vendor.objects.get(name=vendor)
+            try:
+                instance.vendor = Vendor.objects.get(name=vendor)
+            except:
+                pass
             instance.start_date = parse_date(start_date)
             instance.deadline = parse_date(end_date)
             instance.created_by = request.user
@@ -128,10 +136,14 @@ def ajax_create_project(request):
             for team in teams:
                 instance.teams.add(Team.objects.get(name=team))
 
-            for v_s in vendor_supervisors:
-                instance.vendor_supervisors.add(VendorSupervisor.objects.filter(vendor=instance.vendor).get(
-                    name=v_s.split('(')[0].strip()
-                ))
+            try:
+                for v_s in vendor_supervisors:
+                    instance.vendor_supervisors.add(VendorSupervisor.objects.filter(vendor=instance.vendor).get(
+                        name=v_s.split('(')[0].strip()
+                    ))
+            except:
+                pass
+
         except Exception as e:
             return JsonResponse({"success": False, "error": e}, status=400)
         return JsonResponse({}, status=200)

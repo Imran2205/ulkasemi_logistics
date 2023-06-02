@@ -37,17 +37,6 @@ class Leave(models.Model):
         super().save(*args, **kwargs)
 
 
-class UlkaSupervisor(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    teams = models.ManyToManyField(Team)
-
-    def __str__(self):
-        return f'{self.user.last_name}'
-
-    def save(self, *args, **kwargs):
-        super().save(*args, **kwargs)
-
-
 class Tag(models.Model):
     name = models.CharField(max_length=255, default='', unique=True)
     color = ColorField(default='#FF0000')
@@ -100,7 +89,7 @@ class ProjectInfo(models.Model):
     members = models.ManyToManyField(User)
     vendor = models.ForeignKey(Vendor, on_delete=models.CASCADE, null=True)
     vendor_supervisors = models.ManyToManyField(VendorSupervisor)
-    ulka_supervisors = models.ManyToManyField(UlkaSupervisor)
+    ulka_supervisors = models.ManyToManyField(User)
     departments = models.ManyToManyField(Department)
     teams = models.ManyToManyField(Team)
     tags = models.ManyToManyField(Tag)
@@ -109,6 +98,8 @@ class ProjectInfo(models.Model):
     deadline = models.DateField(default=None, null=True)
     entry_date = models.DateField(default=datetime.date.today, null=True)
     last_updated = models.DateTimeField(default=datetime.datetime.now, null=True)
+    ulka_manager = models.ManyToManyField(User)
+    ulka_pm = models.ManyToManyField(User)
     progress = models.IntegerField()
 
     def __str__(self):
