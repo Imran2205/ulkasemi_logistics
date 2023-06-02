@@ -24,7 +24,7 @@ def project_management(request):
         ulka_supervisors = User.objects.filter(profileinfo__role=Role.objects.get(name='Supervisor'))
         pms = User.objects.filter(profileinfo__role=Role.objects.get(name='PM'))
         managers = User.objects.filter(profileinfo__role=Role.objects.get(name='Manager'))
-        ack_pers = pms = User.objects.all()
+        ack_pers = User.objects.filter(~Q(profileinfo__office_id_no="000000"))
     except:
         ulka_supervisors = []
         pms = []
@@ -32,7 +32,7 @@ def project_management(request):
         ack_pers = []
     vendors = Vendor.objects.all()
     vendor_supervisors = VendorSupervisor.objects.all()
-    members = ProfileInfo.objects.all()
+    members = ProfileInfo.objects.filter(~Q(profileinfo__office_id_no="000000"))
     statuses = Status.objects.all().order_by('id')
 
     user_teams = Team.objects.filter(members=request.user)
