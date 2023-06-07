@@ -1178,6 +1178,35 @@ img {
   flex-shrink: 0;
   overflow: auto;
 }
+
+ /* Width and height of the scrollbar track */
+  .user-profile-area::-webkit-scrollbar {
+    width: 4px;
+    height: 2px;
+
+
+  }
+
+  /* Color of the scrollbar track */
+  .user-profile-area::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    /* height: 200px; */
+    /*margin-bottom: 25px;*/
+    /*margin-top: 25px;*/
+    /*margin-right: -25px;*/
+
+  }
+
+  /* Color of the scrollbar thumb */
+  .user-profile-area::-webkit-scrollbar-thumb {
+    background: #888;
+  }
+
+  /* On hover, color of the scrollbar thumb */
+  .user-profile-area::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+
 .task-manager {
   font-size: 15px;
   color: var(--title-color);

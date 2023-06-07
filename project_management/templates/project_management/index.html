@@ -165,6 +165,17 @@
         </svg>
         <input type="color" value="#4d76fd" class="colorpicker" id="colorpicker"></input>
       </div>
+      <div class="color-menu" style="cursor: pointer;" id="logout_btn">
+        <img src="{% static 'project_management/images/logout.png' %}">
+      </div>
+      <script type="text/javascript">
+        document.getElementById("logout_btn").addEventListener("click", function(event){
+          // event.preventDefault();
+          // event.stopPropagation();
+          location.href='/accounts/logout/';
+          // event.stopPropagation();
+        });
+      </script>
     </div>
     <div class="main-container">
       <div class="inbox-container">

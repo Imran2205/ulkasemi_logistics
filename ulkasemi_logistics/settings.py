@@ -186,7 +186,7 @@ SOCIALACCOUNT_PROVIDERS = {
 SOCIALACCOUNT_LOGIN_ON_GET = True
 ACCOUNT_ADAPTER = 'lunch_booking_db.adapters.CustomAccountAdapter'
 SOCIALACCOUNT_ADAPTER = 'lunch_booking_db.adapters.CustomSocialAccountAdapter'
-
+ACCOUNT_LOGOUT_ON_GET = True
 
 # mysqlclient installation error
 # solution:
