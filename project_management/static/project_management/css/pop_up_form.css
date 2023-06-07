@@ -187,7 +187,7 @@
 }
 
 .box {
-    background-color: whitesmoke;
+    /*background-color: whitesmoke;*/
 
     margin-left: auto;
     margin-right: auto;
@@ -197,9 +197,9 @@
     /*-ms-transform: translateY(-50%);*/
     /*transform: translateY(-50%);*/
 
-    -webkit-box-shadow: 0px 4px 6px 0px rgba(0,0,0,0.1);
-    -moz-box-shadow: 0px 4px 6px 0px rgba(0,0,0,0.1);
-    box-shadow: 0px 4px 6px 0px rgba(0,0,0,0.1);
+    /*-webkit-box-shadow: 0px 4px 6px 0px rgba(0,0,0,0.1);*/
+    /*-moz-box-shadow: 0px 4px 6px 0px rgba(0,0,0,0.1);*/
+    /*box-shadow: 0px 4px 6px 0px rgba(0,0,0,0.1);*/
 }
 
 
@@ -223,3 +223,39 @@
     background-color: tomato;
     color: #fff;
 }
+
+.blur-background {
+  background: rgba(255, 255, 255, 0.21);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.75);
+}
+
+.scroll-custom::-webkit-scrollbar {
+    width: 2px;
+    height: 2px;
+
+
+  }
+
+  /* Color of the scrollbar track */
+  .scroll-custom::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    /* height: 200px; */
+    margin-bottom: 25px;
+    margin-top: 25px;
+    margin-right: -25px;
+
+  }
+
+  /* Color of the scrollbar thumb */
+  .scroll-custom::-webkit-scrollbar-thumb {
+    background: #888;
+  }
+
+  /* On hover, color of the scrollbar thumb */
+  .scroll-custom::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }

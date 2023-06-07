@@ -14,13 +14,22 @@ body {
 }
 .profile_hover_body {
   /* background-color: #fff; */
-  background: linear-gradient(
-    120deg,
-    rgba(23, 216, 178, 0.3),
-    rgba(255, 0, 0, 0) 70.71%
-  ),
-  linear-gradient(150deg, rgba(247, 255, 92, 0.3), rgba(0, 255, 0, 0) 70.71%),
-  linear-gradient(330deg, rgba(83, 9, 71, 0.3), rgba(0, 0, 255, 0) 70.71%);
+  /*background: linear-gradient(*/
+  /*  120deg,*/
+  /*  rgba(23, 216, 178, 0.3),*/
+  /*  rgba(255, 0, 0, 0) 70.71%*/
+  /*),*/
+  /*linear-gradient(150deg, rgba(247, 255, 92, 0.3), rgba(0, 255, 0, 0) 70.71%),*/
+  /*linear-gradient(330deg, rgba(83, 9, 71, 0.3), rgba(0, 0, 255, 0) 70.71%);*/
+
+
+
+  background: rgba(255, 255, 255, 0.21);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.75);
 
 
 

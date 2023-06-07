@@ -16,18 +16,21 @@
 /*tooltip Box*/
 .con-tooltip {
 
-  position: relative;
-  background: #F2D1C9;
+  position: absolute;
+  /*background: #F2D1C9;*/
 
-  border-radius: 9px;
   border-radius: 2rem;
-  padding: 0 20px;
+  /*padding: 0 20px;*/
   margin: 10px;
 
   display: inline-block;
 
   transition: all 0.3s ease-in-out;
   cursor: default;
+
+}
+
+.hover-profile {
 
 }
 
@@ -75,7 +78,7 @@
   content: " ";
   width: 0;
   height: 0;
-
+  opacity: 1;
   border-style: solid;
   border-width: 12px 12.5px 0 12.5px;
   border-color: #1e5c6b transparent transparent transparent;
@@ -102,19 +105,27 @@
   position: absolute;
   /* left: 150px; */
 
-  margin-left: -50px;
-  margin-top: 55px;
+  margin-left: 5px;
+  margin-top: 100px;
 
 }
 
-.con-tooltip:hover .tooltip{
+/*.con-tooltip:hover .tooltip{*/
+/*  visibility: visible;*/
+/*  transform: translateY(-10px);*/
+/*  opacity: 1;*/
+/*    transition: .3s linear;*/
+/*  animation: odsoky 1s ease-in-out infinite  alternate;*/
+/*}*/
+
+.tooltip-hover{
   visibility: visible;
   transform: translateY(-10px);
   opacity: 1;
     transition: .3s linear;
   animation: odsoky 1s ease-in-out infinite  alternate;
-
 }
+
 @keyframes odsoky {
   0%{
     transform: translateY(6px);

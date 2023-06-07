@@ -101,7 +101,7 @@
         {% endfor %}
       </div>
     </div>
-    <div class="side-wrapper">
+    <div class="side-wrapper" style="min-height: 1000px;">
       <div class="project-title">Teams</div>
       <div class="project-name">
         {% for team in user_teams %}
@@ -114,7 +114,7 @@
           <div class="team-member"  style="padding-left: 20px;">
             {% for member in team.members.all %}
               {% if member.profileinfo.office_id_no == user.profileinfo.office_id_no %}
-                <div class="circle-image">
+                <div class="circle-image hover-profile">
                   {% if member.profileinfo.profile_picture_url == 'na' or member.profileinfo.profile_picture_url == '' %}
                     <img src="{% static 'project_management/images/avatar.png' %}" alt="" class="members_team">
                   {% else %}
@@ -125,7 +125,7 @@
             {% endfor %}
             {% for member in team.members.all %}
               {% if member.profileinfo.office_id_no != user.profileinfo.office_id_no %}
-                <div class="circle-image">
+                <div class="circle-image hover-profile">
                   {% if member.profileinfo.profile_picture_url == 'na' or member.profileinfo.profile_picture_url == '' %}
                     <img src="{% static 'project_management/images/avatar.png' %}" alt="" class="members_team">
                   {% else %}
@@ -776,13 +776,13 @@
 <div id="form-pop-up-container"
      style="position: absolute; left: 0; top: 0; width: 100%; height: 100%; z-index: 77; background: transparent; overflow-y: hidden;">
   <div class="pop-up-f">
-    <div class="box small-6 large-centered">
+    <div class="box small-6 large-centered blur-background">
       <a href="javascript:void(0)" class="close-button" style="z-index: 200; text-decoration:none">&#10008;</a>
       {#      <div style="position:fixed; padding: 30px 150px; background-color: #f1f1f6; height: 88vh; top: 40px; margin-left: auto; margin-right: auto; z-index: 0; width: 1000px;" class="col-md blur-bg">#}
       {#      </div>#}
       <div
-          style="padding: 50px 40px 20px 40px; overflow-y: scroll; height: 88vh; top: 0; left: 0; background-color: #f0f0f7"
-          class="col-md">
+          style="padding: 50px 40px 20px 40px; overflow-y: scroll; height: 88vh; top: 0; left: 0; background-color: transparent;"
+          class="col-md scroll-custom">
         <form id="project_creation_form" action="/create_project" method="post">
           <div class="row mb-1">
             <div class="form-outline mb-1">
@@ -932,9 +932,8 @@
   </div>
 </div>
 
-<div class="con-tooltip bottom">
-  <p> bottom </p>
-  <div class="tooltip ">
+<div class="con-tooltip bottom" style="display: none;">
+  <div class="tooltip" id="tooltip">
     <div class="profile_hover_body">
       <div class="banner">
         <svg xmlns="http://www.w3.org/2000/svg" width="100px" height="100px" viewBox="0 0 1024 1024" class="icon"
@@ -1041,6 +1040,7 @@
         crossorigin="anonymous"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/select2.full.min.js"></script>
+<script src="{% static 'project_management/js/hover_profile.js' %}"></script>
 
 <script type="text/javascript">
     $(function () {
