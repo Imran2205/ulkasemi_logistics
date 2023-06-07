@@ -43,7 +43,7 @@ $(".hover-profile").hover(function(){
       let team_html = ``;
       for (let i=0; i<response['teams'].length; i++) {
         team_html += `
-          <div class="team">${response['teams'][i]['name']}</div>
+          <div class="team" style="background-color: ${response['teams'][i]['color']}">${response['teams'][i]['name']}</div>
         `;
       }
       $('#popup_teams').html(team_html);
