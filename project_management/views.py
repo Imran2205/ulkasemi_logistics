@@ -268,7 +268,10 @@ def get_user_pop_up_info(request,):
         name = f'{user.first_name} {user.last_name}'
         ulka_email = user.email
         designation = user.profileinfo.designation
-        department = user.profileinfo.department.name
+        try:
+            department = user.profileinfo.department.name
+        except:
+            department = 'N/A'
         profile_picture = user.profileinfo.profile_picture_url
 
         teams = Team.objects.filter(members=user).values()
