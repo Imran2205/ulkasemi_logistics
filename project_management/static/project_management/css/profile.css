@@ -133,6 +133,8 @@ body {
   align-content: center;
   align-items: center;
   justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .profile_hover_body .team {
