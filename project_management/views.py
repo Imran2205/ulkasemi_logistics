@@ -261,6 +261,45 @@ def set_project_status(request):
     return JsonResponse({"success": False}, status=400)
 
 
+def get_user_pop_up_info(request,):
+    if request.method == "GET" and is_ajax(request=request):
+        print(request.GET.get('id', None))
+        user = User.objects.get(id=int(request.GET.get('id', None)))
+        name = f'{user.first_name} {user.last_name}'
+        ulka_email = user.email
+        designation = user.profileinfo.designation
+        department = user.profileinfo.department.name
+        profile_picture = user.profileinfo.profile_picture_url
+
+        teams = Team.objects.filter(members=user).values()
+
+        statuses = Status.objects.all().order_by('id')
+        project_counts_c1 = {
+            'All': len(ProjectInfo.objects.filter(members=user))
+        }
+        project_counts_c2 = {}
+        for i, status in enumerate(statuses):
+            if i < 2:
+                project_counts_c1[status.name] = len(
+                    ProjectInfo.objects.filter(members=user).filter(status=status))
+            else:
+                project_counts_c2[status.name] = len(
+                    ProjectInfo.objects.filter(members=user).filter(status=status))
+
+        context = {
+            "name": name,
+            "designation": designation,
+            "ulka_email": ulka_email,
+            "teams": list(teams),
+            "project_counts_c1": project_counts_c1,
+            "project_counts_c2": project_counts_c2,
+            "profile_picture": profile_picture,
+            "department": department
+        }
+        return JsonResponse(data=context, status=200, safe=False)
+    return JsonResponse({"success": False}, status=400)
+
+
 @csrf_exempt
 def create_teams(request):
     if request.method == "POST":
