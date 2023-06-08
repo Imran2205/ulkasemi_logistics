@@ -38,8 +38,8 @@ $(".hover-profile").hover(function(){
       $('#popup_designation').html(response['designation']);
       $('#popup_department').html(response['department']);
       $('#popip_ulka_email').html(response['ulka_email']);
-      $('#popup_phone').html(response['ulka_email']);
-      $('#popup_gf_email').html(response['ulka_email']);
+      $('#popup_phone').html(response['contact_no']);
+      $('#popup_gf_email').html(response['gf_email']);
       let team_html = ``;
       for (let i=0; i<response['teams'].length; i++) {
         team_html += `

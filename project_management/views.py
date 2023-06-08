@@ -140,7 +140,13 @@ def ajax_create_project(request):
             ])
 
             for tag in tags:
-                instance.tags.add(Tag.objects.get(name=tag))
+                try:
+                    tag_obj = Tag.objects.get(name=tag)
+                except:
+                    tag_obj = Tag()
+                    tag_obj.name = tag
+                    tag.save()
+                instance.tags.add(tag_obj)
 
             for member in members:
                 instance.members.add(ProfileInfo.objects.get(office_id_no=member.split('(')[-1].replace(')', '')).user)
@@ -267,6 +273,8 @@ def get_user_pop_up_info(request,):
         user = User.objects.get(id=int(request.GET.get('id', None)))
         name = f'{user.first_name} {user.last_name}'
         ulka_email = user.email
+        gf_email = user.profileinfo.gf_email
+        contact_no = user.profileinfo.contact_no
         designation = user.profileinfo.designation
         try:
             department = user.profileinfo.department.name
@@ -297,7 +305,9 @@ def get_user_pop_up_info(request,):
             "project_counts_c1": project_counts_c1,
             "project_counts_c2": project_counts_c2,
             "profile_picture": profile_picture,
-            "department": department
+            "department": department,
+            'gf_email': gf_email,
+            'contact_no': contact_no
         }
         return JsonResponse(data=context, status=200, safe=False)
     return JsonResponse({"success": False}, status=400)
@@ -329,4 +339,40 @@ def create_teams(request):
             return JsonResponse({"success": True, "not_found": user_not_found}, status=200)
         except Exception as e:
             return JsonResponse({"success": False}, status=200)
+    return JsonResponse({"success": False}, status=200)
+
+
+def set_user_info(request):
+    if request.method == "POST":
+        try:
+            office_id = request.POST.get('ID', None)
+            dept = request.POST.get('Department', None)
+            designation = request.POST.get('Designation', None)
+            username = request.POST.get('Username', None)
+            phone = request.POST.get('Phone', None)
+            gf_email = request.POST.get('GF Email', None)
+            blood_group = request.POST.get('Blood Group', None)
+
+            profile_instance = ProfileInfo.objects.get(office_id_no=office_id)
+            user_instance = profile_instance.user
+
+            profile_instance.designation = designation
+            profile_instance.contact_no = phone
+            profile_instance.gf_email = gf_email
+            profile_instance.blood_group = blood_group
+            profile_instance.department = Department.objects.get(name=dept)
+
+            user_instance.username = username
+
+            profile_instance.save(
+                update_fields=['department', 'designation', 'gf_email', 'contact_no', 'blood_group']
+            )
+            user_instance.save(
+                update_fields=['username']
+            )
+
+            return JsonResponse({"success": True}, status=200)
+        except Exception as e:
+            office_id = request.POST.get('ID', None)
+            return JsonResponse({"success": False, "ID": office_id}, status=200)
     return JsonResponse({"success": False}, status=200)

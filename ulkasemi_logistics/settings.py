@@ -50,7 +50,8 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
-    'colorfield'
+    'colorfield',
+    'phonenumber_field',
 ]
 
 MIDDLEWARE = [

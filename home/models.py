@@ -3,6 +3,7 @@ import datetime
 from django.db import models
 from django.contrib.auth.models import User
 from allauth.socialaccount.models import SocialAccount
+from phonenumber_field.modelfields import PhoneNumberField
 
 
 stat2 = [
@@ -51,6 +52,9 @@ class ProfileInfo(models.Model):
     profile_picture_url = models.CharField(max_length=200, default='', null=True)
     designation = models.CharField(max_length=100, choices=designations, default='N/A')
     role = models.ManyToManyField(Role)
+    gf_email = models.CharField(max_length=100, default='na')
+    contact_no = PhoneNumberField(blank=True)
+    blood_group = models.CharField(max_length=6, default='n/a')
     last_activity = models.DateTimeField(default=datetime.datetime.now, null=True)
 
     def __str__(self):

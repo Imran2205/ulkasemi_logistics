@@ -880,6 +880,15 @@
           </div>
 
           <div class="row mb-1">
+            <div class="form-check" style="margin-left: 15px; margin-top: 5px;">
+              <input class="form-check-input" type="checkbox" value="" id="vendor_checkbox" checked>
+              <label class="form-check-label" for="vendor_checkbox">
+                Select Vendor
+              </label>
+            </div>
+          </div>
+
+          <div class="row mb-1" id="vendor_div">
             <div class="col">
               <div class="form-outline mb-1">
                 <label for="vendor">Vendor</label>
@@ -1018,6 +1027,7 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/select2.full.min.js"></script>
 <script src="{% static 'project_management/js/hover_profile.js' %}"></script>
+<script src="{% static 'project_management/js/pop_form_func.js' %}"></script>
 
 <script type="text/javascript">
     $(function () {

@@ -12,4 +12,5 @@ urlpatterns = [
     path('ajax/set_project_progress/', views.set_project_progress, name='set_project_progress'),
     path('ajax/get_user_pop_up_info/', views.get_user_pop_up_info, name='get_user_pop_up_info'),
     path('create_teams/', views.create_teams, name='create_teams'),
+    path('set_user_info/', views.set_user_info, name='set_user_info'),
 ]
