@@ -15,6 +15,11 @@ from .models import (
 from home.models import Role
 
 
+color_dict = {
+    0: 'FF0000FF'
+}
+
+
 @login_required
 def project_management(request):
     departments = Department.objects.all()
@@ -146,6 +151,20 @@ def ajax_create_project(request):
                     tag_obj = Tag()
                     tag_obj.name = tag
                     tag.save()
+                    prev_tag_id = tag.id - 1
+                    try:
+                        use_color = Tag.objects.get(id=prev_tag_id).last_used_color + 1
+                    except:
+                        use_color = 0
+
+                    if use_color >= len(list(color_dict.keys())):
+                        use_color = 0
+
+                    tag.last_used_color = use_color
+                    tag.save(
+                        update_fields=['last_used_color']
+                    )
+
                 instance.tags.add(tag_obj)
 
             for member in members:

@@ -40,6 +40,7 @@ class Leave(models.Model):
 class Tag(models.Model):
     name = models.CharField(max_length=255, default='', unique=True)
     color = ColorField(default='#FF0000')
+    last_used_color = models.IntegerField(default=0)
 
     def __str__(self):
         return f'{self.name}'
