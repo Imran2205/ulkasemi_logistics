@@ -16,7 +16,56 @@ from home.models import Role
 
 
 color_dict = {
-    0: 'FF0000FF'
+    "1": "fb8500ff",
+    "2": "ffb703ff",
+    "3": "219ebcff",
+    "4": "d4a373ff",
+    "5": "ccd5aeff",
+    "6": "606c38ff",
+    "7": "bc6c25ff",
+    "8": "dda15eff",
+    "9": "fb5607ff",
+    "10": "8338ecff",
+    "11": "2a9d8fff",
+    "12": "e76f51ff",
+    "13": "588157ff",
+    "14": "d5bdafff",
+    "15": "0096c7ff",
+    "16": "00b4d8ff",
+    "17": "a8dadcff",
+    "18": "457b9dff",
+    "19": "4a4e69ff",
+    "20": "118ab2ff",
+    "21": "00afb9ff",
+    "22": "0081a7ff",
+    "23": "fca311ff",
+    "24": "84a59dff",
+    "25": "f6bd60ff",
+    "26": "9f86c0ff",
+    "27": "e4c1f9ff",
+    "28": "006d77ff",
+    "29": "00b4d8ff",
+    "30": "e09f3eff",
+    "31": "0fa3b1ff",
+    "32": "eddea4ff",
+    "33": "f7a072ff",
+    "34": "31572cff",
+    "35": "4f772dff",
+    "36": "cb997eff",
+    "37": "6b705cff",
+    "38": "ff8fabff",
+    "39": "fb6f92ff",
+    "40": "7209b7ff",
+    "41": "a3a380ff",
+    "42": "cbf3f0ff",
+    "43": "2ec4b6ff",
+    "44": "25a18eff",
+    "45": "8ac926ff",
+    "46": "6a4c93ff",
+    "47": "dd6e42ff",
+    "48": "c0d6dfff",
+    "49": "5f0f40ff",
+    "50": "c9cba3ff"
 }
 
 
@@ -161,8 +210,9 @@ def ajax_create_project(request):
                         use_color = 0
 
                     tag.last_used_color = use_color
+                    tag.color = color_dict[str(use_color)]
                     tag.save(
-                        update_fields=['last_used_color']
+                        update_fields=['color', 'last_used_color']
                     )
 
                 instance.tags.add(tag_obj)
