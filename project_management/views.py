@@ -445,3 +445,26 @@ def set_user_info(request):
             office_id = request.POST.get('ID', None)
             return JsonResponse({"success": False, "ID": office_id}, status=200)
     return JsonResponse({"success": False}, status=200)
+
+
+@login_required
+def ajax_set_active_time(request):
+    if request.method == "POST" and is_ajax(request=request):
+        time = request.POST.get('time', None)
+        ofc_id = request.POST.get('id', None)
+        instance = ProfileInfo.objects.get(office_id_no=ofc_id)
+        instance.last_activity = time
+        instance.save(
+            update_fields=['last_activity']
+        )
+        return JsonResponse({"success": True}, status=200)
+    return JsonResponse({"success": False}, status=200)
+
+
+@login_required
+def ajax_get_active_time(request):
+    if request.method == "GET" and is_ajax(request=request):
+        ofc_id = request.GET.get('id', None)
+        time = ProfileInfo.objects.get(office_id_no=ofc_id).last_activity
+        return JsonResponse({"success": True, "time": time}, status=200)
+    return JsonResponse({"success": False}, status=200)

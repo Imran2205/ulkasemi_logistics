@@ -33,6 +33,7 @@
         crossorigin="anonymous"></script>
 <script src="{% static 'project_management/js/progress.js' %}"></script>
 <script type="text/javascript">
+  let csrf_token = '{{ csrf_token }}';
   fetch("{% url 'update_profile_picture' %}")
   .then((response) => response.json())
   .then((json) => console.log(json));
@@ -42,7 +43,7 @@
     <div class="task-manager">ulka life</div>
     <div class="side-wrapper">
       <div class="user-profile">
-        <div class="circle-image-up">
+        <div class="circle-image-up pp_st" ofc_id="{{ user.profileinfo.office_id_no }}">
           <img src="{{ user.profileinfo.profile_picture_url }}" alt="PP"
              class="user-photo-status">
         </div>
@@ -114,7 +115,7 @@
           <div class="team-member"  style="padding-left: 20px;">
             {% for member in team.members.all %}
               {% if member.profileinfo.office_id_no == user.profileinfo.office_id_no %}
-                <div class="circle-image hover-profile" uid="{{ member.id }}">
+                <div class="hover-profile circle-image pp_st" ofc_id="{{ member.profileinfo.office_id_no }}" uid="{{ member.id }}" token="{{ csrf_token }}">
                   {% if member.profileinfo.profile_picture_url == 'na' or member.profileinfo.profile_picture_url == '' %}
                     <img src="{% static 'project_management/images/avatar.png' %}" alt="" class="members_team">
                   {% else %}
@@ -125,7 +126,7 @@
             {% endfor %}
             {% for member in team.members.all %}
               {% if member.profileinfo.office_id_no != user.profileinfo.office_id_no %}
-                <div class="circle-image hover-profile" uid="{{ member.id }}" token="{{ csrf_token }}">
+                <div class="hover-profile circle-image pp_st" ofc_id="{{ member.profileinfo.office_id_no }}" uid="{{ member.id }}" token="{{ csrf_token }}">
                   {% if member.profileinfo.profile_picture_url == 'na' or member.profileinfo.profile_picture_url == '' %}
                     <img src="{% static 'project_management/images/avatar.png' %}" alt="" class="members_team">
                   {% else %}
@@ -230,7 +231,7 @@
                 <!-- <div class="project-title">Team</div> -->
                 <div class="team-member">
                   {% for member in project.members.all %}
-                    <div class="circle-image">
+                    <div class="circle-image pp_st" ofc_id="{{ member.profileinfo.office_id_no }}">
                       <img
                         src="{{ member.profileinfo.profile_picture_url }}"
                         alt="PP" class="members_team">
@@ -304,7 +305,7 @@
                 <!-- <div class="project-title">Team</div> -->
                 <div class="team-member">
                   {% for member in project.members.all %}
-                    <div class="circle-image">
+                    <div class="circle-image pp_st" ofc_id="{{ member.profileinfo.office_id_no }}">
                       <img
                         src="{{ member.profileinfo.profile_picture_url }}"
                         alt="PP" class="members_team">
@@ -342,7 +343,7 @@
       <div class="mail-detail" style="display: none; width: 100%;">
         <div class="mail-detail-header">
           <div class="mail-detail-profile">
-            <div class="circle-image-rp">
+            <div class="circle-image-rp pp_st" ofc_id="{{ user.profileinfo.office_id_no }}">
               <img src="{{ user.profileinfo.profile_picture_url }}" alt=""
                  class="members_team_rp"/>
             </div>
@@ -480,9 +481,9 @@
                       <ul class="timeline-member">
                         <li class="timeline-item-member">
                           <div class="timeline-info-member"></div>
-                          <div class="timeline-marker-member">
+                          <div class="timeline-marker-member pp_st" ofc_id="{{ user.profileinfo.office_id_no }}">
                             <img src="{{ user.profileinfo.profile_picture_url }}"
-                                 alt="" class="members">
+                                 alt="" class="members>
                           </div>
                           <div style="text-align: justify">
                             <p class="justify-align-text" style="font-size: 15px;">Nullam vel sem. Nullam vel sem.
@@ -1470,12 +1471,39 @@
     }
   });
 </script>
+<script src="{% static 'project_management/js/moment.js' %}"></script>
+<script src="{% static 'project_management/js/moment-timezone-with-data.js' %}"></script>
+<script src="{% static 'project_management/js/user_online_status.js' %}"></script>
 <script type="text/javascript">
     $(window).on('load', function () {
         setTimeout(function () {
             $('.loader_div').hide();
         }, 1500);
     });
+    const interval = setInterval(function () {
+      let c_time = new Date();
+      // console.log(moment(c_time).tz('UTC').format('YYYY-MM-DD HH:mm:ss.SSS[tz]'));
+      $.ajax({
+        url: "ajax/ajax_set_active_time/",
+        method: 'POST',
+        data: {
+          "id": '{{ user.profileinfo.office_id_no }}',
+          "time": moment(c_time).tz('UTC').format('YYYY-MM-DD HH:mm:ss.SSS')
+        },
+        headers: {'X-CSRFToken': '{{ csrf_token }}'},
+        success: function (response) {
+          // console.log(response);
+          // setup_timeline(proj_id, proj_req_url, token);
+          // console.log(e.value);
+        },
+        error: function (error) {
+          console.log(error);
+          console.log("error");
+        }
+      });
+      get_online_stat();
+    }, 5000);
+    get_online_stat();
 </script>
 <script src="{% static 'project_management/js/project_selection.js' %}"></script>
 

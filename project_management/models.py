@@ -117,6 +117,7 @@ class WeeklyUpdate(models.Model):
     project = models.ForeignKey(ProjectInfo, on_delete=models.CASCADE, null=True)
     creator = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     creator_pp_url = models.CharField(max_length=200, default='', null=True)
+    creator_ofc_id = models.CharField(max_length=10, default='', null=True)
     # type = models.CharField(max_length=100, choices=update_type, default='this_week')
     description_this_week = models.TextField(max_length=1000, default='', null=True)
     description_next_week = models.TextField(max_length=1000, default='', null=True)
