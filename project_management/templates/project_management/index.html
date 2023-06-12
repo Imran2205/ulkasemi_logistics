@@ -153,6 +153,7 @@
       <div class="search-bar">
         <input type="text" placeholder="Search...">
       </div>
+
       <div class="inbox-calendar">
         <input type="checkbox" class="inbox-calendar-checkbox">
         <div class="toggle-page">
@@ -180,6 +181,16 @@
     </div>
     <div class="main-container">
       <div class="inbox-container">
+        <!--<div>
+          <div class="form-outline" style="margin-left: 15px; margin-top: 5px;">
+            <label class="form-select-label" for="status_query">Status:</label>
+            <select class="form-select-input" id="status_query" name="status_query">
+              {% for status in statuses %}
+                <option value="{{ status.name }}">{{ status.name|title }}</option>
+              {% endfor %}
+            </select>
+          </div>
+        </div>-->
         <div class="inbox">
           <!--          <div class="msg msg-department anim-y">-->
           <!--            Marketing-->

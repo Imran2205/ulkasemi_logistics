@@ -173,22 +173,29 @@ def ajax_create_project(request):
         # )
 
         try:
+            search_value = ""
             instance = ProjectInfo()
             instance.name = project_name
+            search_value = search_value + project_name
             instance.description = project_description
+            search_value = search_value + project_description
             instance.progress = 0
             instance.save()
 
             try:
                 instance.vendor = Vendor.objects.get(name=vendor)
+                search_value = search_value + " " + vendor
             except:
                 pass
             instance.start_date = parse_date(start_date)
             instance.deadline = parse_date(end_date)
             instance.created_by = request.user
+            search_value = search_value + " " + request.user.first_name + " " + request.user.last_name + " " + \
+                request.user.profileinfo.office_id_no
             instance.status = Status.objects.get(name="Pending")
 
             instance.project_id = f'{datetime.datetime.now().year}{str(instance.id).zfill(8)}'
+            search_value = search_value + " " + instance.project_id
             instance.save(update_fields=[
                 'project_id', 'vendor', 'start_date', 'deadline', 'entry_date', 'status', 'created_by'
             ])
@@ -216,37 +223,51 @@ def ajax_create_project(request):
                     )
 
                 instance.tags.add(tag_obj)
+                search_value = search_value + " " + tag_obj.name
 
             for member in members:
                 instance.members.add(ProfileInfo.objects.get(office_id_no=member.split('(')[-1].replace(')', '')).user)
             for dept in departments:
                 instance.departments.add(Department.objects.get(name=dept))
+                search_value = search_value + " " + dept
             for team in teams:
                 instance.teams.add(Team.objects.get(name=team))
+                search_value = search_value + " " + team
 
             try:
                 for v_s in vendor_supervisors:
                     instance.vendor_supervisors.add(VendorSupervisor.objects.filter(vendor=instance.vendor).get(
                         name=v_s.split('(')[0].strip()
                     ))
+                    search_value = search_value + " " + v_s.split('(')[0].strip()
             except:
                 pass
 
             for pm in pms:
                 instance.ulka_pm.add(ProfileInfo.objects.get(
                     office_id_no=pm.split('(')[-1].replace(')', '')).user)
+                search_value = search_value + " " + pm.split('(')[-1].replace(')', '')
 
             for manager in managers:
                 instance.ulka_manager.add(ProfileInfo.objects.get(
                     office_id_no=manager.split('(')[-1].replace(')', '')).user)
+                search_value = search_value + " " + manager.split('(')[-1].replace(')', '')
 
             for ack_per in ack_pers:
                 instance.ulka_ack_person.add(ProfileInfo.objects.get(
                     office_id_no=ack_per.split('(')[-1].replace(')', '')).user)
+                search_value = search_value + " " + ack_per.split('(')[-1].replace(')', '')
 
             for ulka_supervisor in ulka_supervisors:
                 instance.ulka_supervisors.add(ProfileInfo.objects.get(
                     office_id_no=ulka_supervisor.split('(')[-1].replace(')', '')).user)
+                search_value = search_value + " " + ulka_supervisor.split('(')[-1].replace(')', '')
+
+            instance.search_field = search_value
+
+            instance.save(
+                update_fields=['search_field']
+            )
 
         except Exception as e:
             return JsonResponse({"success": False, "error": e}, status=400)
@@ -463,6 +484,15 @@ def ajax_set_active_time(request):
 
 @login_required
 def ajax_get_active_time(request):
+    if request.method == "GET" and is_ajax(request=request):
+        ofc_id = request.GET.get('id', None)
+        time = ProfileInfo.objects.get(office_id_no=ofc_id).last_activity
+        return JsonResponse({"success": True, "time": time}, status=200)
+    return JsonResponse({"success": False}, status=200)
+
+
+@login_required
+def ajax_search_project(request):
     if request.method == "GET" and is_ajax(request=request):
         ofc_id = request.GET.get('id', None)
         time = ProfileInfo.objects.get(office_id_no=ofc_id).last_activity
