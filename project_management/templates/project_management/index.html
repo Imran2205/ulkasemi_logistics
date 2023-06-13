@@ -111,7 +111,7 @@
                 border: 3px solid {{ team.color }};
             }
           </style>
-          <div class="project-department team_color_{{ team.id }}">{{ team.name }}</div>
+          <div class="project-department team_color_{{ team.id }}">{{ team.name }} ({{ team.members.all.count }})</div>
           <div class="team-member"  style="padding-left: 20px;">
             {% for member in team.members.all %}
               {% if member.profileinfo.office_id_no == user.profileinfo.office_id_no %}
