@@ -110,8 +110,24 @@
             .team_color_{{ team.id }}::before {
                 border: 3px solid {{ team.color }};
             }
+            .numberCircle {
+              border-radius: 4px;
+              width: auto;
+              height: 12px;
+              padding: 1px 5px;
+
+              background: #7a7e9ddd;
+              border: 1px solid #7a7e9ddd;
+              color: #fff;
+              text-align: center;
+
+              font: 8px Arial, sans-serif;
+              font-weight: bold;
+              letter-spacing: 1px;
+              margin-top: 4px;
+            }
           </style>
-          <div class="project-department team_color_{{ team.id }}">{{ team.name }} ({{ team.members.all.count }})</div>
+          <div class="project-department team_color_{{ team.id }}">{{ team.name }} &nbsp; <div class="numberCircle">{{ team.members.all.count }}</div></div>
           <div class="team-member"  style="padding-left: 20px;">
             {% for member in team.members.all %}
               {% if member.profileinfo.office_id_no == user.profileinfo.office_id_no %}

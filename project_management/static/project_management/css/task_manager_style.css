@@ -1413,6 +1413,7 @@ img {
   font-size: 13px;
   font-weight: 600;
   margin-top: 14px;
+  display: flex;
 }
 .project-department:before {
   position: absolute;
