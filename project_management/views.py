@@ -494,7 +494,7 @@ def ajax_get_active_time(request):
 @login_required
 def ajax_search_project(request):
     if request.method == "GET" and is_ajax(request=request):
-        ofc_id = request.GET.get('id', None)
-        time = ProfileInfo.objects.get(office_id_no=ofc_id).last_activity
-        return JsonResponse({"success": True, "time": time}, status=200)
+        search_param = request.GET.get('search_param', None)
+        projects = ProjectInfo.objects.filter(search_field__icontains=search_param).values()
+        return JsonResponse({"success": True, "projects": list(projects)}, status=200)
     return JsonResponse({"success": False}, status=200)

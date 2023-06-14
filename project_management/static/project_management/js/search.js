@@ -3,14 +3,14 @@ function search(e) {
     url: "ajax/ajax_search_project/",
     method: 'GET',
     data: {
-      "proj_id": ""
+      "search_parameter": e.text
     },
     headers: {'X-CSRFToken': token},
     success: function (response) {
       // console.log(response);
       // setup_timeline(proj_id, proj_req_url, token);
       // console.log(e.value);
-      progress_set(proj_id, e.value);
+      console.log(response)
     },
     error: function (error) {
       console.log(error);
