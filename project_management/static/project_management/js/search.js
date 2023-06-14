@@ -1,11 +1,12 @@
 function search(e) {
+  console.log(e.value);
   $.ajax({
     url: "ajax/ajax_search_project/",
     method: 'GET',
     data: {
-      "search_parameter": e.text
+      "search_parameter": e.value
     },
-    headers: {'X-CSRFToken': token},
+    headers: {'X-CSRFToken': csrf_token},
     success: function (response) {
       // console.log(response);
       // setup_timeline(proj_id, proj_req_url, token);

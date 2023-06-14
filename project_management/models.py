@@ -103,7 +103,7 @@ class ProjectInfo(models.Model):
     ulka_pm = models.ManyToManyField(User, related_name='ulka_pm')
     ulka_ack_person = models.ManyToManyField(User, related_name='ulka_ack_person')
     progress = models.IntegerField()
-    search_field = models.CharField(max_length=2000, default='', null=True)
+    search_field = models.TextField(max_length=2000, default='', null=True)
 
     def __str__(self):
         return f'{self.name}'
