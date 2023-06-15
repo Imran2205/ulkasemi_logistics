@@ -86,7 +86,7 @@ function setup_timeline(proj_id, req_url, token) {
                 <li class="timeline-item-member">
                   <div class="timeline-info-member"></div>
                   <div class="timeline-marker-member">
-                    <div class="circle-image pp_st" ofc_id="${response["updates_others"][j]['creator_ofc_id']}">
+                    <div class="circle-image pp_st" ofc_id="${response["updates_others"][k]['creator_ofc_id']}">
                       <img src="${response["updates_others"][k]['creator_pp_url']}"
                          alt="" class="members_team">
                     </div>

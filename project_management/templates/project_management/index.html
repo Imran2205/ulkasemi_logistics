@@ -344,7 +344,6 @@
               <!---Project Status-->
               <div class="mail-members">
                 <div class="tag {{ project.status|lower|cut:' ' }} chatStatus" id="status_{{ project.id }}">{{ project.status }}</div>
-
                 <div class="progress-pie-chart" data-percent="{{ project.progress }}" id="progress_{{ project.id }}">
                   <div class="ppc-progress">
                     <div class="ppc-progress-fill" id="progres_fill_{{ project.id }}"></div>
@@ -360,7 +359,6 @@
                 </div>
               </div>
             </div>
-
           {% endfor %}
         </div>
         <div class="add-task">
