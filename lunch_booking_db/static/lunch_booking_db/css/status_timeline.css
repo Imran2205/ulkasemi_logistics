@@ -54,6 +54,10 @@
     color: #d01339;
 }
 
+.cb_un_booked{
+    color: #b36dfb;
+}
+
 .default_booked{
     color: var(--greyLight-2);
 }

@@ -321,10 +321,14 @@ function load_calender(){
           `)
         }
         else {
-          let id_b = `#cb_${i+1}`
+          let id_b = `#cb_${i+1}`;
+          let color_cls = 'un_booked';
+          if (usr_ofc_id === '191001' || usr_ofc_id === '210601') {
+            color_cls = 'cb_un_booked';
+          }
           $(id_b).html(`
             <div class="calender_bubble" >
-              <span class="calender_bubble_span un_booked">${var_date.getDate()}</span>
+              <span class="calender_bubble_span ${color_cls}">${var_date.getDate()}</span>
              </div>
              <span class="calender_day_span default_booked">${dow[var_date.getDay()]}</span>
           `)

@@ -16,6 +16,7 @@
 </head>
 <body>
   <script type="text/javascript">
+    let usr_ofc_id = '{{ user.profileinfo.office_id_no }}';
     fetch("{% url 'update_profile_picture' %}")
     .then((response) => response.json())
     .then((json) => console.log('update_profile_picture', json));
