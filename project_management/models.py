@@ -112,6 +112,17 @@ class ProjectInfo(models.Model):
         super().save(*args, **kwargs)
 
 
+class TaskInfo(models.Model):
+    name = models.CharField(max_length=255, default='', unique=True)
+    project = models.ForeignKey(ProjectInfo, on_delete=models.CASCADE, null=True)
+
+    def __str__(self):
+        return f'{self.project.name} {self.name}'
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+
+
 class WeeklyUpdate(models.Model):
     week = models.IntegerField()
     created_at = models.DateTimeField(default=None, null=True)
