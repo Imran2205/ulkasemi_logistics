@@ -12,7 +12,6 @@ function project_selection(target, proj_id, req_url, token) {
   var b = $('.submit-button');
   b.attr('p_id', proj_id);
   b.attr('p_req_url', req_url);
-
   setup_timeline(proj_id, req_url, token);
 }
 

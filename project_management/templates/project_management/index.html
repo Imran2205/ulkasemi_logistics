@@ -414,28 +414,27 @@
             Typekit.load({async: true});
         } catch (e) {
         }</script>
+
         <div class="mail-contents">
-          <div class="proj_stat_div">
-            {% for status in statuses %}
-              <a class="defult-btn btn_st" id="btn-{{ status.name }}" onclick="set_project_status('{{ status.name }}', '{{ csrf_token }}')">{{ status.name }}</a>
-            {% endfor %}
+          <div class="row">
+            <div class="col-md-6">
+              <div class="proj_stat_div">
+                {% for status in statuses %}
+                  <a class="defult-btn btn_st" id="btn-{{ status.name }}" onclick="set_project_status('{{ status.name }}', '{{ csrf_token }}')">{{ status.name }}</a>
+                {% endfor %}
+              </div>
+              <div class="mb-4">
+                <label for="project_progress" class="form-label">Progress</label>
+                <input type="range" class="form-range" min="0" max="100" step="1.0" value="0"
+                       id="project_progress" onchange="set_project_progress(this, '{{ csrf_token  }}')"
+                       oninput="this.nextElementSibling.value = this.value"
+                >
+                <output id="project_progress_value">0</output>
+              </div>
+            </div>
+            <div class="col-md-6">
 
-
-            <!--<a class="defult-green btn" href="#">Green Button</a>
-
-            <a class="defult-red btn" href="#">red Button</a>
-
-            <a class="defult-gray btn" href="#">gray Button</a>
-
-            <a class="defult-Purple btn" href="#">Purple Button</a>-->
-          </div>
-          <div class="mb-4">
-            <label for="project_progress" class="form-label">Progress</label>
-            <input type="range" class="form-range" min="0" max="100" step="1.0" value="0"
-                   id="project_progress" onchange="set_project_progress(this, '{{ csrf_token  }}')"
-                   oninput="this.nextElementSibling.value = this.value"
-            >
-            <output id="project_progress_value">0</output>
+            </div>
           </div>
 
           <div class="editor" style="margin-bottom: 30px; display: none;">
@@ -503,9 +502,9 @@
                           <div class="timeline-info-member"></div>
                           <div class="timeline-marker-member pp_st" ofc_id="{{ user.profileinfo.office_id_no }}">
                             <img src="{{ user.profileinfo.profile_picture_url }}"
-                                 alt="" class="members>
+                                 alt="" class="members">
                           </div>
-                          <div style="text-align: justify">
+                          <div style="text-align: justify;">
                             <p class="justify-align-text" style="font-size: 15px;">
                             </p>
                             <p style="font-size: 15px;">
@@ -607,28 +606,6 @@
             </div>
           </div>
         </div>
-        <!--                <div class="mail-textarea">-->
-        <!--                   -->
-        <!--                    <div class="textarea-icons">-->
-        <!--                        <div class="attach">-->
-        <!--                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"-->
-        <!--                                 fill="none"-->
-        <!--                                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"-->
-        <!--                                 class="feather feather-paperclip">-->
-        <!--                                <path-->
-        <!--                                        d="M21.44 11.05l-9.19 9.19a6 6 0 01-8.49-8.49l9.19-9.19a4 4 0 015.66 5.66l-9.2 9.19a2 2 0 01-2.83-2.83l8.49-8.48"/>-->
-        <!--                            </svg>-->
-        <!--                        </div>-->
-        <!--                        <div class="send">-->
-        <!--                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"-->
-        <!--                                 fill="none"-->
-        <!--                                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"-->
-        <!--                                 class="feather feather-send">-->
-        <!--                                <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>-->
-        <!--                            </svg>-->
-        <!--                        </div>-->
-        <!--                    </div>-->
-        <!--                </div>-->
       </div>
       <div class="calendar-container">
         <div class="calender-tab anim-y">
