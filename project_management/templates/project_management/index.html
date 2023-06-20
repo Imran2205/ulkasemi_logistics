@@ -216,7 +216,7 @@
           <!--            </svg>-->
           <!--          </div>-->
           {% for project in projects_1 %}
-            <div class="msg anim-y" onclick="project_selection(this, {{ project.id }}, '{% url "get_proj" pk=0 %}', '{{ csrf_token }}')">
+            <div class="msg anim-y" onclick="project_selection(this, {{ project.id }}, '{% url "get_proj" pk=project.id %}', '{{ csrf_token }}')">
               <!-- <input type="checkbox" name="msg" id="mail1" class="mail-choice" checked> -->
               <!--                        <label for="mail1"></label>-->
               <div class="msg-content">
@@ -286,11 +286,10 @@
                 </div>
               </div>
             </div>
-
           {% endfor %}
 
           {% for project in project_rest %}
-            <div class="msg anim-y" onclick="project_selection(this, {{ project.id }}, '{% url "get_proj" pk=0 %}', '{{ csrf_token }}')">
+            <div class="msg anim-y" onclick="project_selection(this, {{ project.id }}, '{% url "get_proj" pk=project.id %}', '{{ csrf_token }}')">
               <!-- <input type="checkbox" name="msg" id="mail1" class="mail-choice" checked> -->
               <!--                        <label for="mail1"></label>-->
               <div class="msg-content">

@@ -495,10 +495,11 @@ def ajax_get_active_time(request):
 def ajax_search_project(request):
     if request.method == "GET" and is_ajax(request=request):
         search_param = request.GET.get('search_parameter', None)
-        projects = ProjectInfo.objects.filter(search_field__icontains=search_param)
+        projects = ProjectInfo.objects.filter(search_field__icontains=search_param).filter(members=request.user)
         projects_list = []
         for proj in projects:
             proj_dict = {
+                'id': proj.id,
                 'name': proj.name,
                 'started': proj.start_date,
                 'ends': proj.deadline,
@@ -506,7 +507,7 @@ def ajax_search_project(request):
                 'status': proj.status.name,
                 'progress': proj.progress,
                 'tags': [x.name for x in proj.tags.all()],
-                'members': [x.profileinfo.profile_picture_url for x in proj.members.all()]
+                'members': [{'pp': x.profileinfo.profile_picture_url, 'id': x.profileinfo.office_id_no} for x in proj.members.all()]
             }
             projects_list.append(proj_dict)
         return JsonResponse(data={"success": True, "projects": projects_list}, status=200, safe=False)
