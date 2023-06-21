@@ -1179,6 +1179,13 @@ img {
   overflow: auto;
 }
 
+.overflow_scroll {
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  overflow-y: auto;
+}
+
  /* Width and height of the scrollbar track */
   .user-profile-area::-webkit-scrollbar {
     width: 4px;
@@ -1760,6 +1767,7 @@ img {
 }
 .mail-contents {
   padding: 30px;
+  overflow-y: hidden;
 }
 .mail-contents-subject {
   display: flex;
@@ -2337,3 +2345,34 @@ img {
 .individual-project-percentage{
   display : flex;
 }
+
+.scroll_custom {
+
+}
+
+ .scroll_custom::-webkit-scrollbar {
+    width: 4px;
+    height: 2px;
+
+
+  }
+
+  /* Color of the scrollbar track */
+  .scroll_custom::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    /* height: 200px; */
+    /*margin-bottom: 25px;*/
+    /*margin-top: 25px;*/
+    /*margin-right: -25px;*/
+
+  }
+
+  /* Color of the scrollbar thumb */
+  .scroll_custom::-webkit-scrollbar-thumb {
+    background: #888;
+  }
+
+  /* On hover, color of the scrollbar thumb */
+  .scroll_custom::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
