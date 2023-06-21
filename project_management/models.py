@@ -170,7 +170,7 @@ class WeeklyUpdateTask(models.Model):
     description_summary = models.TextField(max_length=1000, default='', null=True)
 
     def __str__(self):
-        return f'week-{self.week} project-{self.task.name} Task-{self.task.project.name} user-{self.creator.profileinfo.office_id_no}'
+        return f'week-{self.week} project-{self.task.name} Task-{self.task.project.name} user-{self.task_creator.profileinfo.office_id_no}'
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
