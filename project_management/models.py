@@ -114,7 +114,20 @@ class ProjectInfo(models.Model):
 
 class TaskInfo(models.Model):
     name = models.CharField(max_length=255, default='', unique=True)
+    task_id = models.CharField(max_length=255, unique=True, default='', null=True)
+    details = models.TextField(max_length=1000, default='')
     project = models.ForeignKey(ProjectInfo, on_delete=models.CASCADE, null=True)
+    created_by = models.ForeignKey(User, on_delete=models.CASCADE, null=True, related_name='created_by')
+    start_date = models.DateField(default=None, null=True)
+    deadline = models.DateField(default=None, null=True)
+    entry_date = models.DateField(default=datetime.date.today, null=True)
+    last_updated = models.DateTimeField(default=datetime.datetime.now, null=True)
+    assigned_by = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    assigned_to = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    percent_of_proj = models.IntegerField()
+    progress = models.IntegerField()
+    tags = models.ManyToManyField(Tag)
+    status = models.ForeignKey(Status, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
         return f'{self.project.name} {self.name}'
@@ -138,6 +151,26 @@ class WeeklyUpdate(models.Model):
 
     def __str__(self):
         return f'week-{self.week} project-{self.project.name} user-{self.creator.profileinfo.office_id_no}'
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+
+
+class WeeklyUpdateTask(models.Model):
+    week = models.IntegerField()
+    created_at = models.DateTimeField(default=None, null=True)
+    task = models.ForeignKey(TaskInfo, on_delete=models.CASCADE, null=True)
+    creator = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    creator_pp_url = models.CharField(max_length=200, default='', null=True)
+    creator_ofc_id = models.CharField(max_length=10, default='', null=True)
+    # type = models.CharField(max_length=100, choices=update_type, default='this_week')
+    description_this_week = models.TextField(max_length=1000, default='', null=True)
+    description_next_week = models.TextField(max_length=1000, default='', null=True)
+    description_comment = models.TextField(max_length=1000, default='', null=True)
+    description_summary = models.TextField(max_length=1000, default='', null=True)
+
+    def __str__(self):
+        return f'week-{self.week} project-{self.task.name} Task-{self.task.project.name} user-{self.creator.profileinfo.office_id_no}'
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
