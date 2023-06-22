@@ -112,8 +112,16 @@ class ProjectInfo(models.Model):
         super().save(*args, **kwargs)
 
 
+def user_directory_path(instance, filename):
+    path_of_file = f'files/task_files/{instance.project.name}/{instance.name}/' \
+                   f'{instance.assigned_by.username}_{instance.assigned_by.profileinfo.office_id_no}/' \
+                   f'{instance.id}/{instance.submitted_by.username}/' + \
+                   f'supp_mat_{instance.name}_{instance.project.id}_{instance.id}.{filename.strip().split(".")[-1]}'
+    return path_of_file
+
+
 class TaskInfo(models.Model):
-    name = models.CharField(max_length=255, default='', unique=True)
+    name = models.CharField(max_length=255, default='')
     task_id = models.CharField(max_length=255, unique=True, default='', null=True)
     details = models.TextField(max_length=1000, default='')
     project = models.ForeignKey(ProjectInfo, on_delete=models.CASCADE, null=True)
@@ -123,11 +131,12 @@ class TaskInfo(models.Model):
     entry_date = models.DateField(default=datetime.date.today, null=True)
     last_updated = models.DateTimeField(default=datetime.datetime.now, null=True)
     assigned_by = models.ForeignKey(User, on_delete=models.CASCADE, null=True, related_name='assigned_by')
-    assigned_to = models.ForeignKey(User, on_delete=models.CASCADE, null=True, related_name='assigned_to')
+    assigned_to = models.ManyToManyField(User, related_name='assigned_to')
     percent_of_proj = models.IntegerField()
     progress = models.IntegerField()
     tags = models.ManyToManyField(Tag)
     status = models.ForeignKey(Status, on_delete=models.CASCADE, null=True)
+    supplementary_file = models.FileField(upload_to=user_directory_path, null=True, default='')
 
     def __str__(self):
         return f'{self.project.name} {self.name}'

@@ -1628,7 +1628,7 @@ img {
 }
 .inbox-container {
   border-right: 1px solid var(--border-color);
-  width: 420px;
+  width: 350px;
   display: flex;
   flex-direction: column;
   overflow: auto;

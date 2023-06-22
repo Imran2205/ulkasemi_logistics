@@ -361,7 +361,7 @@
           {% endfor %}
         </div>
         <div class="add-task">
-          <button class="add-button">Add task</button>
+          <button class="add-button">Add Project</button>
         </div>
       </div>
       <div class="mail-detail" style="display: none; width: 100%;">
@@ -417,7 +417,7 @@
 
         <div class="mail-contents">
           <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-5">
               <div class="proj_stat_div">
                 {% for status in statuses %}
                   <a class="defult-btn btn_st" id="btn-{{ status.name }}" onclick="set_project_status('{{ status.name }}', '{{ csrf_token }}')">{{ status.name }}</a>
@@ -432,14 +432,48 @@
                 <output id="project_progress_value">0</output>
               </div>
             </div>
-            <div class="col-md-8">
+            <div class="col-md-7">
 
             </div>
           </div>
           <div class="row">
-            <div class="col-md-4 overflow_scroll scroll_custom" style="height: 60vh">
+            <div class="col-md-5 overflow_scroll scroll_custom" style="height: 60vh">
+              <div style="width: 100%; background-color: transparent">
+                <div style="text-align: center; margin-top: 8px;">
+                  <a id="add_task_btn" style="cursor: pointer; padding: 5px 20px; background-color: #625be8; border-radius: 15px; color: whitesmoke; font-size: 13px;">Add Task</a>
+                </div>
+                <div id="task_form_div" style="display: none;">
+                  <form id="task_create_form" action="/create_task" method="post">
+                    <div class="form-group">
+                      <label for="task_name" style="font-size: 12px">Task Name</label>
+                      <input type="text" class="form-control" id="task_name" name="task_name" placeholder="task name" style="height: 22px; font-size: 12px;">
+                    </div>
+                    <div class="form-group">
+                      <label for="task_description" style="font-size: 12px">Task Details</label>
+                      <textarea class="form-control" id="task_description" name="task_description" rows="3" style="font-size: 12px;"></textarea>
+                    </div>
+                    <div class="form-group">
+                      <label for="task_members" style="font-size: 12px">Assigned Persons</label>
+                      <div style="font-size: 12px;">
+                        <select id="task_members" class="form-control task_member_selection" name="task_members" multiple="multiple" style="width: 100%"></select>
+                      </div>
+                    </div>
+                    <div class="form-group" style="margin-top: 2px;">
+                      <label for="task_dead_line" style="font-size: 12px">Task Deadline</label>
+                      <input id="task_dead_line" class="form-control" name="task_dead_line" type="date" style="font-size: 12px; height: 25px;"/>
+                    </div>
+                    <div class="form-group">
+                      <label for="supp_doc" style="font-size: 12px;">Supplementary Document</label>
+                      <input class="form-control form-control-sm" id="supp_doc" name="supp_doc" type="file" style="font-size: 12px;">
+                    </div>
+                    <div class="form-outline mb-1" style="margin-top: 12px; text-align: center">
+                      <button type="submit" class="btn btn-primary btn-block mb-4" style="width: 80px; height: 30px; font-size: 12px;">Create</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
             </div>
-            <div class="col-md-8 overflow_scroll scroll_custom" style="height: 60vh">
+            <div class="col-md-7 overflow_scroll scroll_custom" style="height: 60vh">
               <div class="editor" style="margin-bottom: 30px; display: none;">
                 <div class="toolbar">
                   <input height="16px"
@@ -1031,21 +1065,20 @@
         maximumSelectionLength: 10,
 
         placeholder: "Select or type keywords",
-        //minimumInputLength: 1,
-        //ajax: {
-        //   url: "you url to data",
-        //   dataType: 'json',
-        //  quietMillis: 250,
-        //  data: function (term, page) {
-        //     return {
-        //         q: term, // search term
-        //    };
-        //  },
-        //  results: function (data, page) {
-        //  return { results: data.items };
-        //   },
-        //   cache: true
-        // }
+    });
+</script>
+<script>
+    $('.task_member_selection').select2({
+        data: [
+            {% for member in members  %}
+                "{{ member.first_name }} {{ member.last_name }} ({{ member.profileinfo.office_id_no }})",
+            {% endfor %}
+
+        ],
+
+        maximumSelectionLength: 10,
+
+        placeholder: "Select or type keywords",
     });
 </script>
 <script>
@@ -1428,6 +1461,39 @@
     }
     else {
       alert("Please Fill up all the fields.");
+    }
+  });
+</script>
+<script type="text/javascript">
+  var frm = $('#task_create_form');
+
+  frm.submit(function (e) {
+
+    e.preventDefault();
+    e.stopPropagation();
+    var token = '{{ csrf_token }}';
+
+    let frm_data = {
+      'task_name': '',
+      'task_description': '',
+      'task_members': '',
+      'task_dead_line': '',
+      'supp_doc': ''
+    };
+
+    console.log(frm, frm.serialize());
+
+    for (let kk = 0; kk < frm.serialize().split('&').length; kk++) {
+      frm_data[frm.serialize().split('&')[kk].split('=')[0]] = frm.serialize().split('&')[kk].split('=')[1];
+    }
+
+    let data_ok = true;
+    console.log(frm_data);
+    if (
+      frm_data['task_name'] === '' || frm_data['task_description'] === '' ||
+      frm_data['assigned_to'] === '' || frm_data['deadline'] === ''
+    ) {
+      data_ok = false;
     }
   });
 </script>

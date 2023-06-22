@@ -263,3 +263,17 @@ function set_project_status(status, token){
     }
   });
 }
+
+$('#add_task_btn').click(function () {
+  let frm_div = $('#task_form_div');
+  let frm_btn = $('#add_task_btn');
+  if (frm_div.is(":visible")) {
+    frm_div.hide("slow");
+    frm_btn.text('Add Task');
+    frm_btn.css('background-color', '#625be8');
+  } else {
+    frm_div.show("slow");
+    frm_btn.text('Cancel');
+    frm_btn.css('background-color', 'darkred');
+  }
+});
