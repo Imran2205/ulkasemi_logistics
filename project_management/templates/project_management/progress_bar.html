@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    .progress-bar {
+      position: relative;
+      height: 20px;
+      background-color: #f9f9f9;
+    }
+
+    .progress-content {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 75%;
+      height: 100%;
+      background: linear-gradient(60deg, #ff7f00aa 25%, #f8c555aa 25%, #f8c555aa 50%, #ff7f00aa 50%, #ff7f00aa 75%, #f8c555aa 75%, #f8c555aa);
+      background-size: 27px 27px;
+      animation: progress-stripes 2s linear infinite;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 10px;
+      font-weight: bold;
+    }
+
+    @keyframes progress-stripes {
+      0% {
+        background-position: 0 0;
+      }
+      100% {
+        background-position: 54px 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="progress-bar">
+    <div class="progress-content">
+      <span>Project in Progress</span>
+      <span>75% Complete</span>
+    </div>
+  </div>
+</body>
+</html>
