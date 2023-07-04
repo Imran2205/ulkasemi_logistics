@@ -21,6 +21,7 @@ function setup_timeline(proj_id, req_url, token) {
     method: 'GET',
     headers: {'X-CSRFToken': token},
     success: function (response) {
+      // console.log(response["updates_this_week"]);
       let timeline_data = ``
       for (var j=0; j<response["updates_this_week"].length; j++){
         let this_week_html = `
@@ -116,8 +117,8 @@ function setup_timeline(proj_id, req_url, token) {
         var currentDate = new Date();
         var year = new Date(currentDate.getFullYear(), 0, 1);
         var days = Math.floor((currentDate - year) / (24 * 60 * 60 * 1000));
-        var week = Math.trunc((currentDate.getDay() + 1 + days) / 7);
-
+        var week = Math.ceil((currentDate.getDay() + 1 + days) / 7);
+        // console.log(response["updates_this_week"][0]['week'], week);
         if (response["updates_this_week"][0]['week'] === week) {
           for (var i = 0; i < response["updates_this_week"].length; i++) {
             document.getElementById('editorContent').innerHTML = response["updates_this_week"][i]['description_this_week'];
