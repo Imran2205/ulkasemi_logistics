@@ -1,0 +1,51 @@
+.progress-bar-c {
+  position: relative;
+  height: fit-content;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  margin-bottom: 8px;
+}
+
+.progress-content-c-selected {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 75%;
+  height: 100%;
+  background: linear-gradient(60deg, #ff7f0088 19.5%, #f8c55588 19.5%, #f8c55588 50%, #ff7f0088 50%, #ff7f0088 83%, #f8c55588 83%, #f8c55588);
+  background-size: 200px 200px;
+  animation: progress-stripes-c 12s linear infinite;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-weight: bold;
+  border-radius: 10px;
+}
+
+.progress-content-c-not-selected {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 75%;
+  height: 100%;
+  background: linear-gradient(60deg, #ff7f0055 19.5%, #f8c55555 19.5%, #f8c55555 50%, #ff7f0055 50%, #ff7f0055 83%, #f8c55555 83%, #f8c55555);
+  background-size: 200px 200px;
+  animation: progress-stripes-c 12s linear infinite;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 10px;
+  font-weight: bold;
+  border-radius: 10px;
+}
+
+@keyframes progress-stripes-c {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: -400px 0;
+  }
+}
