@@ -422,7 +422,7 @@
               <div>
                 <div class="proj_stat_div">
                   {% for status in statuses %}
-                    <a class="defult-btn btn_st" id="btn-{{ status.name }}" onclick="set_project_status('{{ status.name }}', '{{ csrf_token }}')">{{ status.name }}</a>
+                    <a class="defult-btn btn_st" id="btn-{{ status.name }}" onclick="set_project_status(this, '{{ status.name }}', '{{ csrf_token }}')">{{ status.name }}</a>
                   {% endfor %}
                 </div>
                 <div class="mb-4">
@@ -759,7 +759,7 @@
               <div>
                 <div class="proj_stat_div">
                   {% for status in statuses %}
-                    <a class="defult-btn btn_st" id="btn-{{ status.name }}" onclick="set_project_status('{{ status.name }}', '{{ csrf_token }}')">{{ status.name }}</a>
+                    <a class="defult-btn btn_st" id="btn-{{ status.name }}" onclick="set_project_status(this, '{{ status.name }}', '{{ csrf_token }}')">{{ status.name }}</a>
                   {% endfor %}
                 </div>
                 <div class="mb-4">

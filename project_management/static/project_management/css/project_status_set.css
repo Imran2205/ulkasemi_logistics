@@ -10,18 +10,20 @@
 
 .proj_stat_div .btn_st{
     padding: 3px 5px;
-    color: #F5F5F5;
     display: inline-block;
     margin: 3px;-webkit-transition: box-shadow 0.2s ease;-moz-transition: box-shadow 0.05s ease;
     transition: all 0.2s ease;
     font-size: 14px;
     width: 100px;
+    border-radius: 8px;
+    cursor: pointer;
 }
-.proj_stat_div .btn_st:hover{box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); opacity:0.9}
-.proj_stat_div .btn_st:active {box-shadow: none; }
+/*.proj_stat_div .btn_st:hover{box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); opacity:0.9}*/
+/*.proj_stat_div .btn_st:active {box-shadow: none; }*/
 
 .proj_stat_div  .defult-btn{
-    background-color: #2196F3;
+    background-color: #f5f5f5;
+    color: #88888877;
 }
 .proj_stat_div .defult-green{
     background-color: #4CAF50;

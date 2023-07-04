@@ -23,23 +23,23 @@
   align-items: center;
   min-width: 80px;
 }
-.tag.ongoing {
+.ongoing {
   background-color: var(--tag-color-one);
   color: var(--tag-color-text-one);
 }
-.tag.completed {
+.completed {
   background-color: var(--tag-color-two);
   color: var(--tag-color-text-two);
 }
-.tag.onreview {
+.onreview {
   background-color: var(--tag-color-three);
   color: var(--tag-color-text-three);
 }
-.tag.pending {
+.pending {
   background-color: var(--tag-color-four);
   color: var(--tag-color-text-four);
 }
-.tag.onhold {
+.onhold {
   background-color: var(--tag-color-five);
   color: var(--tag-color-text-five);
 }
