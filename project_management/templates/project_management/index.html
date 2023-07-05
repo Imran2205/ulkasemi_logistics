@@ -1778,22 +1778,30 @@
     let token = '{{ csrf_token }}';
     let form_data = new FormData();
     let proj_id = document.getElementById('submit-button').getAttribute('p_id');
-    let created_by_ofc_id = "{{ user.profileinfo.office_id_no }}";
+    let creators_ofc_id = "{{ user.profileinfo.office_id_no }}";
 
     let frm_data = {
       'task_name': '',
       'task_description': '',
-      'task_members': '',
+      'task_members': [],
       'task_dead_line': '',
-      'supp_doc': ''
+      'supp_doc': '',
+      'proj_id': proj_id,
+      'ofc_id': creators_ofc_id
     };
 
     // console.log(frm, frm.serialize());
 
     for (let kk = 0; kk < frm.serialize().split('&').length; kk++) {
-      frm_data[frm.serialize().split('&')[kk].split('=')[0]] = frm.serialize().split('&')[kk].split('=')[1].replaceAll('%20', ' ');
+      if (frm.serialize().split('&')[kk].split('=')[0] === 'task_members') {
+        frm_data[frm.serialize().split('&')[kk].split('=')[0]].push(frm.serialize().split('&')[kk].split('=')[1].replaceAll('%20', ' '));
+      }
+      else {
+        frm_data[frm.serialize().split('&')[kk].split('=')[0]] = frm.serialize().split('&')[kk].split('=')[1].replaceAll('%20', ' ');
+      }
       form_data.append(frm.serialize().split('&')[kk].split('=')[0] , frm.serialize().split('&')[kk].split('=')[1].replaceAll('%20', ' '));
     }
+
     frm_data['supp_doc'] = document.getElementById('supp_doc').files[0];
     form_data.append('supp_doc', document.getElementById('supp_doc').files[0]);
 

@@ -518,5 +518,10 @@ def ajax_create_task(request):
     if request.method == "POST":
         supp_doc = request.FILES.getlist('supp_doc', None)
         task_name = request.POST.get('task_name', None)
-        print(supp_doc, task_name)
+        task_description = request.POST.get('task_description', None)
+        task_members = request.POST.getlist('task_members', None)
+        task_dead_line = request.POST.get('tasktask_dead_line_name', None)
+        proj_id = request.POST.get('proj_id', None)
+        ofc_id = request.POST.get('ofc_id', None)
+        print(supp_doc, task_name, task_members)
         return JsonResponse({"success": False}, status=200)
