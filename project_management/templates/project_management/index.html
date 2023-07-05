@@ -752,6 +752,7 @@
                       </div>-->
                     </div>
                   </div>
+                  <div style="height: 150px;"></div>
                 </div>
               </div>
             </div>
@@ -1774,7 +1775,10 @@
 
     e.preventDefault();
     e.stopPropagation();
-    var token = '{{ csrf_token }}';
+    let token = '{{ csrf_token }}';
+    let form_data = new FormData();
+    let proj_id = document.getElementById('submit-button').getAttribute('p_id');
+    let created_by_ofc_id = "{{ user.profileinfo.office_id_no }}";
 
     let frm_data = {
       'task_name': '',
@@ -1784,11 +1788,14 @@
       'supp_doc': ''
     };
 
-    console.log(frm, frm.serialize());
+    // console.log(frm, frm.serialize());
 
     for (let kk = 0; kk < frm.serialize().split('&').length; kk++) {
-      frm_data[frm.serialize().split('&')[kk].split('=')[0]] = frm.serialize().split('&')[kk].split('=')[1];
+      frm_data[frm.serialize().split('&')[kk].split('=')[0]] = frm.serialize().split('&')[kk].split('=')[1].replaceAll('%20', ' ');
+      form_data.append(frm.serialize().split('&')[kk].split('=')[0] , frm.serialize().split('&')[kk].split('=')[1].replaceAll('%20', ' '));
     }
+    frm_data['supp_doc'] = document.getElementById('supp_doc').files[0];
+    form_data.append('supp_doc', document.getElementById('supp_doc').files[0]);
 
     let data_ok = true;
     console.log(frm_data);
@@ -1797,6 +1804,39 @@
       frm_data['assigned_to'] === '' || frm_data['deadline'] === ''
     ) {
       data_ok = false;
+    }
+    let file_size_allow = 1024 * 1024 * 5;
+    if (frm_data['supp_doc'].size > 5000000) {
+      data_ok = false;
+      console.log("file size must be less than 5mb");
+    }
+    if (data_ok) {
+      $.ajax({
+        url: "{% url 'create_task' %}",
+        dataType: 'json',
+        cache: false,
+        contentType: false,
+        processData: false,
+        method: 'POST',
+        data: form_data,
+        headers: {'X-CSRFToken': token},
+        success: function (response) {
+          alert("Successfully created your task");
+          // location.href = "{% url 'project_management' %}";
+        },
+        error: function (error) {
+          console.log(error);
+          console.log("error");
+        }
+      });
+    }
+    else {
+      if (frm_data['supp_doc'].size > 5000000) {
+        alert("file size must be less than 5mb.");
+      }
+      else {
+        alert("Please Fill up all the fields.");
+      }
     }
   });
 </script>

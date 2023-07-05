@@ -147,12 +147,12 @@ function setup_timeline(proj_id, req_url, token) {
       }
       $(".btn_st").each(function( index ) {
         if ($(this).text() === response['proj_status']) {
-          // $(this).removeClass('defult-btn');
-          // $(this).addClass('defult-green');
+          $(this).removeClass('defult-btn');
+          $(this).addClass('defult-green');
         }
         else {
-          // $(this).removeClass('defult-green');
-          // $(this).addClass('defult-btn');
+          $(this).removeClass('defult-green');
+          $(this).addClass('defult-btn');
         }
       });
       $("#project_progress").val(response['proj_progress']);
@@ -230,7 +230,7 @@ function set_project_progress(e, token) {
 }
 
 function set_project_status(e_dom, status, token){
-  let e = $(e_dom);
+  // let e = $(e_dom);
   let proj_id = document.getElementById('submit-button').getAttribute('p_id');
   var proj_req_url = document.getElementById('submit-button').getAttribute('p_req_url');
 
@@ -253,13 +253,13 @@ function set_project_status(e_dom, status, token){
         if (! keep_class.includes(item)) {
           console.log("removing..", item);
           status_show.removeClass(item);
-          e.removeClass(item);
+          // e.removeClass(item);
         }
       });
       let css_class = status.replaceAll(' ', '').toLowerCase();
       console.log("adding..", css_class);
       status_show.addClass(css_class);
-      e.addClass(css_class);
+      // e.addClass(css_class);
     },
     error: function (error) {
       console.log(error);

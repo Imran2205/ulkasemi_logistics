@@ -512,3 +512,11 @@ def ajax_search_project(request):
             projects_list.append(proj_dict)
         return JsonResponse(data={"success": True, "projects": projects_list}, status=200, safe=False)
     return JsonResponse({"success": False}, status=200)
+
+
+def ajax_create_task(request):
+    if request.method == "POST":
+        supp_doc = request.FILES.getlist('supp_doc', None)
+        task_name = request.POST.get('task_name', None)
+        print(supp_doc, task_name)
+        return JsonResponse({"success": False}, status=200)
