@@ -10,9 +10,11 @@ from django.contrib.auth.models import User
 from django.core import serializers
 from .models import (
     Tag, Team, VendorSupervisor,
-    Vendor, ProjectInfo, Status, WeeklyUpdate
+    Vendor, ProjectInfo, Status, WeeklyUpdate,
+    TaskInfo, TaskSuppFile
 )
 from home.models import Role
+from .forms import SuppFileUploadForm
 
 
 color_dict = {
@@ -516,12 +518,43 @@ def ajax_search_project(request):
 
 def ajax_create_task(request):
     if request.method == "POST":
-        supp_doc = request.FILES.getlist('supp_doc', None)
+        # supp_doc = request.FILES.getlist('supplementary_file', None)
+        form = SuppFileUploadForm(request.POST, request.FILES)
         task_name = request.POST.get('task_name', None)
         task_description = request.POST.get('task_description', None)
         task_members = request.POST.getlist('task_members', None)
-        task_dead_line = request.POST.get('tasktask_dead_line_name', None)
-        proj_id = request.POST.get('proj_id', None)
-        ofc_id = request.POST.get('ofc_id', None)
-        print(supp_doc, task_name, task_members)
+        task_dead_line = request.POST.get('task_dead_line', None)
+        proj_id = int(request.POST.get('proj_id', None))
+        ofc_id = request.POST.get('creators_ofc_id', None)
+        instance = TaskInfo()
+        instance.name = task_name
+        instance.details = task_description
+        instance.percent_of_proj = 5
+        instance.progress = 0
+        instance.save()
+        # print(type(task_dead_line), type(parse_date(task_dead_line)))
+        instance.deadline = parse_date(task_dead_line)
+        # instance.start_date = datetime.date.today
+        # instance.entry_date = datetime.date.today
+        instance.last_updated = datetime.datetime.now()
+        instance.task_created_by = ProfileInfo.objects.get(office_id_no=ofc_id).user
+        instance.assigned_by = ProfileInfo.objects.get(office_id_no=ofc_id).user
+        instance.project = ProjectInfo.objects.get(id=proj_id)
+        instance.task_id = f'{datetime.datetime.now().year}{str(instance.id).zfill(8)}'
+        instance.save(
+            update_fields=[
+                'deadline', 'start_date', 'entry_date', 'last_updated',
+                'task_created_by', 'project', 'task_id'
+            ]
+        )
+
+        for member in task_members:
+            instance.assigned_to.add(ProfileInfo.objects.get(office_id_no=member.split('(')[-1].replace(')', '')).user)
+
+        if form.is_valid():
+            ins = TaskSuppFile()
+            ins.task = instance
+            ins.supplementary_file = form.cleaned_data['supplementary_file']
+            ins.save()
+
         return JsonResponse({"success": False}, status=200)

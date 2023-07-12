@@ -1785,9 +1785,9 @@
       'task_description': '',
       'task_members': [],
       'task_dead_line': '',
-      'supp_doc': '',
+      'supplementary_file': '',
       'proj_id': proj_id,
-      'ofc_id': creators_ofc_id
+      'creators_ofc_id': creators_ofc_id
     };
 
     // console.log(frm, frm.serialize());
@@ -1802,8 +1802,10 @@
       form_data.append(frm.serialize().split('&')[kk].split('=')[0] , frm.serialize().split('&')[kk].split('=')[1].replaceAll('%20', ' '));
     }
 
-    frm_data['supp_doc'] = document.getElementById('supp_doc').files[0];
-    form_data.append('supp_doc', document.getElementById('supp_doc').files[0]);
+    frm_data['supplementary_file'] = document.getElementById('supp_doc').files[0];
+    form_data.append('supplementary_file', document.getElementById('supp_doc').files[0]);
+    form_data.append('proj_id', proj_id);
+    form_data.append('creators_ofc_id', creators_ofc_id);
 
     let data_ok = true;
     console.log(frm_data);
@@ -1814,7 +1816,7 @@
       data_ok = false;
     }
     let file_size_allow = 1024 * 1024 * 5;
-    if (frm_data['supp_doc'].size > 5000000) {
+    if (frm_data['supplementary_file'].size > 5000000) {
       data_ok = false;
       console.log("file size must be less than 5mb");
     }
