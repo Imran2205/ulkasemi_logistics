@@ -1832,7 +1832,7 @@
         headers: {'X-CSRFToken': token},
         success: function (response) {
           alert("Successfully created your task");
-          // location.href = "{% url 'project_management' %}";
+          location.href = "{% url 'project_management' %}";
         },
         error: function (error) {
           console.log(error);
